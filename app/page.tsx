@@ -36,7 +36,6 @@ import {
   Calendar,
   Eye,
   Loader2,
-  X,
 } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
@@ -552,7 +551,7 @@ function PortfolioContent() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {Object.entries(projectsData).map(([key, project], index) => (
+        {Object.entries(projectsData).map(([key, project]) => (
               <GlassCard
                 key={key}
                 className={`p-6 group`}
@@ -776,9 +775,9 @@ function PortfolioContent() {
 
                 {submitStatus === "error" && (
                   <div className="mb-4 p-4 bg-red-500/20 border border-red-400/30 rounded-md animate-pulse">
-                    <p className="text-red-300 text-sm flex items-center">
+                    {/* <p className="text-red-300 text-sm flex items-center">
                       <X className="w-4 h-4 mr-2" />❌ Erreur lors de l'envoi. Veuillez réessayer.
-                    </p>
+                    </p> */}
                   </div>
                 )}
 

@@ -1,27 +1,26 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { Resend } from "resend"
 
-// Initialisation sécurisée de Resend avec la clé depuis .env
+interface ContactFormData {
+  firstName: string
+  lastName: string
+  email: string
+  projectType?: string
+  message: string
+}
+
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(request: NextRequest) {
   try {
-    // Gestion de timeout pour éviter les longues attentes
     const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error("Request timeout")), 10000))
 
     const dataPromise = request.json()
     const { firstName, lastName, email, projectType, message } = (await Promise.race([
       dataPromise,
       timeoutPromise,
-    ])) as {
-      firstName: string
-      lastName: string
-      email: string
-      projectType?: string
-      message: string
-    }
+    ])) as ContactFormData
 
-    // Validation des champs essentiels
     if (!firstName || !lastName || !email || !message) {
       return NextResponse.json(
         { success: false, message: "Tous les champs obligatoires doivent être remplis." },
@@ -29,13 +28,11 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Validation de l'email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
       return NextResponse.json({ success: false, message: "Format d'email invalide." }, { status: 400 })
     }
 
-    // Contenu de l'e-mail HTML professionnel
     const htmlContent = `
       <!DOCTYPE html>
       <html>
@@ -116,13 +113,11 @@ export async function POST(request: NextRequest) {
       </html>
     `.trim()
 
-    // Envoi d'email avec Resend
     const emailResponse = await resend.emails.send({
       from: "Portfolio QA <onboarding@resend.dev>",
       to: "poutchokoetienne@gmail.com",
       subject: `🎯 Nouveau Contact Portfolio - ${firstName} ${lastName} (${projectType || "Projet non spécifié"})`,
       html: htmlContent,
-      // Ajout d'une version texte pour la compatibilité
       text: `
 Nouveau contact depuis le portfolio QA
 
@@ -138,13 +133,11 @@ Envoyé le ${new Date().toLocaleString("fr-FR")}
       `.trim(),
     })
 
-    // Vérifie si Resend a renvoyé une erreur
     if (emailResponse.error) {
       console.error("Erreur Resend:", emailResponse.error)
       throw new Error(emailResponse.error.message)
     }
 
-    // Génère un lien WhatsApp prêt à l'emploi
     const whatsappText = encodeURIComponent(
       `Bonjour Étienne,
 
@@ -169,21 +162,23 @@ ${firstName}`,
       whatsappLink,
       emailId: emailResponse.data?.id,
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Erreur /api/contact:", error)
 
-    if (error.message === "Request timeout") {
-      return NextResponse.json(
-        { success: false, message: "⏱️ Délai d'attente dépassé. Veuillez réessayer." },
-        { status: 408 },
-      )
-    }
+    if (error instanceof Error) {
+      if (error.message === "Request timeout") {
+        return NextResponse.json(
+          { success: false, message: "⏱️ Délai d'attente dépassé. Veuillez réessayer." },
+          { status: 408 },
+        )
+      }
 
-    if (error.message?.includes("API key")) {
-      return NextResponse.json(
-        { success: false, message: "🔑 Erreur de configuration. Contactez l'administrateur." },
-        { status: 500 },
-      )
+      if (error.message?.includes("API key")) {
+        return NextResponse.json(
+          { success: false, message: "🔑 Erreur de configuration. Contactez l'administrateur." },
+          { status: 500 },
+        )
+      }
     }
 
     return NextResponse.json(
