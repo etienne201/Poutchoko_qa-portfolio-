@@ -1,0 +1,309 @@
+CURRICULUM VITAE 
+SOFTWARE QUALITY ASSURANCE ENGINEER 
+ 
+ 
+ 
+Name : Poutchoko Emako  
+First name : Etienne 
+Nationality : Cameroonian 
+LinkedIn : https://www.linkedin.com/in/%C3%A9tienne-poutchoko-emako-420524184/ 
+Email address : poutchokoetienne@gmail.com 
+Phone number : +237 657 268 355   
+Location : Douala, Cameroon  
+ 
+ 
+Current position (Profile) :  
+ 
+With over 6 years of experience in software quality assurance, Emako Etienne currently works as a Test Engineer, specializing in the design, execution, and optimization of test strategies 
+across a wide range of IT products. He brings deep expertise in manual and automated testing, ensuring the functionality, performance, and reliability of software solutions. His 
+responsibilities include test planning, development of detailed test cases, execution of test cycles, and collaboration with cross-functional teams to ensure defect-free deliveries. Known for 
+his analytical mindset and commitment to quality, he plays a pivotal role in delivering high-impact, user-centric digital solutions. 
+ 
+Key qualifications and competencies : 
+Fundamentals of Testing. 
+● Testing Throughout the Software Development Lifecycle. 
+● Static Testing. 
+● Test Techniques. 
+● Test Management. 
+● Tool Support for Testing. 
+● Automation Testing. 
+● Quick understanding of specifications and ability to adapt to project requirements. 
+● Reporting and tracking bugs: During the tests, when bugs are detected I make sure to report them and I also 
+track the resolution by running regression and confirmation tests. 
+● Team spirit. 
+● Software life cycle management and testing life cycle: I have a good understanding of the evolution in 
+software development and added to that a mastery in software testing life cycle. 
+● CI/CD: I have a good knowledge of "Continuous Integration" and "Continue Development" using the Jenkins 
+tool. 
+● Containerization: I have a good knowledge of "Docker" technology. 
+● Code version management: I have mastered the use of git commands and bitbucket repository. 
+● Agile and SCRUM: I have a knowledge of the different SCRUM events for the smooth running of complex 
+projects. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Professional Experience: Completed Projects: 
+ 
+Date Location Organization Position Description 
+Jan 2025 - To date Douala, Cameroon  Seven Common 
+Factor 
+Test Lead/ PM 
+CEMAC – ARSy (Agréments Réglementaires Système) 
+Within the framework of the digitisation of the regulatory approval management process 
+across CEMAC member states. 
+ My tasks: 
+ ● Analysis of functional and technical specifications from the ARSy regulatory framework. 
+ ● Test planning, specification, execution (manual and automated), performance testing, and 
+documentation across the entire application lifecycle. 
+ ● Coordination of exploratory testing, end-to-end testing, and regression testing using 
+Cypress, Postman, and Gatling for performance analysis. 
+ ● Management of test campaigns and traceability via Xray (JIRA), with documentation 
+managed on Google Docs and test cases tracked in Google Sheets. 
+ ● Supervision of bug tracking and resolution cycles in collaboration with the regional ARSy 
+technical teams and the CEMAC supervisory authority. 
+ ● Assignment and tracking of development tasks (frontend & backend) using ClickUp, 
+ensuring timely delivery through sprint planning, follow-ups, and progress monitoring. 
+ ● Regular sprint reviews, daily stand-ups, and workshops with stakeholders   
+ ● Implementation of CI/CD pipelines for test automation and integration into the GitLab 
+workflow. 
+Tools: Cypress, Postman, Gatling, JIRA (Xray), ClickUp, GitLab CI/CD, Google Docs, 
+Google Sheets 
+ Methodology: Agile / SCRUM 
+Jan 2025 - To date Douala, Cameroon  Seven Common 
+Factor 
+Test Lead/ PM URBANY – Smart Construction Control System 
+Digital Transformation of Construction Regulatory and Inspection Processes. 
+My tasks: 
+ 
+● Analysis & Specifications: Conducted in-depth analysis of functional and technical 
+specifications aligned with urban regulatory frameworks for construction permits, 
+zoning plans, and technical standards, ensuring compliance with local and regional 
+requirements. 
+● Test Planning & Execution: Led the test strategy across the entire application 
+lifecycle, including planning, specification, execution (manual and automated), and 
+performance testing using Cypress, Postman, and Gatling. Managed test case 
+documentation on Google Docs and tracked progress in Google Sheets. 
+● Exploratory & End-to-End Testing: Coordinated exploratory, end-to-end, and 
+regression testing to ensure platform functionality aligned with business objectives. 
+Ensured high-quality software through rigorous test campaigns and robust 
+traceability via Xray (JIRA). 
+● Collaboration & Bug Tracking: Managed bug tracking and resolution cycles in 
+collaboration with internal and external development teams, including CEMAC 
+supervisory authority. Provided timely support for critical issues and ensured 
+seamless communication between stakeholders. 
+● Task Management: Assigned and tracked frontend and backend development tasks 
+via ClickUp, ensuring efficient sprint planning, regular progress monitoring, and 
+timely delivery of features. 
+● Agile Project Management: Drove Agile / SCRUM processes, including daily 
+stand-ups, sprint reviews, retrospectives, and stakeholder workshops to ensure 
+continuous delivery and alignment with project goals. 
+● CI/CD Integration: Implemented CI/CD pipelines to automate testing and 
+integrate it seamlessly into the GitLab workflow, ensuring continuous integration 
+and accelerated delivery of new features. 
+ 
+● Tools & Technologies: 
+○ Cypress, Postman, Gatling, JIRA (Xray), ClickUp, GitLab CI/CD, 
+Google Docs, Google Sheets 
+ 
+● Methodology: Agile / SCRUM 
+Jan 2023 - Nov 
+2025 
+Italy  Freelancing Quality Assurance 
+Engineer 
+ 
+Bainkode Dev is a tech company that sources and manages skilled freelancers to deliver 
+high-impact software development and QA solutions for its clients. Through this dynamic 
+structure, I contributed to several strategic products, including D4lean, EZ Trip 
+My tasks: 
+● Led quality assurance activities across multiple platforms using Xray, Cypress, Playwright 
+Automation, and Robot Framework to ensure functional integrity and platform stability. 
+ ● Collaborated with cross-functional development teams to align backend services with 
+frontend expectations, delivering a seamless user experience. 
+ ● Identified, tracked, and documented bugs in the D4lean system, accelerating resolution 
+cycles and supporting continuous delivery. 
+ ● Designed and executed automated regression test strategies, increasing test efficiency and 
+reducing manual workload. 
+ ● Performed automated API and UI testing to validate system performance and critical 
+workflows. 
+ ● Conducted tailored manual testing for EZ Trip to verify real-world usability and optimize 
+user satisfaction. 
+ ● Created and maintained detailed test plans, test cases, and QA documentation to support 
+project traceability and process improvements. 
+ ● Assessed code quality using SonarQube, ensuring technical debt was minimized and quality 
+standards were maintained. 
+ ● Actively contributed to Agile ceremonies and used JIRA to manage sprints, priorities, and 
+collaborative task tracking. 
+Tools: Cypress, Playwright, Robot Framework, SonarQube, Xray (JIRA), GitLab CI/CD, 
+Google Docs, Google Sheets 
+ Methodology: Agile / SCRUM 
+. 
+June 2020 to 
+January 2023 
+ 
+Douala, Cameroon  Seven Common 
+Factor 
+Quality Assurance 
+Testing 
+ 
+PAYUNIT – Integrated Digital Payment Gateway 
+ Enabling Seamless Multi-Channel Payment Processing Across Africa 
+ 
+My Tasks: 
+● Analysis & Specifications: Conducted in-depth analysis of functional and technical 
+requirements for digital payment services, ensuring alignment with security 
+standards, local regulatory compliance (mobile money, card payments), and 
+merchant partner needs. 
+Test Planning & Execution: Led comprehensive test strategy covering payment, 
+transaction, user onboarding, and reporting modules. Executed both manual and 
+automated tests using Cypress, Postman, and Gatling. Maintained structured 
+documentation on Google Docs and tracked test progress via Google Sheets. 
+● Exploratory & End-to-End Testing: Coordinated exploratory, end-to-end, and 
+regression testing to validate integration with MTN Mobile Money, Orange Money, 
+Visa, PayPal, and other services. Ensured strong traceability and test coverage using 
+Xray (JIRA). 
+● Collaboration & Bug Tracking: Managed bug reporting and resolution workflows 
+in close collaboration with internal engineering teams and third-party payment 
+aggregators. Provided critical support and maintained clear communication across 
+stakeholders. 
+Task Management: Oversaw task assignment and tracking for frontend and 
+backend teams using ClickUp. Facilitated sprint planning, prioritized development 
+efforts, and ensured alignment with evolving business requirements. 
+● Agile Project Management: Drove Agile / SCRUM ceremonies, including daily 
+stand-ups, sprint reviews, retrospectives, and stakeholder workshops to ensure 
+continuous delivery and value-driven development. 
+ 
+● CI/CD Integration: Supported the implementation of CI/CD pipelines within 
+GitLab to automate testing and accelerate the secure deployment of new features 
+across the payment API and platform. 
+Tools & Technologies: 
+ Cypress, Postman, Gatling, JIRA (Xray), ClickUp, GitLab CI/CD, Google Docs, Google 
+Sheets 
+Methodology: Agile / SCRUM 
+ 
+ 
+June 2020 to 
+January 2023 
+Douala, Cameroon  Seven Common 
+Factor 
+Quality Assurance 
+Testing 
+ACTIVA Showroom – Digital Insurance & Client Experience 
+ Optimizing the reliability of digital services for accessible and high-performance insurance. 
+My tasks: 
+● Test Design & Execution: Designed, wrote, and executed exhaustive manual test 
+scenarios covering all functionalities of the ACTIVA Showroom application, 
+ensuring reliability, consistency, and compliance of final products with functional 
+requirements. 
+● Collaboration with Development Teams: Worked closely with frontend and backend 
+teams to create comprehensive test plans, ensuring early detection of issues and 
+maintaining the quality of deliverables at every sprint. 
+● Test Automation & Efficiency: Implemented test automation tools, specifically 
+Cypress, to improve test coverage, reduce validation times, and increase the 
+reliability of delivery cycles in an agile environment. 
+● Performance & Scalability Testing: Performed performance and scalability testing to 
+ensure the stability of the application under heavy load and assess code quality in 
+real-world usage conditions. 
+● CI/CD Pipeline with Jenkins: Created and managed a test deployment pipeline with 
+Jenkins to automate the execution of tests, accelerate validation phases, and simplify 
+the deployment process. 
+● Agile Project Management: Actively participated in Agile rituals (daily stand-ups, 
+sprint planning, retrospectives), ensuring continuous alignment with business needs 
+and incremental delivery of value. 
+Tools & Technologies: 
+ Cypress, Jenkins,  Google Sheets, Google Docs, Git, Postman 
+Methodology: Agile / SCRUM 
+ 
+June 2020 to 
+January 2023 
+Douala, Cameroon  Seven Common 
+Factor 
+Quality Assurance 
+Testing 
+Hallovoiture – Automating Vehicle Rental, Sales, and Purchase Platforms 
+ Digital Transformation in the Automotive Industry 
+My Tasks: 
+● Designing and Executing Manual Tests: Developed and executed detailed manual 
+test scenarios to ensure the reliability and quality of the final products, ensuring a 
+seamless user experience. 
+● Collaboration with Development Teams: Worked closely with the development 
+teams to craft comprehensive test plans, ensuring alignment and maintaining 
+high-quality standards in the products delivered. 
+● Test Automation Implementation: Deployed test automation tools to increase 
+testing efficiency, reduce manual intervention, and expedite delivery timelines. 
+● Scalability and Code Quality Testing: Conducted performance and stability tests to 
+assess the application's ability to handle scalability demands, ensuring robust and 
+smooth functionality for end users. 
+● Test Deployment Pipeline Management: Built and managed a streamlined test 
+deployment pipeline with Jenkins to facilitate faster and more efficient testing and 
+validation processes. 
+● Agile Methodology Application: Applied Agile methodologies to support flexible 
+project management, allowing for quick adjustments to changing project 
+requirements and ensuring timely delivery. 
+ 
+December 2020 to 
+June 2023 
+ 
+Douala, Cameroon  Seven Common 
+Factor 
+Software Testing 
+Intern 
+ 
+As a Software Testing Intern, I was deeply involved in ensuring the quality and reliability of 
+software products, working alongside development teams to identify issues and ensure 
+adherence to the highest standards of performance and functionality. My contributions spanned 
+across several critical aspects of the software development and testing life cycle, as outlined 
+below: 
+Core Responsibilities and Key Achievements: 
+● Comprehensive Test Design & Execution: Strategically designed and executed 
+in-depth, exhaustive test scenarios to uncover defects across different stages of the 
+software development lifecycle, ensuring alignment with functional and 
+non-functional requirements. 
+ 
+● Advanced Test Management & Issue Tracking: Utilized robust test management 
+tools such as Jira and Testpad to structure and maintain comprehensive test case 
+documentation, meticulously tracking issues and ensuring real-time reporting to 
+stakeholders for enhanced decision-making. 
+ 
+● Cross-functional Collaboration & Process Optimization: Engaged in regular 
+sprint meetings with development teams to provide detailed feedback on testing 
+progress, assess potential areas of improvement, and align testing strategies with 
+agile development workflows for optimal project outcomes. 
+ 
+● Precise Test Documentation & Impact Reporting: Produced rigorous 
+documentation of test results, facilitating clear communication across the 
+development lifecycle and providing detailed analytical reports to support iterative 
+product enhancements and continuous improvement. 
+ 
+● Automation Strategy & Efficiency Gains: Contributed to the development and 
+execution of test automation strategies using frameworks such as Selenium, 
+significantly increasing test coverage and reducing the time spent on repetitive 
+testing tasks, thereby accelerating delivery cycles and optimizing resource 
+allocation. 
+ 
+ 
+ 
+ 
+Education: 
+ 
+Institution (Date from - Date to)  Diploma(s) or certificate(s) obtained 
+Seven Advanced Academy, Cameroun  
+[2018-2020] 
+ 
+Full Stack Web Certificate of Professional Qualification (CQP) 
+High School Diploma (Baccalaureate D) 
+GBS Molyko High School, Buea, Cameroon 
+[2017- 2018] 
+General Certificate of Education "Advanced Level" (Science 
+ 
+ 
+LANGUAGE :                                                           Other skills :    
+● French: mother tongue                                ● Versatile 
+● English: A1 beginner                                  ● Multitask 
+                                                                                                                                                                           
+ 
+                             
+                                                                                                                                                                                                                                        Last Edited : 08th May 2025

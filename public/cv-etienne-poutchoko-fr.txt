@@ -1,0 +1,129 @@
+CURRICULUM VITAE 
+Ingénieur Assurance Qualité Logicielle 
+ 
+ 
+ 
+ 
+Nom : Poutchoko Emako 
+Prénom : Étienne 
+Nationalité : Camerounais 
+LinkedIn : https://www.linkedin.com/in/%C3%A9tienne-poutchoko-emako-420524184 
+Adresse e-mail : poutchokoetienne@gmail.com 
+Téléphone : +237 657 268 355 
+Localisation : Douala, Cameroun 
+ 
+ 
+Profil :  
+ 
+Ingénieur Qualité Logicielle avec plus de 6 ans d'expérience dans l'assurance qualité de produits numériques à fort enjeu. Spécialiste en tests manuels et 
+automatisés, CI/CD, performance et intégration continue, j'ai piloté la qualité logicielle de solutions complexes dans les secteurs du paiement digital, de la 
+réglementation régionale, de l'immobilier et des assurances. Je maîtrise les environnements Agile/Scrum, les outils de QA modernes (Cypress, Postman, 
+Playwright, Xray, GitLab), et je suis reconnu pour ma rigueur, ma capacité d'analyse et mon engagement envers l'excellence produit.
+ 
+ 
+ COMPÉTENCES CLÉS : 
+• Conception & Exécution de Stratégies de Test (Manuel & Automatique) 
+• Outils : Cypress, Playwright, Robot Framework, Postman, Gatling, Selenium 
+• CI/CD : GitLab, Jenkins, Docker 
+• Suivi des bugs & documentation : Xray (JIRA), Google Docs, Google Sheets 
+• Méthodologie Agile / SCRUM, Sprints, Revues, Rétrospectives 
+• Tests API REST, tests UI, tests mobile,  tests de performance & de charge 
+• Collaboration avec équipes produit, backend, frontend & métiers 
+• Maîtrise des outils collaboratifs : Git, ClickUp, 
+ 
+ 
+EXPÉRIENCE PROFESSIONNELLE : 
+ 
+Date Lieu Organisation Poste occupé Description des missions 
+Janv. 2025 – 
+Aujourd'hui 
+ 
+Douala, 
+Cameroun 
+Seven Common 
+Factor(SevenGPS) 
+ 
+QA 
+Engineer 
+• Pilotage QA des projets CEMAC – ARSy et URBANY (systèmes de 
+gestion réglementaire et d'urbanisme) 
+• Analyse des spécifications, conception des plans de test, automatisation 
+E2E (Cypress, Gatling, Postman) 
+• Encadrement des cycles de test : exploratoire, régression, performance 
+• Mise en place de pipelines CI/CD avec GitLab, suivi des bugs via Xray 
+• Coordination avec les équipes régionales, techniques et métier en 
+environnement Agile/SCRUM
+ 
+Janv. 2023 – 
+Nov 2024 
+Remote, 
+Europe(Italie)  
+Bainkode Dev 
+ 
+QA 
+Engineer 
+Freelance 
+ 
+• Conduite de tests automatisés pour plusieurs clients européens (D4 Lean, 
+EZ Trip...) 
+• Automatisation des tests API et UI avec Cypress, Playwright, Robot 
+Framework 
+• Analyse fonctionnelle, rédaction de plans de test, tests manuels 
+personnalisés 
+• Participation aux sprints et gestion des anomalies via JIRA/Xray
+ 
+. 
+Juin 2020 – 
+Janv. 2023 
+ 
+Douala, 
+Cameroun 
+Seven Common 
+Factor(SevenGPS) 
+ 
+Junior QA 
+Engineer 
+ 
+• QA sur plusieurs plateformes SaaS : PayUnit (paiement), Activa 
+(assurance), Hallovoiture (automobile) 
+• Tests fonctionnels, exploratoires, de performance ; couverture de services 
+comme Mobile Money, Visa, PayPal 
+• Automatisation avec Cypress, intégration Jenkins, gestion de projets via 
+ClickUp 
+• Collaboration étroite avec les équipes de développement pour optimiser 
+qualité et délais
+ 
+ 
+ 
+Déc. 2019 – 
+Juin 2020 
+Douala, 
+Cameroun 
+Seven Common 
+Factor(SevenGPS) 
+ 
+Stage – 
+Testeur 
+Logiciel 
+ 
+• Conception et exécution de tests pour divers modules logiciels 
+• Documentation des cas de tests avec JIRA, suivi de la résolution des 
+anomalies 
+• Participation active aux cérémonies SCRUM et amélioration continue des 
+processus de test
+ 
+ 
+FORMATION  
+• Full Stack Web Developer – Seven Advanced Academy | 2018 – 2020 
+LANGUES 
+• Français : Langue maternelle 
+• Anglais : Niveau A2 (en cours de perfectionnement) 
+AUTRES COMPÉTENCES 
+ 
+• Esprit d'analyse et de synthèse 
+• Polyvalence et adaptabilité 
+• Sens de la rigueur 
+• Autonomie et collaboration 
+• Culture du delivery et de l'amélioration continue                              
+ 
+                                                                                                                                                                                                                                        Dernière modification : 08 Mai 2025

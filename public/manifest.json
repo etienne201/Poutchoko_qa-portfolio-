@@ -1,0 +1,28 @@
+{
+  "name": "Étienne Poutchoko  Emako- QA Engineer Portfolio",
+  "short_name": "Étienne QA",
+  "description": "Portfolio professionnel d'Étienne Poutchoko, Ingénieur QA spécialisé en automatisation des tests",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1e293b",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/images/logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity", "utilities"],
+  "lang": "fr-FR",
+  "dir": "ltr"
+}
