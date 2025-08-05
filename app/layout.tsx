@@ -12,10 +12,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Étienne Poutchoko - QA Engineer Portfolio",
   description: "Experienced QA Engineer specializing in test automation, performance testing, and CI/CD integration.",
-  keywords: "QA Engineer, Test Automation, Quality Assurance, Software Testing, Cypress, Playwright, Étienne Poutchoko",
+  keywords: "QA Engineer, Test Automation, Quality Assurance, Software Testing, Cypress, Playwright, Étienne Poutchoko Emako",
   authors: [{ name: "Étienne Poutchoko" }],
-  creator: "Étienne Poutchoko",
-  publisher: "Étienne Poutchoko",
+  creator: "Étienne Poutchoko Emako",
+  publisher: "Étienne Poutchoko Emako",
   robots: "index, follow",
   icons: {
     icon: [
@@ -28,22 +28,22 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://your-domain.vercel.app",
-    title: "Étienne Poutchoko - QA Engineer Portfolio",
+    url: "https://poutchoko-qa-portfolio.vercel.app/",
+    title: "Étienne Poutchoko  - QA Engineer Portfolio",
     description: "Experienced QA Engineer specializing in test automation, performance testing, and CI/CD integration.",
-    siteName: "Étienne Poutchoko Portfolio",
+    siteName: "Étienne Poutchoko Emako - QA Engineer Portfolio",
     images: [
       {
         url: "/images/homepage.jpg",
         width: 1200,
         height: 630,
-        alt: "Étienne Poutchoko - QA Engineer Portfolio",
+        alt: "Étienne Poutchoko  Emako  - QA Engineer Portfolio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Étienne Poutchoko - QA Engineer Portfolio",
+    title: "Étienne Poutchoko  Emako - QA Engineer Portfolio",
     description: "Experienced QA Engineer specializing in test automation, performance testing, and CI/CD integration.",
     images: ["/images/homepage.jpg"],
   },
