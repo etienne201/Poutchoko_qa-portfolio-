@@ -3,49 +3,162 @@
 @tailwind utilities;
 
 @layer base {
+  /* ==========================================================================
+     DESIGN TOKEN SYSTEM
+     Basé exclusivement sur l'identité visuelle et les couleurs du logo :
+     - Dark Base : #081018 (Noir pétrole ardoisé profond du logo)
+     - Surfaces : #0e1922 & #14222c (Nuances d'ardoise océanique)
+     - Alabaster : #f8fafc & #ffffff (Blanc pur du logo)
+     - Accents : #0284c7 (Sky 600 / Slate Cyan) & #38bdf8 (Sky 400 / Reflet néon)
+     ========================================================================== */
+
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* --- Tokens Sémantiques : MODE CLAIR (Light Mode) --- */
+    --color-primary: #0284c7;
+    --color-primary-hover: #0369a1;
+    --color-primary-active: #075985;
+    --color-primary-focus: #0ea5e9;
+    --color-primary-disabled: rgba(2, 132, 199, 0.4);
+    --color-primary-subtle: #e0f2fe;
+
+    --color-secondary: #0f172a;
+    --color-secondary-hover: #1e293b;
+    --color-secondary-active: #334155;
+    --color-secondary-subtle: #f1f5f9;
+
+    --color-background: #f8fafc;
+    --color-surface: #ffffff;
+    --color-surface-elevated: #ffffff;
+    --color-card: #ffffff;
+    --color-card-muted: #f1f5f9;
+
+    --color-text: #0d1820;          /* Noir pétrole ardoisé extrait du logo */
+    --color-text-muted: #475569;    /* Slate 600 pour contraste AA/AAA */
+    --color-text-subtle: #64748b;   /* Slate 500 */
+
+    --color-border: #e2e8f0;        /* Slate 200 */
+    --color-border-subtle: #f1f5f9;
+    --color-border-strong: #cbd5e1;
+
+    --color-accent: #0284c7;
+    --color-accent-subtle: #e0f2fe;
+
+    --color-success: #059669;
+    --color-success-subtle: #ecfdf5;
+    --color-warning: #d97706;
+    --color-warning-subtle: #fffbeb;
+    --color-error: #dc2626;
+    --color-error-subtle: #fef2f2;
+
+    /* Glassmorphism & Cards adaptatifs Light */
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(226, 232, 240, 0.85);
+    --glass-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.08), 0 1px 3px 0 rgba(15, 23, 42, 0.05);
+
+    --glass-elevated-bg: rgba(255, 255, 255, 0.95);
+    --glass-elevated-border: rgba(203, 213, 225, 0.8);
+    --glass-elevated-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.1), 0 1px 3px 0 rgba(15, 23, 42, 0.05);
+
+    --inner-card-bg: rgba(248, 250, 252, 0.85);
+    --inner-card-border: rgba(226, 232, 240, 0.8);
+
+    /* Mappings Shadcn UI pour cohérence avec les composants Radix */
+    --background: 210 40% 98%;
+    --foreground: 205 42% 9%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 205 42% 9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 84% 4.9%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96%;
-    --accent-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 205 42% 9%;
+    --primary: 199 89% 48%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 205 42% 9%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 204 94% 94%;
+    --accent-foreground: 205 42% 9%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.5rem;
+    --ring: 199 89% 48%;
+    --radius: 0.75rem;
+
+    color-scheme: light;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    /* --- Tokens Sémantiques : MODE SOMBRE (Dark Mode) --- */
+    --color-primary: #38bdf8;       /* Reflet cyan lumineux du logo */
+    --color-primary-hover: #0ea5e9;
+    --color-primary-active: #0284c7;
+    --color-primary-focus: #7dd3fc;
+    --color-primary-disabled: rgba(56, 189, 248, 0.35);
+    --color-primary-subtle: rgba(56, 189, 248, 0.12);
+
+    --color-secondary: #14222c;
+    --color-secondary-hover: #1e293b;
+    --color-secondary-active: #334155;
+    --color-secondary-subtle: rgba(255, 255, 255, 0.05);
+
+    --color-background: #081018;    /* Fond profond exact du logo */
+    --color-surface: #0e1922;       /* Surface ardoisée exacte du logo */
+    --color-surface-elevated: #14222c;
+    --color-card: #0e1922;
+    --color-card-muted: #14222c;
+
+    --color-text: #f8fafc;          /* Blanc pur du badge */
+    --color-text-muted: #94a3b8;    /* Slate 400 */
+    --color-text-subtle: #64748b;   /* Slate 500 */
+
+    --color-border: rgba(255, 255, 255, 0.08);
+    --color-border-subtle: rgba(255, 255, 255, 0.04);
+    --color-border-strong: rgba(255, 255, 255, 0.16);
+
+    --color-accent: #38bdf8;
+    --color-accent-subtle: rgba(56, 189, 248, 0.15);
+
+    --color-success: #34d399;
+    --color-success-subtle: rgba(52, 211, 153, 0.12);
+    --color-warning: #fbbf24;
+    --color-warning-subtle: rgba(251, 191, 36, 0.12);
+    --color-error: #f87171;
+    --color-error-subtle: rgba(248, 113, 113, 0.12);
+
+    /* Glassmorphism & Cards adaptatifs Dark */
+    --glass-bg: rgba(14, 25, 34, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.6);
+
+    --glass-elevated-bg: rgba(20, 34, 44, 0.85);
+    --glass-elevated-border: rgba(255, 255, 255, 0.12);
+    --glass-elevated-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.75), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+
+    --inner-card-bg: rgba(8, 16, 24, 0.65);
+    --inner-card-border: rgba(255, 255, 255, 0.06);
+
+    /* Mappings Shadcn UI Dark */
+    --background: 210 50% 6%;
     --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
+    --card: 207 42% 9%;
     --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
+    --popover: 207 42% 9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 84% 4.9%;
-    --secondary: 217.2 32.6% 17.5%;
+    --primary: 199 95% 74%;
+    --primary-foreground: 205 42% 9%;
+    --secondary: 205 37% 13%;
     --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
+    --muted: 205 37% 13%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 205 37% 16%;
     --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 94.1%;
+    --border: 205 25% 15%;
+    --input: 205 25% 15%;
+    --ring: 199 95% 74%;
+
+    color-scheme: dark;
   }
 }
 
@@ -53,52 +166,129 @@
   * {
     @apply border-border;
   }
+  html {
+    scroll-behavior: smooth;
+    color-scheme: light dark;
+  }
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+}
+
+/* ==========================================================================
+   TRANSITION DOUCE ET PREMIUM SANS FOUC
+   Déclenchée uniquement lors du basculement manuel de thème via .theme-transition
+   ========================================================================== */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition-delay: 0s !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
 @layer utilities {
-  .shadow-3xl {
-    box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+  .glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+  .glass-panel-elevated {
+    background: var(--glass-elevated-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-elevated-border);
+    box-shadow: var(--glass-elevated-shadow);
+  }
+  .glass-panel-subtle {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
   }
 
-  .backdrop-blur-3xl {
-    backdrop-filter: blur(64px);
+  .inner-card {
+    background: var(--inner-card-bg);
+    border: 1px solid var(--inner-card-border);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
   }
 
-  .text-shadow {
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  .chip-subtle {
+    background: rgba(15, 23, 42, 0.04);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    color: var(--color-text-muted);
+  }
+  .dark .chip-subtle {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #cbd5e1;
   }
 
-  .text-shadow-lg {
-    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  .text-gradient-silver {
+    background: linear-gradient(180deg, #09131a 0%, #334155 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .dark .text-gradient-silver {
+    background: linear-gradient(180deg, #FFFFFF 0%, #CBD5E1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gradient-accent {
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .dark .text-gradient-accent {
+    background: linear-gradient(135deg, #38BDF8 0%, #60A5FA 50%, #818CF8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar adaptative */
 ::-webkit-scrollbar {
   width: 8px;
 }
-
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(241, 245, 249, 0.8);
 }
-
+.dark ::-webkit-scrollbar-track {
+  background: rgba(14, 25, 34, 0.8);
+}
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(148, 163, 184, 0.45);
   border-radius: 4px;
 }
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.5);
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.25);
+  border-radius: 4px;
 }
-
-/* Smooth animations */
-* {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow,
-    transform, filter, backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms;
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.65);
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.45);
 }

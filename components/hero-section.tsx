@@ -1,127 +1,274 @@
 "use client"
-import { useState, useEffect } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { TypewriterText } from "@/components/typewriter-text"
 import { CVDownload } from "@/components/cv-download"
-import { GlassCard } from "@/components/glass-card"
 import { useLanguage } from "@/hooks/use-language"
-import { Mail, Linkedin, Github, Shield, CheckCircle, Sparkles } from "lucide-react"
-import Link from "next/link"
+import {
+  ArrowRight,
+  Mail,
+  Linkedin,
+  Phone,
+  MessageSquare,
+  CheckCircle2,
+  TrendingDown,
+  TrendingUp,
+  Clock,
+  MapPin,
+} from "lucide-react"
+import { TechBadge } from "@/components/tech-icon"
 
 export function HeroSection() {
-  const { t } = useLanguage()
-  const [isVisible, setIsVisible] = useState(false)
+  const { t, language } = useLanguage()
 
-  useEffect(() => {
-    setIsVisible(true)
-  }, [])
+  const heroWaText = encodeURIComponent(
+    language === "fr"
+      ? "Bonjour Étienne, je consulte votre portfolio QA et souhaiterais échanger avec vous."
+      : "Hello Étienne, I visited your QA portfolio and would like to connect with you.",
+  )
+  const heroMailSubject = encodeURIComponent(
+    language === "fr"
+      ? "Contact Portfolio - Opportunité QA Automation"
+      : "Portfolio Contact - QA Automation Opportunity",
+  )
 
-  const scrollToContact = () => {
-    const contactSection = document.getElementById("contact")
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" })
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id)
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" })
     }
   }
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 py-20">
-      <div className="container mx-auto max-w-6xl">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
-          <div
-            className={`space-y-8 transition-all duration-1000 ${
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
-            }`}
-          >
-            <div className="space-y-6">
-              <Badge
-                variant="outline"
-                className="backdrop-blur-xl bg-white/10 border-white/30 text-white hover:bg-white/20 animate-bounce"
-              >
-                <Shield className="w-4 h-4 mr-2" />
-                <Sparkles className="w-4 h-4 mr-2" />
-                {t("hero.badge")}
-              </Badge>
+    <section id="hero" className="relative min-h-[92vh] flex items-center justify-center pt-28 sm:pt-32 pb-16 sm:pb-20 px-3.5 sm:px-6 lg:px-8 overflow-hidden">
+      <div className="max-w-7xl mx-auto w-full">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-10 items-center">
+          {/* Left Column: Positioning & CTAs */}
+          <div className="lg:col-span-7 space-y-5 sm:space-y-7 text-left">
+            {/* Top Eyebrow Badge */}
+            <div className="inline-flex items-center space-x-2.5 px-3 py-1.5 sm:px-3.5 rounded-full bg-slate-100/90 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.1] text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-medium backdrop-blur-md shadow-sm dark:shadow-subtle max-w-full">
+              <span className="relative flex h-2 w-2 flex-shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span className="text-slate-800 dark:text-slate-200 truncate">{t("hero.badge")}</span>
+            </div>
 
-              <h1 className="text-6xl font-bold text-white leading-tight">
-                <TypewriterText text={t("hero.title")} speed={100} />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 block">
-                  <TypewriterText text={t("hero.subtitle")} speed={100} />
+            {/* Main Headline */}
+            <div className="space-y-2">
+              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.12]">
+                <span className="block text-gradient-silver">{t("hero.name")}</span>
+                <span className="block text-gradient-accent mt-1.5 font-bold text-xl sm:text-3xl md:text-4xl lg:text-5xl">
+                  {t("hero.title")}
                 </span>
               </h1>
-
-              <p className="text-xl text-white/80 leading-relaxed max-w-2xl">{t("hero.description")}</p>
+              <p className="text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400 tracking-wider uppercase pt-1">
+                {t("hero.subtitle")}
+              </p>
             </div>
 
-            <div className="flex flex-wrap gap-4">
+            {/* Professional Summary */}
+            <p className="text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed font-normal">
+              {t("hero.description")}
+            </p>
+
+            {/* Location & Status Bar */}
+            <div className="flex flex-wrap items-center gap-y-2 gap-x-3 sm:gap-x-4 text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+              <div className="flex items-center space-x-1.5">
+                <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
+                <span className="text-slate-700 dark:text-slate-300">{t("hero.location")}</span>
+              </div>
+              <span className="hidden sm:inline text-slate-300 dark:text-slate-600" aria-hidden="true">•</span>
+              <div className="flex items-center space-x-1.5 text-emerald-600 dark:text-emerald-400 font-medium">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 flex-shrink-0"></span>
+                <span>{t("hero.status")}</span>
+              </div>
+            </div>
+
+            {/* Core Tooling Strip with Dedicated Icons */}
+            <div className="pt-1">
+              <div className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2.5">
+                {t("hero.toolsLabel")}
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {["Cypress", "Playwright", "Robot Framework", "Postman", "Gatling", "GitLab CI", "Jenkins", "Docker", "Xray (JIRA)"].map((tool, idx) => (
+                  <TechBadge key={idx} name={tool} size="sm" />
+                ))}
+              </div>
+            </div>
+
+            {/* Primary Action Buttons */}
+            <div className="flex flex-wrap items-center gap-2.5 sm:gap-4 pt-2">
               <Button
                 size="lg"
-                onClick={scrollToContact}
-                className="backdrop-blur-xl bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 border-0 transform hover:scale-105 transition-all duration-300 hover:shadow-2xl"
+                onClick={() => scrollToSection("experience")}
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-5 sm:px-6 py-3 rounded-xl shadow-accent hover:shadow-accent transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center group min-h-[44px]"
               >
-                <Mail className="w-4 h-4 mr-2" />
-                {t("hero.cta.contact")}
+                <span>{t("hero.cta.journey")}</span>
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
 
-              <CVDownload />
+              <Button
+                size="lg"
+                variant="outline"
+                onClick={() => scrollToSection("contact")}
+                className="border-slate-300/90 dark:border-white/[0.12] hover:border-slate-400 dark:hover:border-white/[0.25] bg-white dark:bg-white/[0.04] hover:bg-slate-50 dark:hover:bg-white/[0.08] text-slate-800 dark:text-white font-semibold px-5 sm:px-6 py-3 rounded-xl backdrop-blur-md transition-all hover:scale-[1.02] active:scale-[0.98] shadow-sm min-h-[44px]"
+              >
+                <Mail className="w-4 h-4 mr-2 text-primary" />
+                <span>{t("hero.cta.contact")}</span>
+              </Button>
+
+              <CVDownload size="lg" />
             </div>
 
-            <div className="flex space-x-6">
-              <Link
-                href="https://www.linkedin.com/in/%C3%A9tienne-poutchoko-emako-420524184"
-                className="text-white/60 hover:text-white transition-all duration-300 hover:scale-125 transform"
+            {/* Instant Direct Contact Channels */}
+            <div className="pt-2 flex items-center space-x-2.5 sm:space-x-3 text-slate-500 dark:text-slate-400">
+              <span className="text-xs uppercase tracking-wider text-slate-500 font-medium mr-1">
+                {t("hero.direct")}
+              </span>
+              <a
+                href="https://linkedin.com/in/etienne-poutchoko-emako"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.08] hover:border-blue-500 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/80 dark:hover:bg-white/[0.08] transition-all shadow-sm dark:shadow-subtle min-h-[40px] min-w-[40px] flex items-center justify-center"
+                title="LinkedIn"
+                aria-label="LinkedIn Profile"
               >
-                <Linkedin className="w-6 h-6" />
-              </Link>
-              <Link
-                href="#"
-                className="text-white/60 hover:text-white transition-all duration-300 hover:scale-125 transform"
+                <Linkedin className="w-4 h-4" />
+              </a>
+              <a
+                href={`https://wa.me/237657268355?text=${heroWaText}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.08] hover:border-emerald-500 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-200/80 dark:hover:bg-white/[0.08] transition-all shadow-sm dark:shadow-subtle min-h-[40px] min-w-[40px] flex items-center justify-center"
+                title="WhatsApp"
+                aria-label="WhatsApp Chat"
               >
-                <Github className="w-6 h-6" />
-              </Link>
-              <Link
-                href="mailto:poutchokoetienne@gmail.com"
-                className="text-white/60 hover:text-white transition-all duration-300 hover:scale-125 transform"
+                <MessageSquare className="w-4 h-4" />
+              </a>
+              <a
+                href={`mailto:poutchokoetienne@gmail.com?subject=${heroMailSubject}`}
+                className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.08] hover:border-sky-500 text-slate-600 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-slate-200/80 dark:hover:bg-white/[0.08] transition-all shadow-sm dark:shadow-subtle min-h-[40px] min-w-[40px] flex items-center justify-center"
+                title="Email"
+                aria-label="Send Email"
               >
-                <Mail className="w-6 h-6" />
-              </Link>
+                <Mail className="w-4 h-4" />
+              </a>
+              <a
+                href="tel:+237657268355"
+                className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.08] hover:border-indigo-500 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-200/80 dark:hover:bg-white/[0.08] transition-all shadow-sm dark:shadow-subtle min-h-[40px] min-w-[40px] flex items-center justify-center"
+                title="Call"
+                aria-label="Phone Call"
+              >
+                <Phone className="w-4 h-4" />
+              </a>
             </div>
           </div>
 
-          {/* Right Content - Stats Card */}
-          <div
-            className={`relative transition-all duration-1000 delay-300 ${
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
-            }`}
-          >
-            <GlassCard className="p-8 text-center">
-              <div className="space-y-6">
-                <div className="flex items-center justify-center mb-6">
-                  <CheckCircle className="w-16 h-16 text-green-400" />
+          {/* Right Column: High-Impact QA Command Deck */}
+          <div className="lg:col-span-5 w-full">
+            <div className="relative rounded-2xl p-5 sm:p-7 glass-panel-elevated shadow-card">
+              {/* Card Header */}
+              <div className="flex flex-wrap items-center justify-between gap-2 pb-4 sm:pb-5 border-b border-slate-200/80 dark:border-white/[0.08]">
+                <div className="flex items-center space-x-2.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse flex-shrink-0" />
+                  <span className="text-xs font-semibold uppercase tracking-wider text-slate-800 dark:text-slate-200">
+                    {t("hero.deckTitle")}
+                  </span>
+                </div>
+                <Badge variant="outline" className="border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[11px] font-mono">
+                  {t("hero.qualityGate")}
+                </Badge>
+              </div>
+
+              {/* 2x2 Quantified Metrics Grid */}
+              <div className="grid grid-cols-2 gap-2.5 sm:gap-3.5 py-4 sm:py-5">
+                <div className="p-3.5 sm:p-4 rounded-xl inner-card space-y-1 text-left">
+                  <div className="flex items-center text-primary text-xs font-medium space-x-1.5">
+                    <Clock className="w-3.5 h-3.5 flex-shrink-0" />
+                    <span>{t("hero.stat.yearsTag")}</span>
+                  </div>
+                  <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
+                    {t("hero.stat.years")}
+                  </div>
+                  <div className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 leading-snug">
+                    {t("hero.stat.yearsLabel")}
+                  </div>
                 </div>
 
-                <div>
-                  <div className="text-4xl font-bold text-white mb-2">99.9%</div>
-                  <div className="text-white/80">{t("hero.metric.label")}</div>
+                <div className="p-3.5 sm:p-4 rounded-xl inner-card space-y-1 text-left">
+                  <div className="flex items-center text-emerald-600 dark:text-emerald-400 text-xs font-medium space-x-1.5">
+                    <TrendingDown className="w-3.5 h-3.5 flex-shrink-0" />
+                    <span>{t("hero.stat.regressionTag")}</span>
+                  </div>
+                  <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
+                    {t("hero.stat.regression")}
+                  </div>
+                  <div className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 leading-snug">
+                    {t("hero.stat.regressionLabel")}
+                  </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/20">
-                  <div>
-                    <div className="text-2xl font-bold text-white">5+</div>
-                    <div className="text-sm text-white/60">Years</div>
+                <div className="p-3.5 sm:p-4 rounded-xl inner-card space-y-1 text-left">
+                  <div className="flex items-center text-sky-600 dark:text-sky-400 text-xs font-medium space-x-1.5">
+                    <TrendingUp className="w-3.5 h-3.5 flex-shrink-0" />
+                    <span>{t("hero.stat.coverageTag")}</span>
                   </div>
-                  <div>
-                    <div className="text-2xl font-bold text-white"> 10 +</div>
-                    <div className="text-sm text-white/60">Projects</div>
+                  <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
+                    {t("hero.stat.coverage")}
                   </div>
-                  <div>
-                    <div className="text-2xl font-bold text-white">80%</div>
-                    <div className="text-sm text-white/60">Automation</div>
+                  <div className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 leading-snug">
+                    {t("hero.stat.coverageLabel")}
+                  </div>
+                </div>
+
+                <div className="p-3.5 sm:p-4 rounded-xl inner-card space-y-1 text-left">
+                  <div className="flex items-center text-indigo-600 dark:text-indigo-400 text-xs font-medium space-x-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0" />
+                    <span>{t("hero.stat.defectsTag")}</span>
+                  </div>
+                  <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
+                    {t("hero.stat.defects")}
+                  </div>
+                  <div className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 leading-snug">
+                    {t("hero.stat.defectsLabel")}
                   </div>
                 </div>
               </div>
-            </GlassCard>
+
+              {/* Core Quality Pillars */}
+              <div className="pt-4 border-t border-slate-200/80 dark:border-white/[0.08] space-y-2.5 text-left">
+                <div className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                  {t("hero.validatedTitle")}
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  <span className="chip-subtle inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-lg text-xs font-medium">
+                    <TechBadge name="Cypress" size="sm" className="bg-transparent border-0 p-0 shadow-none" />
+                    <span>{t("hero.env.regtech")}</span>
+                  </span>
+                  <span className="chip-subtle inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-lg text-xs font-medium">
+                    <TechBadge name="Mobile Money" size="sm" className="bg-transparent border-0 p-0 shadow-none" />
+                    <span>{t("hero.env.fintech")}</span>
+                  </span>
+                  <span className="chip-subtle inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-lg text-xs font-medium">
+                    <TechBadge name="Playwright" size="sm" className="bg-transparent border-0 p-0 shadow-none" />
+                    <span>{t("hero.env.saas")}</span>
+                  </span>
+                  <span className="chip-subtle inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-lg text-xs font-medium">
+                    <TechBadge name="GitLab CI" size="sm" className="bg-transparent border-0 p-0 shadow-none" />
+                    <span>{t("hero.env.cicd")}</span>
+                  </span>
+                </div>
+              </div>
+
+              {/* Micro Status Terminal Footer */}
+              <div className="mt-4 pt-3 border-t border-slate-200/80 dark:border-white/[0.06] flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 font-mono">
+                <span className="text-emerald-600 dark:text-emerald-400 flex items-center space-x-1 font-semibold">
+                  <span>✓</span>
+                  <span>{t("hero.pipelineVerified")}</span>
+                </span>
+                <span className="text-slate-500">{t("hero.zeroBugs")}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

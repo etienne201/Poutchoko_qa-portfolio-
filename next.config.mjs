@@ -4,56 +4,40 @@ const nextConfig = {
 
   // Images
   images: {
-    domains: ['localhost'],
-    unoptimized: true,
+    formats: ['image/avif', 'image/webp'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
 
-  // Headers anti-cache agressifs
+  // Security Headers
   async headers() {
     return [
       {
         source: '/(.*)',
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'no-cache, no-store, must-revalidate, max-age=0',
-          },
-          {
-            key: 'Pragma',
-            value: 'no-cache',
-          },
-          {
-            key: 'Expires',
-            value: '0',
-          },
-          {
             key: 'X-Frame-Options',
-            value: 'DENY',
+            value: 'SAMEORIGIN',
           },
           {
             key: 'X-Content-Type-Options',
             value: 'nosniff',
           },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()',
+          },
         ],
       },
     ]
-  },
-
-  // Webpack config pour forcer Next.js
-  webpack: (config, { dev, isServer }) => {
-    if (dev && !isServer) {
-      config.watchOptions = {
-        poll: 1000,
-        aggregateTimeout: 300,
-        ignored: [
-          '**/node_modules/**',
-          '**/.git/**',
-          '**/vite.config.*',
-          '**/src/main.*',
-        ],
-      }
-    }
-    return config
   },
 
   // Config expérimentale (ex. : import optimisé)

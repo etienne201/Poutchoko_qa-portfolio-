@@ -53,6 +53,27 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Tokens exclusifs dérivés du logo (Slate Cyan & Deep Oceanic Slate)
+        brand: {
+          DEFAULT: "var(--color-primary)",
+          hover: "var(--color-primary-hover)",
+          active: "var(--color-primary-active)",
+          focus: "var(--color-primary-focus)",
+          disabled: "var(--color-primary-disabled)",
+          dark: "#081018",      // Noir ardoisé profond du badge
+          surface: "#0e1922",   // Surface ardoisée intermédiaire
+          elevated: "#14222c",  // Élévation
+          cyan: "#38bdf8",      // Reflet cyan néon du logo
+          cobalt: "#0284c7",    // Bleu primaire du logo
+          deep: "#0369a1",      // Bleu soutenu
+        },
+      },
+      boxShadow: {
+        subtle: "0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px -1px rgba(0, 0, 0, 0.08)",
+        card: "var(--glass-shadow)",
+        elevated: "var(--glass-elevated-shadow)",
+        accent: "0 8px 24px -4px rgba(2, 132, 199, 0.28)",
+        "accent-glow": "0 0 32px -4px rgba(56, 189, 248, 0.25)",
       },
       borderRadius: {
         lg: "var(--radius)",
