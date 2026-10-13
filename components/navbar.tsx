@@ -100,7 +100,7 @@ export function Navbar() {
             })}
           </div>
 
-          {/* Actions: Availability Pill + Lang + Theme + CTA */}
+          {/* Actions: Availability Pill + Studio CV + Lang + Theme + CTA */}
           <div className="flex items-center space-x-1.5 sm:space-x-2.5 flex-shrink-0">
             {/* Availability status badge */}
             <div className="hidden md:flex items-center space-x-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-600 dark:text-emerald-400 text-[11px] font-medium whitespace-nowrap">
@@ -110,6 +110,16 @@ export function Navbar() {
               </span>
               <span>{t("nav.availableBadge")}</span>
             </div>
+
+            {/* Lien Consultation directe du CV */}
+            <Link
+              href="/cv"
+              className="hidden lg:inline-flex items-center space-x-1.5 text-xs font-bold px-3 py-1.5 rounded-xl bg-sky-500/10 hover:bg-sky-500/20 text-sky-600 dark:text-sky-400 border border-sky-500/20 transition-all shadow-sm"
+              title={t("cv.viewCta")}
+            >
+              <span>📄</span>
+              <span>{t("cv.viewCta")}</span>
+            </Link>
 
             <LanguageToggle />
             <ThemeToggle />
@@ -162,7 +172,21 @@ export function Navbar() {
               ))}
             </div>
 
-            <div className="pt-3 mt-3 border-t border-slate-200 dark:border-white/10 flex items-center justify-between">
+            <div className="pt-3 mt-3 border-t border-slate-200 dark:border-white/10 flex flex-col gap-2">
+              <Link
+                href="/cv"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="w-full flex items-center justify-center space-x-2 bg-sky-500/10 hover:bg-sky-500/20 text-sky-700 dark:text-sky-300 font-bold text-sm rounded-xl py-2.5 border border-sky-500/25 transition-colors"
+              >
+                <span>📄 {t("cv.viewCta")}</span>
+              </Link>
+              <Link
+                href="/cv-builder"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="w-full flex items-center justify-center space-x-2 bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.08] dark:hover:bg-white/[0.12] text-slate-900 dark:text-white font-semibold text-sm rounded-xl py-2.5 border border-slate-200 dark:border-white/[0.1] transition-colors"
+              >
+                <span>✨ Studio CV & Créateur Pro</span>
+              </Link>
               <Button
                 size="sm"
                 onClick={() => handleNavClick("#contact")}

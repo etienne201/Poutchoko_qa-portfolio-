@@ -15,7 +15,7 @@ import { MobileContactBar } from "@/components/mobile-contact-bar"
 
 function PortfolioContent() {
   return (
-    <div className="min-h-screen relative flex flex-col justify-between selection:bg-primary/20 selection:text-primary">
+    <div className="min-h-screen relative isolate flex flex-col justify-between selection:bg-primary/20 selection:text-primary">
       {/* Dynamic Background */}
       <AnimatedBackground />
 

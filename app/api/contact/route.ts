@@ -1,16 +1,28 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { processContactSubmission } from "@/lib/contact-service"
+import { processContactSubmission, getClientIp, MAX_BODY_BYTES } from "@/lib/contact-service"
 
 export async function POST(request: NextRequest) {
   try {
-    const forwardedFor = request.headers.get("x-forwarded-for")
-    const ip = forwardedFor
-      ? forwardedFor.split(",")[0].trim()
-      : request.headers.get("x-real-ip") || "127.0.0.1"
+    const ip = getClientIp(request.headers)
+
+    const contentLength = Number(request.headers.get("content-length") || 0)
+    if (contentLength > MAX_BODY_BYTES) {
+      return NextResponse.json(
+        { success: false, message: "Requête trop volumineuse." },
+        { status: 413 },
+      )
+    }
 
     let body: unknown
     try {
-      body = await request.json()
+      const raw = await request.text()
+      if (raw.length > MAX_BODY_BYTES) {
+        return NextResponse.json(
+          { success: false, message: "Requête trop volumineuse." },
+          { status: 413 },
+        )
+      }
+      body = JSON.parse(raw)
     } catch {
       return NextResponse.json(
         { success: false, message: "Requête invalide (JSON mal formé)." },

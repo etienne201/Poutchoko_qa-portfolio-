@@ -1,16 +1,17 @@
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  outputFileTracingRoot: __dirname,
   reactStrictMode: true,
 
   // Images
   images: {
     formats: ['image/avif', 'image/webp'],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
-    ],
+    // Aucune image distante utilisée : pas de remotePatterns (évite un proxy d'images ouvert)
   },
 
   // Security Headers

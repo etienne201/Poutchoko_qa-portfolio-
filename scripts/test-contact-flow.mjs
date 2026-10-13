@@ -5,6 +5,7 @@ import {
   resetRateLimits,
   escapeHtml,
   sanitizeHeader,
+  getClientIp,
 } from "../lib/contact-service.ts"
 
 async function runTests() {
@@ -170,7 +171,26 @@ async function runTests() {
     passedCount++
   }
 
-  console.log(`\n🎉 All ${passedCount}/7 QA Automation tests PASSED with 100% success!`)
+  // -------------------------------------------------------------
+  // Test 8: Spoofed X-Forwarded-For cannot bypass the rate limiter
+  // -------------------------------------------------------------
+  {
+    resetRateLimits()
+    const proxyIp = "203.0.113.9"
+    for (let i = 0; i < 6; i++) {
+      const h = new Headers({ "x-forwarded-for": `10.0.0.${i}, ${proxyIp}` })
+      const ip = getClientIp(h)
+      assert.equal(ip, proxyIp, "Client-controlled first XFF hop must be ignored")
+      const allowed = checkRateLimit(ip)
+      assert.equal(allowed, i < 5, `Rotating spoofed XFF request ${i + 1}`)
+    }
+    assert.equal(getClientIp(new Headers({ "x-real-ip": "198.51.100.1", "x-forwarded-for": "1.1.1.1" })), "198.51.100.1")
+    assert.equal(getClientIp(new Headers()), "127.0.0.1")
+    console.log("✅ Test 8: Spoofed X-Forwarded-For rotation still rate limited.")
+    passedCount++
+  }
+
+  console.log(`\n🎉 All ${passedCount}/8 QA Automation tests PASSED with 100% success!`)
 }
 
 runTests().catch((err) => {

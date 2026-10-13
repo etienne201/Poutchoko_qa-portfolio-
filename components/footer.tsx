@@ -10,13 +10,14 @@ import {
   FileDown,
   MapPin,
   ShieldCheck,
+  Sparkles,
 } from "lucide-react"
 
 export function Footer() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
 
   return (
-    <footer className="pt-16 sm:pt-20 pb-24 md:pb-16 px-3.5 sm:px-6 lg:px-8 border-t border-slate-200/80 dark:border-white/[0.08] bg-slate-50/95 dark:bg-[#081018]/95 relative text-left">
+    <footer className="pt-16 sm:pt-20 pb-24 md:pb-16 px-3.5 sm:px-6 lg:px-8 border-t border-slate-200/80 dark:border-white/[0.08] bg-slate-50/60 dark:bg-[#081018]/55 backdrop-blur-md relative text-left">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 sm:pb-12 border-b border-slate-200/80 dark:border-white/[0.08]">
           {/* Identity & Role */}
@@ -132,27 +133,31 @@ export function Footer() {
             </div>
 
             <div className="space-y-2 pt-1">
-              <a
-                href="/Etienne_Poutchoko_CV_EN.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                download="Etienne_Poutchoko_CV_EN.pdf"
-                className="inline-flex items-center text-xs text-slate-600 dark:text-slate-300 hover:text-primary transition-colors py-0.5"
+              <Link
+                href="/cv"
+                className="inline-flex items-center text-xs font-bold text-sky-600 dark:text-sky-400 hover:underline transition-colors py-0.5"
               >
-                <FileDown className="w-3.5 h-3.5 mr-1.5 text-primary flex-shrink-0" />
-                <span>{t("footer.cvEn")}</span>
-              </a>
+                <Sparkles className="w-3.5 h-3.5 mr-1.5 flex-shrink-0" />
+                <span>{t("cv.viewCta")}</span>
+              </Link>
               <br />
               <a
-                href="/Etienne_Poutchoko_CV_FR.pdf"
+                href={language === "en" ? "/CV_Poutchoko_Emako_Etienne_EN.pdf" : "/CV_Poutchoko_Emako_Etienne_FR.pdf"}
                 target="_blank"
                 rel="noopener noreferrer"
-                download="Etienne_Poutchoko_CV_FR.pdf"
-                className="inline-flex items-center text-xs text-slate-600 dark:text-slate-300 hover:text-primary transition-colors py-0.5"
+                download={language === "en" ? "CV_Poutchoko_Emako_Etienne_EN.pdf" : "CV_Poutchoko_Emako_Etienne_FR.pdf"}
+                className="inline-flex items-center text-xs font-semibold text-slate-800 dark:text-slate-200 hover:text-sky-600 dark:hover:text-sky-400 transition-colors py-0.5"
               >
-                <FileDown className="w-3.5 h-3.5 mr-1.5 text-primary flex-shrink-0" />
-                <span>{t("footer.cvFr")}</span>
+                <FileDown className="w-3.5 h-3.5 mr-1.5 text-sky-500 flex-shrink-0" />
+                <span>{t("cv.downloadCta")}</span>
               </a>
+              <br />
+              <Link
+                href="/cv-builder"
+                className="inline-flex items-center text-xs text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors py-0.5"
+              >
+                <span>Studio CV &amp; Personnalisation</span>
+              </Link>
             </div>
           </div>
         </div>

@@ -2,135 +2,582 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>CV - Etienne Poutchoko Emako - Senior QA Automation Engineer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV - Etienne Poutchoko Emako - Ingénieur QA Automation Senior</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    @page { size: A4; margin: 12mm 15mm; }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: #1e293b; line-height: 1.45; font-size: 10.5pt; background: #fff; }
-    .header { border-bottom: 2px solid #2563eb; padding-bottom: 12px; margin-bottom: 14px; }
-    h1 { font-size: 20pt; color: #0f172a; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; }
-    .title { font-size: 12pt; color: #2563eb; font-weight: 700; margin-top: 2px; }
-    .contact-bar { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px; font-size: 9pt; color: #475569; }
-    .contact-bar a { color: #2563eb; text-decoration: none; }
-    .section { margin-bottom: 14px; page-break-inside: avoid; }
-    .section-title { font-size: 11pt; font-weight: 700; color: #0f172a; text-transform: uppercase; border-bottom: 1px solid #cbd5e1; padding-bottom: 3px; margin-bottom: 8px; letter-spacing: 0.5px; }
-    .summary { font-size: 9.5pt; color: #334155; text-align: justify; }
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    ul { list-style: disc; padding-left: 16px; margin-top: 4px; }
-    li { font-size: 9pt; color: #334155; margin-bottom: 3px; }
-    .job { margin-bottom: 11px; page-break-inside: avoid; }
-    .job-header { display: flex; justify-content: space-between; align-items: baseline; }
-    .job-title { font-weight: 700; color: #0f172a; font-size: 10pt; }
-    .job-company { color: #2563eb; font-weight: 600; font-size: 9.5pt; }
-    .job-date { font-size: 8.5pt; color: #64748b; font-weight: 600; }
-    .skills-category { margin-bottom: 6px; font-size: 9pt; }
-    .skills-label { font-weight: 700; color: #0f172a; }
-    .tag { display: inline-block; background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 8.5pt; color: #334155; margin-right: 4px; margin-bottom: 3px; border: 1px solid #e2e8f0; }
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --text-dark: #0f172a;
+      --text-muted: #475569;
+      --text-light: #64748b;
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      --border-accent: #cbd5e1;
+      --tag-bg: #f1f5f9;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text-dark);
+      background-color: var(--bg-page);
+      line-height: 1.45;
+      font-size: 13px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Actions Bar (Screen only) */
+    .screen-actions {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(8px);
+      color: #ffffff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .screen-actions .title {
+      font-weight: 700;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .screen-actions .badge {
+      background: #0284c7;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: #0284c7;
+      color: #ffffff;
+    }
+    .btn-primary:hover {
+      background: #0369a1;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* CV Sheet Container */
+    .cv-container {
+      max-width: 210mm;
+      margin: 24px auto;
+      background: var(--bg-card);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border-radius: 4px;
+      padding: 16mm 18mm;
+    }
+
+    /* Header */
+    .cv-header {
+      border-bottom: 2px solid var(--text-dark);
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+    }
+
+    .cv-name {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text-dark);
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .cv-role {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 10px;
+      letter-spacing: 0.2px;
+    }
+
+    .cv-contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    .cv-contact-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .cv-contact-item a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .cv-contact-item a:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    /* Section Structure */
+    .section {
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-dark);
+      border-bottom: 1.5px solid var(--border-accent);
+      padding-bottom: 3px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .section-title::after {
+      content: "";
+      height: 2px;
+      width: 28px;
+      background: var(--primary);
+      display: inline-block;
+    }
+
+    .summary-text {
+      font-size: 12px;
+      color: var(--text-dark);
+      line-height: 1.5;
+      text-align: justify;
+    }
+
+    /* Technical Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 6px;
+      font-size: 12px;
+    }
+
+    .skill-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .skill-label {
+      font-weight: 700;
+      color: var(--text-dark);
+      min-width: 175px;
+      flex-shrink: 0;
+    }
+
+    .skill-values {
+      color: var(--text-muted);
+    }
+
+    /* Experience Items */
+    .experience-list {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .experience-item {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .experience-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 2px;
+    }
+
+    .experience-role {
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--text-dark);
+    }
+
+    .experience-company {
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .experience-dates {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-light);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .experience-desc {
+      font-size: 12px;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+
+    .achievement-list {
+      list-style-type: none;
+      padding-left: 0;
+      margin-top: 3px;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5px;
+    }
+
+    .achievement-item {
+      position: relative;
+      padding-left: 14px;
+      font-size: 11.5px;
+      color: var(--text-dark);
+      line-height: 1.4;
+    }
+
+    .achievement-item::before {
+      content: "▪";
+      position: absolute;
+      left: 2px;
+      top: -1px;
+      color: var(--primary);
+      font-size: 12px;
+    }
+
+    /* Education & Soft Skills Layout */
+    .two-col-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 8px;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .education-item {
+      margin-bottom: 4px;
+    }
+
+    .education-degree {
+      font-weight: 700;
+      font-size: 12.5px;
+      color: var(--text-dark);
+    }
+
+    .education-school {
+      font-size: 11.5px;
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+
+    .education-dates {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-light);
+    }
+
+    .soft-skills-text {
+      font-size: 11.5px;
+      color: var(--text-dark);
+      line-height: 1.5;
+    }
+
+    /* Print Styles */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 12mm 15mm;
+      }
+
+      body {
+        background: #ffffff !important;
+        font-size: 11.5px;
+      }
+
+      .no-print,
+      .screen-actions {
+        display: none !important;
+      }
+
+      .cv-container {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+      }
+
+      .cv-name {
+        font-size: 24px;
+      }
+
+      .cv-role {
+        font-size: 12.5px;
+        margin-bottom: 6px;
+      }
+
+      .section {
+        margin-bottom: 11px;
+      }
+
+      .section-title {
+        font-size: 11px;
+        margin-bottom: 6px;
+      }
+
+      .experience-item {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+      }
+
+      .achievement-item {
+        font-size: 11px;
+      }
+
+      a {
+        text-decoration: none !important;
+        color: inherit !important;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="header">
-    <h1>ETIENNE POUTCHOKO EMAKO</h1>
-    <div class="title">Senior QA Automation Engineer | FinTech | CI/CD | Cypress | Playwright</div>
-    <div class="contact-bar">
-      <span>📍 Douala, Cameroun (Ouvert au Remote – Europe & International)</span>
-      <span>🔗 <a href="https://linkedin.com/in/etienne-poutchoko-emako">linkedin.com/in/etienne-poutchoko-emako</a></span>
-      <span>✉️ <a href="mailto:poutchokoetienne@gmail.com">poutchokoetienne@gmail.com</a></span>
-      <span>📞 +237 657 268 355</span>
+  <!-- Barre d'actions pour écran (Masquée à l'impression) -->
+  <div class="screen-actions no-print">
+    <div class="title">
+      <span>📄 Étienne Poutchoko — CV Standalone (FR)</span>
+      <span class="badge">Édition Française</span>
+    </div>
+    <div class="action-buttons">
+      <a href="/" class="btn btn-secondary">
+        ← Retour au Portfolio
+      </a>
+      <a href="cv-en.html" class="btn btn-secondary">
+        🇬🇧 English Version
+      </a>
+      <a href="/CV_Poutchoko_Emako_Etienne_FR.pdf" download="CV_Poutchoko_Emako_Etienne_FR.pdf" class="btn btn-primary">
+        📥 Télécharger mon CV (PDF)
+      </a>
+      <button onclick="window.print()" class="btn btn-secondary">
+        🖨️ Imprimer
+      </button>
     </div>
   </div>
 
-  <div class="section">
-    <div class="section-title">Résumé Professionnel</div>
-    <p class="summary">
-      Senior QA Automation Engineer avec <strong>6+ années d'expérience</strong> dans la livraison de produits digitaux de haute qualité dans les domaines <strong>FinTech, SaaS, RegTech, Assurance et Plateformes de Paiement</strong>. Expert dans la conception de stratégies de test, l'automatisation de bout en bout (UI & API), les tests de performance et l'intégration CI/CD. Expérience confirmée dans le pilotage des processus QA pour des systèmes réglementés (zone CEMAC), paiements digitaux et plateformes SaaS d'entreprise. Forte expérience en environnement Agile/Scrum avec des équipes internationales distribuées. Orienté résultats, analytique et focalisé sur l'amélioration continue de la qualité.
-    </p>
-  </div>
+  <div class="cv-container">
+    <!-- En-tête -->
+    <header class="cv-header">
+      <h1 class="cv-name">ETIENNE POUTCHOKO EMAKO</h1>
+      <div class="cv-role">Senior QA Automation Engineer | FinTech | CI/CD | Cypress | Playwright</div>
+      <div class="cv-contact">
+        <span class="cv-contact-item">📍 Douala, Cameroun (Ouvert au Remote – Europe &amp; International)</span>
+        <span class="cv-contact-item">🔗 <a href="https://linkedin.com/in/etienne-poutchoko-emako" target="_blank" rel="noopener">linkedin.com/in/etienne-poutchoko-emako</a></span>
+        <span class="cv-contact-item">✉️ <a href="mailto:poutchokoetienne@gmail.com">poutchokoetienne@gmail.com</a></span>
+        <span class="cv-contact-item">📞 +237 657 268 355</span>
+        <span class="cv-contact-item">🐙 <a href="https://github.com/etienne201" target="_blank" rel="noopener">github.com/etienne201</a></span>
+      </div>
+    </header>
 
-  <div class="section">
-    <div class="section-title">Compétences Clés & Outils Techniques</div>
-    <div class="grid-2">
-      <div>
-        <div class="skills-category"><span class="skills-label">Expertises :</span> Stratégie de test, Automatisation E2E, Tests UI & API, Tests de performance, Intégration CI/CD, QA FinTech & Paiements, Agile/Scrum, Gestion des anomalies, Tests basés sur les risques</div>
-        <div class="skills-category"><span class="skills-label">Automatisation :</span> <span class="tag">Cypress</span> <span class="tag">Playwright</span> <span class="tag">Robot Framework</span></div>
-        <div class="skills-category"><span class="skills-label">Tests API :</span> <span class="tag">Postman</span> <span class="tag">REST API Testing</span></div>
-      </div>
-      <div>
-        <div class="skills-category"><span class="skills-label">Performance & CI/CD :</span> <span class="tag">Gatling</span> <span class="tag">GitLab CI</span> <span class="tag">Jenkins</span> <span class="tag">Docker</span></div>
-        <div class="skills-category"><span class="skills-label">Management de Test :</span> <span class="tag">Xray (JIRA)</span> <span class="tag">ClickUp</span> <span class="tag">Git</span> <span class="tag">Google Workspace</span></div>
-        <div class="skills-category"><span class="skills-label">Langues :</span> Français (Natif), Anglais (Compétence professionnelle)</div>
-      </div>
-    </div>
-  </div>
+    <!-- Résumé professionnel -->
+    <section class="section">
+      <h2 class="section-title">PROFIL PROFESSIONNEL &amp; SYNTHÈSE</h2>
+      <p class="summary-text">
+        Ingénieur Senior QA Automation fort de 6+ années d'expérience dans la livraison de produits numériques à haute fiabilité en FinTech,
+        SaaS, RegTech, Assurance et plateformes de paiement. Expert en conception de stratégies de test, automatisation end-to-end (UI &amp;
+        API), tests de performance et intégration CI/CD. Expérience éprouvée dans le pilotage des processus QA pour des systèmes réglementés
+        (zone CEMAC), paiements digitaux et plateformes SaaS d'entreprise. Forte pratique des environnements Agile/Scrum avec des équipes
+        internationales distribuées. Orienté résultats, rigueur analytique et amélioration continue de la qualité logicielle.
+      </p>
+    </section>
 
-  <div class="section">
-    <div class="section-title">Expérience Professionnelle</div>
+    <!-- Compétences clés & techniques -->
+    <section class="section">
+      <h2 class="section-title">COMPÉTENCES CLÉS &amp; TECHNIQUES</h2>
+      <div class="skills-grid">
+        <div class="skill-row">
+          <span class="skill-label">Cœur de métier :</span>
+          <span class="skill-values">Stratégie de test, Automatisation E2E, Tests UI &amp; API, Tests de performance, Intégration CI/CD, Assurance Qualité FinTech, Agile/Scrum, Gestion des anomalies, Approche par les risques</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-label">Outils d'Automatisation :</span>
+          <span class="skill-values">Cypress, Playwright, Robot Framework</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-label">Tests d'API :</span>
+          <span class="skill-values">Postman, REST API Testing</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-label">Performance &amp; CI/CD :</span>
+          <span class="skill-values">Gatling, GitLab CI, Jenkins, Docker</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-label">Gestion &amp; Outils :</span>
+          <span class="skill-values">Xray (JIRA), ClickUp, Git, Google Workspace</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-label">Langues :</span>
+          <span class="skill-values">Français (Natif), Anglais (Capacité professionnelle complète)</span>
+        </div>
+      </div>
+    </section>
 
-    <div class="job">
-      <div class="job-header">
-        <div><span class="job-title">Senior QA Engineer</span> — <span class="job-company">Seven Common Factors (Seven GPS)</span>, Douala, Cameroun</div>
-        <div class="job-date">Jan 2025 – Présent</div>
-      </div>
-      <ul>
-        <li>Pilotage des activités QA pour les plateformes réglementaires CEMAC (ARSy & URBANY — systèmes de gestion urbaine et réglementaire).</li>
-        <li>Conception et implémentation de frameworks de test automatisés E2E avec Cypress.</li>
-        <li>Exécution de tests d'API et de performance avec Postman et Gatling.</li>
-        <li><strong>Réduction du temps de test de non-régression de 40%</strong> grâce à l'automatisation.</li>
-        <li>Intégration des pipelines de tests automatisés dans GitLab CI/CD.</li>
-        <li>Supervision du cycle complet de test : exploratoire, régression, performance et UAT.</li>
-        <li>Coordination avec les parties prenantes régionales et pluridisciplinaires en environnement Agile/Scrum.</li>
-      </ul>
-    </div>
+    <!-- Expériences professionnelles -->
+    <section class="section">
+      <h2 class="section-title">EXPÉRIENCES PROFESSIONNELLES</h2>
+      <div class="experience-list">
+        
+        <!-- Expérience 1 -->
+        <article class="experience-item">
+          <div class="experience-header">
+            <div>
+              <span class="experience-role">Senior QA Engineer</span> — 
+              <span class="experience-company">Seven Common Factors (Seven GPS)</span>, Douala, Cameroun
+            </div>
+            <span class="experience-dates">Janv 2025 – Présent</span>
+          </div>
+          <p class="experience-desc">
+            Pilotage des activités QA pour les plateformes réglementaires d'envergure CEMAC (ARSy &amp; URBANY—systèmes d'agréments et d'aménagement urbain).
+          </p>
+          <ul class="achievement-list">
+            <li class="achievement-item">Conception et mise en œuvre de frameworks de tests automatisés E2E sous Cypress.</li>
+            <li class="achievement-item">Exécution des tests d'API et de performance avec Postman et Gatling.</li>
+            <li class="achievement-item">Réduction de 40% du temps de test de non-régression grâce à l'automatisation.</li>
+            <li class="achievement-item">Intégration des pipelines de tests automatisés dans GitLab CI/CD.</li>
+            <li class="achievement-item">Supervision de cycles complets : exploratoire, régression, charge et UAT.</li>
+            <li class="achievement-item">Coordination avec les parties prenantes régionales en environnement Agile/Scrum.</li>
+          </ul>
+        </article>
 
-    <div class="job">
-      <div class="job-header">
-        <div><span class="job-title">Freelance QA Automation Engineer</span> — <span class="job-company">Bainkode Dev</span>, Italie (Remote — Europe)</div>
-        <div class="job-date">Jan 2023 – Nov 2024</div>
-      </div>
-      <ul>
-        <li>Délivrance de solutions QA automatisées pour plateformes SaaS européennes (D4Lean, EZ Trip).</li>
-        <li>Développement de frameworks d'automatisation scalables avec Cypress, Playwright et Robot Framework.</li>
-        <li><strong>Augmentation de la couverture de test de 60%</strong> sur plusieurs projets clients.</li>
-        <li>Conception de plans de test exhaustifs et de stratégies manuelles ciblées.</li>
-        <li>Gestion du cycle de vie des anomalies via JIRA/Xray en collaboration avec les équipes distribuées en Europe.</li>
-      </ul>
-    </div>
+        <!-- Expérience 2 -->
+        <article class="experience-item">
+          <div class="experience-header">
+            <div>
+              <span class="experience-role">Freelance QA Automation Engineer</span> — 
+              <span class="experience-company">Bainkode Dev</span>, Italie (Remote — Europe)
+            </div>
+            <span class="experience-dates">Janv 2023 – Nov 2024</span>
+          </div>
+          <p class="experience-desc">
+            Prestations de solutions QA automatisées pour plateformes SaaS et digitales européennes (D4Lean, EZ Trip).
+          </p>
+          <ul class="achievement-list">
+            <li class="achievement-item">Développement de frameworks d'automatisation évolutifs sous Cypress, Playwright et Robot Framework.</li>
+            <li class="achievement-item">Augmentation mesurée de 60% de la couverture de tests sur plusieurs projets clients.</li>
+            <li class="achievement-item">Conception de plans de test exhaustifs et stratégies de tests manuels sur mesure.</li>
+            <li class="achievement-item">Gestion complète du cycle de vie des anomalies sous JIRA/Xray et collaboration avec des équipes européennes distribuées.</li>
+          </ul>
+        </article>
 
-    <div class="job">
-      <div class="job-header">
-        <div><span class="job-title">QA Engineer</span> — <span class="job-company">Seven Common Factors (Seven GPS)</span>, Douala, Cameroun</div>
-        <div class="job-date">Juin 2020 – Jan 2023</div>
-      </div>
-      <ul>
-        <li>Assurance qualité pour multiples plateformes SaaS, paiements digitaux (Mobile Money, Visa, PayPal), assurance et automobile.</li>
-        <li>Exécution de tests fonctionnels, exploratoires et de performance.</li>
-        <li>Automatisation des flux utilisateurs critiques avec Cypress ; intégration dans les pipelines Jenkins CI.</li>
-        <li><strong>Amélioration de la stabilité des releases avec une baisse de 35% des anomalies en production</strong>.</li>
-      </ul>
-    </div>
+        <!-- Expérience 3 -->
+        <article class="experience-item">
+          <div class="experience-header">
+            <div>
+              <span class="experience-role">QA Engineer</span> — 
+              <span class="experience-company">Seven Common Factors (Seven GPS)</span>, Douala, Cameroun
+            </div>
+            <span class="experience-dates">Juin 2020 – Janv 2023</span>
+          </div>
+          <p class="experience-desc">
+            Assurance qualité sur plusieurs plateformes SaaS : paiements digitaux (Mobile Money, Visa, PayPal), assurances et automobile.
+          </p>
+          <ul class="achievement-list">
+            <li class="achievement-item">Exécution des tests fonctionnels, exploratoires et de performance.</li>
+            <li class="achievement-item">Automatisation des parcours utilisateurs critiques avec Cypress et intégration dans les pipelines Jenkins CI.</li>
+            <li class="achievement-item">Amélioration de la stabilité des versions avec une réduction de 35% des anomalies en production.</li>
+          </ul>
+        </article>
 
-    <div class="job">
-      <div class="job-header">
-        <div><span class="job-title">Stagiaire Testeur Logiciel</span> — <span class="job-company">Seven Common Factors (Seven GPS)</span>, Douala, Cameroun</div>
-        <div class="job-date">Déc 2019 – Juin 2020</div>
-      </div>
-      <ul>
-        <li>Conception et exécution de cas de test manuels ; documentation des anomalies et suivi des résolutions via JIRA.</li>
-        <li>Participation active aux cérémonies Scrum et à la planification des sprints.</li>
-      </ul>
-    </div>
-  </div>
+        <!-- Expérience 4 -->
+        <article class="experience-item">
+          <div class="experience-header">
+            <div>
+              <span class="experience-role">Software Tester Intern</span> — 
+              <span class="experience-company">Seven Common Factors (Seven GPS)</span>, Douala, Cameroun
+            </div>
+            <span class="experience-dates">Déc 2019 – Juin 2020</span>
+          </div>
+          <ul class="achievement-list">
+            <li class="achievement-item">Conception et exécution de cas de tests manuels ; documentation des anomalies et suivi des résolutions sous JIRA.</li>
+            <li class="achievement-item">Participation active aux cérémonies Scrum et à la planification des sprints.</li>
+          </ul>
+        </article>
 
-  <div class="section">
-    <div class="section-title">Formation & Qualités Humaines</div>
-    <div class="grid-2">
-      <div>
-        <p style="font-size: 9.5pt;"><strong>Développeur Web Full Stack</strong> — Seven Advanced Academy (2018–2020)</p>
       </div>
-      <div>
-        <p style="font-size: 9pt; color: #475569;">Esprit analytique affûté • Souci du détail • Autonomie et esprit d'équipe • Résolution pragmatique de problèmes • Culture de l'amélioration continue</p>
+    </section>
+
+    <!-- Formation & Soft Skills -->
+    <section class="section">
+      <div class="two-col-section">
+        <div>
+          <h2 class="section-title">FORMATION</h2>
+          <div class="education-item">
+            <div class="education-degree">Full Stack Web Developer</div>
+            <div class="education-school">Seven Advanced Academy</div>
+            <div class="education-dates">2018 – 2020</div>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="section-title">QUALITÉS HUMAINES &amp; POSTURE</h2>
+          <p class="soft-skills-text">
+            Esprit analytique affûté • Sens aigu du détail et obsession de la fiabilité • Autonome et excellent esprit d'équipe • Orientation résolution pragmatique • Culture de l'amélioration continue
+          </p>
+        </div>
       </div>
-    </div>
+    </section>
   </div>
 </body>
 </html>

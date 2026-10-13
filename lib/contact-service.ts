@@ -43,6 +43,26 @@ export function resetRateLimits(): void {
   rateLimitMap.clear()
 }
 
+/** Taille maximale acceptée pour le corps JSON (octets). */
+export const MAX_BODY_BYTES = 16 * 1024
+
+/**
+ * Résout l'IP client à partir d'en-têtes fixés par la plateforme.
+ * - `x-real-ip` est écrasé par Vercel/reverse-proxy (non falsifiable côté client).
+ * - Sinon on prend le DERNIER élément de `x-forwarded-for` (ajouté par le proxy),
+ *   jamais le premier, qui est contrôlé par le client.
+ */
+export function getClientIp(headers: Headers): string {
+  const realIp = headers.get("x-real-ip")?.trim()
+  if (realIp) return realIp
+  const xff = headers.get("x-forwarded-for")
+  if (xff) {
+    const hops = xff.split(",").map((h) => h.trim()).filter(Boolean)
+    if (hops.length) return hops[hops.length - 1]
+  }
+  return "127.0.0.1"
+}
+
 // -------------------------------------------------------------
 // 2. Input Sanitization & HTML Escaping
 // -------------------------------------------------------------

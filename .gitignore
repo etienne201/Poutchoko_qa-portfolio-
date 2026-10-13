@@ -109,3 +109,5 @@ desktop.ini
 .temp/
 tmp/
 temp/
+# Outils IA locaux
+.refact/

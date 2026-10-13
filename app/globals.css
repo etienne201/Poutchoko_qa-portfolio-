@@ -276,7 +276,7 @@ html.theme-transition *::after {
   background: rgba(241, 245, 249, 0.8);
 }
 .dark ::-webkit-scrollbar-track {
-  background: rgba(14, 25, 34, 0.8);
+  background: rgba(148, 163, 184, 0.25);
 }
 ::-webkit-scrollbar-thumb {
   background: rgba(148, 163, 184, 0.45);
@@ -292,3 +292,66 @@ html.theme-transition *::after {
 .dark ::-webkit-scrollbar-thumb:hover {
   background: rgba(148, 163, 184, 0.45);
 }
+
+/* ==========================================================================
+   PRINT STYLES FOR CV EXPORT (A4 FORMAT)
+   ========================================================================== */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 210mm !important;
+    min-height: 297mm !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Masquer tous les éléments d'interface non pertinents lors de l'impression */
+  .no-print,
+  nav,
+  footer,
+  header,
+  aside,
+  button,
+  .mobile-contact-bar,
+  #navbar,
+  [data-no-print="true"] {
+    display: none !important;
+  }
+
+  /* Le conteneur principal A4 reprend sa taille exacte 210mm sans zoom */
+  .cv-a4-sheet {
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    width: 210mm !important;
+    max-width: 210mm !important;
+    min-height: 297mm !important;
+    background: #ffffff !important;
+    transform: none !important;
+    transform-origin: top left !important;
+  }
+
+  /* Isolation et élimination des coupures de sections en milieu de page */
+  .cv-section-block,
+  .cv-item-block,
+  .break-inside-avoid {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  a {
+    text-decoration: none !important;
+    color: inherit !important;
+  }
+}
+
+

@@ -502,7 +502,7 @@ export function ContactSection() {
                 )}
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-4 mt-5">
+              <form onSubmit={handleSubmit} className="space-y-4 mt-5" suppressHydrationWarning>
                 {/* Honeypot hidden input for anti-bot trap */}
                 <input
                   type="text"
@@ -513,6 +513,7 @@ export function ContactSection() {
                   autoComplete="off"
                   className="hidden"
                   aria-hidden="true"
+                  suppressHydrationWarning
                 />
 
                 <div className="grid sm:grid-cols-2 gap-3.5 sm:gap-4">
@@ -531,6 +532,7 @@ export function ContactSection() {
                       maxLength={100}
                       placeholder={t("contact.form.namePlaceholder")}
                       disabled={isSubmitting}
+                      suppressHydrationWarning
                       className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-[#081018]/70 border border-slate-200 dark:border-white/[0.08] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all shadow-sm min-h-[42px]"
                     />
                   </div>
@@ -550,6 +552,7 @@ export function ContactSection() {
                       maxLength={254}
                       placeholder={t("contact.form.emailPlaceholder")}
                       disabled={isSubmitting}
+                      suppressHydrationWarning
                       className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-[#081018]/70 border border-slate-200 dark:border-white/[0.08] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all shadow-sm min-h-[42px]"
                     />
                   </div>
@@ -569,6 +572,7 @@ export function ContactSection() {
                       maxLength={100}
                       placeholder={t("contact.form.companyPlaceholder")}
                       disabled={isSubmitting}
+                      suppressHydrationWarning
                       className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-[#081018]/70 border border-slate-200 dark:border-white/[0.08] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all shadow-sm min-h-[42px]"
                     />
                   </div>
@@ -583,6 +587,7 @@ export function ContactSection() {
                       value={formData.requestType}
                       onChange={handleChange}
                       disabled={isSubmitting}
+                      suppressHydrationWarning
                       className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-[#081018]/70 border border-slate-200 dark:border-white/[0.08] text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all shadow-sm min-h-[42px]"
                     >
                       {requestTypes.map((rt, idx) => (
@@ -607,6 +612,7 @@ export function ContactSection() {
                     maxLength={200}
                     placeholder={t("contact.form.subjectPlaceholder")}
                     disabled={isSubmitting}
+                    suppressHydrationWarning
                     className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-[#081018]/70 border border-slate-200 dark:border-white/[0.08] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all shadow-sm min-h-[42px]"
                   />
                 </div>
@@ -633,6 +639,7 @@ export function ContactSection() {
                     disabled={isSubmitting}
                     data-gramm="false"
                     data-enable-grammarly="false"
+                    suppressHydrationWarning
                     className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-[#081018]/70 border border-slate-200 dark:border-white/[0.08] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all resize-none shadow-sm"
                   ></textarea>
                 </div>

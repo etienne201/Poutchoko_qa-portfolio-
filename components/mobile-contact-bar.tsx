@@ -15,7 +15,10 @@ export function MobileContactBar() {
       ? "Opportunité QA Automation - Portfolio"
       : "QA Automation Opportunity - Portfolio",
   )
-  const cvFile = language === "fr" ? "Etienne_Poutchoko_CV_FR.pdf" : "Etienne_Poutchoko_CV_EN.pdf"
+  const cvFile =
+    language === "fr"
+      ? "CV_Poutchoko_Emako_Etienne_FR.pdf"
+      : "CV_Poutchoko_Emako_Etienne_EN.pdf"
 
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 px-2.5 pt-2 pb-[max(0.6rem,env(safe-area-inset-bottom))] bg-white/95 dark:bg-[#081018]/90 backdrop-blur-xl border-t border-slate-200/80 dark:border-white/[0.08] shadow-lg dark:shadow-elevated">
@@ -49,16 +52,14 @@ export function MobileContactBar() {
           <span className="text-[10px] font-semibold truncate max-w-full">{t("mobile.email")}</span>
         </a>
 
-        {/* CV Download */}
+        {/* Consultation & Téléchargement CV */}
         <a
-          href={`/${cvFile}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          download={cvFile}
-          className="flex flex-col items-center justify-center py-2 px-1 rounded-xl bg-slate-100 dark:bg-white/[0.04] text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-white/[0.08] active:scale-95 transition-transform shadow-sm min-h-[44px]"
+          href="/cv"
+          className="flex flex-col items-center justify-center py-2 px-1 rounded-xl bg-sky-500/10 text-sky-700 dark:text-sky-300 border border-sky-500/20 active:scale-95 transition-transform shadow-sm min-h-[44px]"
+          title={`${t("cv.viewCta")} — ${cvFile}`}
         >
-          <FileDown className="w-4 h-4 mb-0.5 flex-shrink-0" />
-          <span className="text-[10px] font-semibold truncate max-w-full">{t("mobile.cv")}</span>
+          <FileDown className="w-4 h-4 mb-0.5 flex-shrink-0 text-sky-600 dark:text-sky-400" />
+          <span className="text-[10px] font-semibold truncate max-w-full">{t("cv.viewCta")}</span>
         </a>
       </div>
     </div>
