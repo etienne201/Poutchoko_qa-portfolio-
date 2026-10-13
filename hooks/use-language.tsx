@@ -18,10 +18,32 @@ const translations: Record<Language, Record<string, string>> = {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<Language>("fr")
+export function LanguageProvider({
+  children,
+  initialLanguage = "fr",
+}: {
+  children: ReactNode
+  initialLanguage?: Language
+}) {
+  const [language, setLanguageState] = useState<Language>(initialLanguage)
 
   useEffect(() => {
+    // 0. Check URL query param ?lang=fr|en first
+    try {
+      if (typeof window !== "undefined") {
+        const urlParams = new URLSearchParams(window.location.search)
+        const qLang = urlParams.get("lang") as Language | null
+        if (qLang === "fr" || qLang === "en") {
+          setLanguageState(qLang)
+          document.documentElement.lang = qLang
+          localStorage.setItem("portfolio_lang", qLang)
+          return
+        }
+      }
+    } catch {
+      // Ignore
+    }
+
     // 1. Check saved user preference in localStorage
     try {
       const saved = localStorage.getItem("portfolio_lang") as Language | null

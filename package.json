@@ -9,6 +9,7 @@
     "fix": "next lint --fix",
     "test:contact": "node --experimental-strip-types scripts/test-contact-flow.mjs",
     "test:cv": "node --experimental-strip-types scripts/test-cv-flow.mjs",
+    "generate:pdf": "node scripts/generate-cv-pdfs.mjs",
     "start": "next start"
   },
   "dependencies": {

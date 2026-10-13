@@ -167,5 +167,22 @@ for (const key of requiredKeys) {
 }
 console.log("   ✔ Test 11 réussi : Toutes les clés i18n requises pour le CV sont présentes et synchronisées.")
 
-console.log("\n🎉 Tous les 11/11 tests du moteur CV et de la chaîne multilingue sont validés avec 100% de succès !")
+// Test 12: Validation de la pureté du document PDF (Absence de headers navigateur parasites & pagination maîtrisée)
+console.log("▶ Test 12: Contrôle d'absence de headers navigateur parasites et pagination...")
+for (const pdf of pdfFiles) {
+  const fullPath = path.resolve(process.cwd(), "public", pdf.name)
+  const rawContent = fs.readFileSync(fullPath, "latin1")
+  
+  // Vérification de l'absence d'URLs locales ou d'anciens timestamps de navigateur
+  assert.ok(!rawContent.includes("file:///Users"), `Le PDF ${pdf.name} ne doit pas contenir d'en-tête navigateur local (file:///Users)`)
+  assert.ok(!rawContent.includes("07/10/2026"), `Le PDF ${pdf.name} ne doit pas contenir l'ancienne date statique d'impression (07/10/2026)`)
+  
+  // Vérification de la pagination (exactement 2 pages)
+  const pageMatches = rawContent.match(/\/Type\s*\/Page\b/g)
+  const pageCount = pageMatches ? pageMatches.length : 0
+  assert.equal(pageCount, 2, `Le PDF ${pdf.name} doit comporter exactement 2 pages maîtrisées (actuel: ${pageCount})`)
+}
+console.log("   ✔ Test 12 réussi : Pagination 2 pages validée et zéro en-tête navigateur parasite détecté.")
+
+console.log("\n🎉 Tous les 12/12 tests du moteur CV et de la chaîne multilingue sont validés avec 100% de succès !")
 

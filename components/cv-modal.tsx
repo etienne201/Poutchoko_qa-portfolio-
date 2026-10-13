@@ -61,7 +61,7 @@ export function CVModal({ isOpen, onClose }: CVModalProps) {
           aria-describedby={undefined}
         >
           {/* Barre d'action supérieure sticky (Screen only) */}
-          <header className="flex-shrink-0 sticky top-0 z-30 bg-white/95 dark:bg-[#081018]/95 backdrop-blur-xl border-b border-slate-200 dark:border-white/[0.1] px-4 py-3 sm:px-6 shadow-sm flex items-center justify-between gap-3">
+          <header className="cv-modal-header no-print flex-shrink-0 sticky top-0 z-30 bg-white/95 dark:bg-[#081018]/95 backdrop-blur-xl border-b border-slate-200 dark:border-white/[0.1] px-4 py-3 sm:px-6 shadow-sm flex items-center justify-between gap-3">
             {/* Gauche : Retour et Titre */}
             <div className="flex items-center space-x-3 min-w-0">
               <button
@@ -162,7 +162,7 @@ export function CVModal({ isOpen, onClose }: CVModalProps) {
             <CVViewer variant="paper" />
             
             {/* Pied de consultation */}
-            <div className="max-w-4xl mx-auto mt-6 text-center text-xs text-slate-500 dark:text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-3 px-4">
+            <div className="no-print max-w-4xl mx-auto mt-6 text-center text-xs text-slate-500 dark:text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-3 px-4">
               <div className="flex items-center space-x-2">
                 <Sparkles className="w-3.5 h-3.5 text-sky-500 flex-shrink-0" />
                 <span>{fileName}</span>

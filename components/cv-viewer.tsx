@@ -22,23 +22,25 @@ import {
 interface CVViewerProps {
   className?: string
   variant?: "paper" | "embedded"
+  lang?: "fr" | "en"
 }
 
-export function CVViewer({ className = "", variant = "paper" }: CVViewerProps) {
-  const { language } = useLanguage()
+export function CVViewer({ className = "", variant = "paper", lang }: CVViewerProps) {
+  const { language: contextLang } = useLanguage()
+  const language = lang || contextLang
   const cv = language === "en" ? defaultEtienneCV_EN : defaultEtienneCV_FR
   const isEn = language === "en"
 
   return (
     <div
-      className={`w-full max-w-4xl mx-auto transition-all ${
+      className={`cv-viewer-paper w-full max-w-4xl mx-auto transition-all ${
         variant === "paper"
-          ? "bg-white dark:bg-[#0c141d] text-slate-900 dark:text-slate-100 shadow-2xl rounded-2xl border border-slate-200/90 dark:border-white/[0.08] p-5 sm:p-8 md:p-12"
+          ? "bg-white dark:bg-[#0c141d] text-slate-900 dark:text-slate-100 shadow-2xl rounded-2xl border border-slate-200/90 dark:border-white/[0.08] p-5 sm:p-8 md:p-12 print:p-0 print:shadow-none print:border-none print:bg-white print:text-slate-900"
           : "text-slate-900 dark:text-slate-100"
       } ${className}`}
     >
       {/* En-tête principal / Profile Header */}
-      <header className="border-b border-slate-200 dark:border-white/[0.1] pb-6 mb-6">
+      <header className="cv-profile-header border-b border-slate-200 dark:border-white/[0.1] pb-6 mb-6 print:pb-3.5 print:mb-3.5">
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
           <div className="space-y-1.5 min-w-0">
             <div className="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20 mb-1">
@@ -117,9 +119,9 @@ export function CVViewer({ className = "", variant = "paper" }: CVViewerProps) {
         </div>
       </header>
 
-      <div className="space-y-7">
+      <div className="space-y-7 print:space-y-4">
         {/* Résumé Professionnel */}
-        <section aria-labelledby="cv-summary-heading">
+        <section aria-labelledby="cv-summary-heading" className="cv-section-block break-inside-avoid">
           <h2
             id="cv-summary-heading"
             className="text-xs font-extrabold uppercase tracking-widest text-slate-900 dark:text-slate-100 pb-1.5 mb-2.5 border-b-2 border-sky-500 flex items-center justify-between"
@@ -133,7 +135,7 @@ export function CVViewer({ className = "", variant = "paper" }: CVViewerProps) {
         </section>
 
         {/* Compétences Clés & Outils */}
-        <section aria-labelledby="cv-skills-heading">
+        <section aria-labelledby="cv-skills-heading" className="cv-section-block break-inside-avoid">
           <h2
             id="cv-skills-heading"
             className="text-xs font-extrabold uppercase tracking-widest text-slate-900 dark:text-slate-100 pb-1.5 mb-3 border-b-2 border-sky-500 flex items-center justify-between"
@@ -141,7 +143,7 @@ export function CVViewer({ className = "", variant = "paper" }: CVViewerProps) {
             <span>{isEn ? "CORE COMPETENCIES & TECHNICAL SKILLS" : "COMPÉTENCES TECHNIQUES & EXPERTISES"}</span>
             <Layers className="w-3.5 h-3.5 text-sky-500" />
           </h2>
-          <div className="grid grid-cols-1 gap-2 text-xs">
+          <div className="cv-skills-grid grid grid-cols-1 gap-2 text-xs">
             {cv.technicalSkills.map((cat) => (
               <div
                 key={cat.id}
@@ -166,7 +168,7 @@ export function CVViewer({ className = "", variant = "paper" }: CVViewerProps) {
         </section>
 
         {/* Expériences Professionnelles */}
-        <section aria-labelledby="cv-experiences-heading">
+        <section aria-labelledby="cv-experiences-heading" className="cv-section-block">
           <h2
             id="cv-experiences-heading"
             className="text-xs font-extrabold uppercase tracking-widest text-slate-900 dark:text-slate-100 pb-1.5 mb-4 border-b-2 border-sky-500 flex items-center justify-between"
@@ -175,11 +177,11 @@ export function CVViewer({ className = "", variant = "paper" }: CVViewerProps) {
             <Briefcase className="w-3.5 h-3.5 text-sky-500" />
           </h2>
 
-          <div className="space-y-5">
+          <div className="space-y-5 print:space-y-3">
             {cv.experiences.map((exp) => (
               <article
                 key={exp.id}
-                className="relative pl-4 border-l-2 border-sky-500/30 hover:border-sky-500 transition-colors"
+                className="cv-item-block break-inside-avoid relative pl-4 border-l-2 border-sky-500/30 hover:border-sky-500 transition-colors"
               >
                 <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
                   <div>
@@ -249,7 +251,7 @@ export function CVViewer({ className = "", variant = "paper" }: CVViewerProps) {
         </section>
 
         {/* Formation & Certifications (2 Colonnes) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+        <div className="cv-grid-block break-inside-avoid grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-6 print:gap-5 pt-2">
           {/* Formation */}
           <section aria-labelledby="cv-edu-heading">
             <h2
@@ -309,7 +311,7 @@ export function CVViewer({ className = "", variant = "paper" }: CVViewerProps) {
         </div>
 
         {/* Langues & Soft Skills (2 Colonnes) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2 border-t border-slate-100 dark:border-white/[0.05]">
+        <div className="cv-grid-block break-inside-avoid grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-6 print:gap-5 pt-2 border-t border-slate-100 dark:border-white/[0.05]">
           {/* Langues */}
           <section aria-labelledby="cv-lang-heading">
             <h2

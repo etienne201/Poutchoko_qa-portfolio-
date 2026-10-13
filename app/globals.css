@@ -299,7 +299,7 @@ html.theme-transition *::after {
 @media print {
   @page {
     size: A4 portrait;
-    margin: 0;
+    margin: 8mm 12mm 8mm 12mm;
   }
 
   html, body {
@@ -307,43 +307,179 @@ html.theme-transition *::after {
     color: #0f172a !important;
     margin: 0 !important;
     padding: 0 !important;
-    width: 210mm !important;
-    min-height: 297mm !important;
+    width: 100% !important;
+    min-height: auto !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
 
-  /* Masquer tous les éléments d'interface non pertinents lors de l'impression */
+  /* Masquer tous les éléments d'interface du site web lors de l'impression */
   .no-print,
+  .cv-no-print,
   nav,
-  footer,
-  header,
-  aside,
-  button,
-  .mobile-contact-bar,
   #navbar,
+  header.cv-page-header,
+  header.cv-modal-header,
+  header:not(.cv-profile-header),
+  footer.cv-page-footer,
+  footer:not(.cv-card-footer),
+  aside,
+  .mobile-contact-bar,
+  button,
   [data-no-print="true"] {
     display: none !important;
   }
 
-  /* Le conteneur principal A4 reprend sa taille exacte 210mm sans zoom */
-  .cv-a4-sheet {
-    box-shadow: none !important;
-    border: none !important;
-    margin: 0 auto !important;
+  main {
     padding: 0 !important;
-    width: 210mm !important;
-    max-width: 210mm !important;
-    min-height: 297mm !important;
-    background: #ffffff !important;
-    transform: none !important;
-    transform-origin: top left !important;
+    margin: 0 !important;
   }
 
-  /* Isolation et élimination des coupures de sections en milieu de page */
-  .cv-section-block,
+  /* Forcer l'affichage de l'en-tête du CV avec sa séparation */
+  header.cv-profile-header {
+    display: block !important;
+    border-bottom: 1px solid #cbd5e1 !important;
+    padding-bottom: 10px !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* Le conteneur du CV Viewer en impression */
+  .cv-viewer-paper {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Neutralisation totale du mode sombre pour l'impression papier */
+  html.dark, body.dark, .dark .cv-viewer-paper {
+    background: #ffffff !important;
+    color: #0f172a !important;
+  }
+
+  .cv-viewer-paper * {
+    color-scheme: light !important;
+  }
+
+  .cv-viewer-paper,
+  .cv-viewer-paper h1,
+  .cv-viewer-paper h2,
+  .cv-viewer-paper h3,
+  .cv-viewer-paper p,
+  .cv-viewer-paper span,
+  .cv-viewer-paper div,
+  .cv-viewer-paper li {
+    text-shadow: none !important;
+  }
+
+  .cv-viewer-paper h1 {
+    color: #020617 !important;
+  }
+
+  .cv-viewer-paper h2 {
+    color: #0f172a !important;
+  }
+
+  .cv-viewer-paper .text-slate-950,
+  .cv-viewer-paper .text-slate-900,
+  .cv-viewer-paper [class*="dark:text-white"],
+  .cv-viewer-paper [class*="dark:text-slate-100"],
+  .cv-viewer-paper [class*="dark:text-slate-200"] {
+    color: #0f172a !important;
+  }
+
+  .cv-viewer-paper p,
+  .cv-viewer-paper .text-slate-700,
+  .cv-viewer-paper .text-slate-800,
+  .cv-viewer-paper [class*="dark:text-slate-300"] {
+    color: #1e293b !important;
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+  }
+
+  .cv-viewer-paper ul li {
+    font-size: 10.5px !important;
+    line-height: 1.35 !important;
+  }
+
+  .cv-viewer-paper .text-slate-600,
+  .cv-viewer-paper .text-slate-500,
+  .cv-viewer-paper [class*="dark:text-slate-400"] {
+    color: #475569 !important;
+  }
+
+  .cv-viewer-paper .text-sky-600,
+  .cv-viewer-paper .text-sky-500,
+  .cv-viewer-paper [class*="dark:text-sky-"] {
+    color: #0284c7 !important;
+  }
+
+  .cv-viewer-paper .border-sky-500,
+  .cv-viewer-paper [class*="border-sky-"] {
+    border-color: #0284c7 !important;
+  }
+
+  .cv-viewer-paper [class*="bg-slate-100"],
+  .cv-viewer-paper [class*="bg-white/"] {
+    background-color: #f1f5f9 !important;
+    border-color: #e2e8f0 !important;
+    color: #1e293b !important;
+  }
+
+  .cv-viewer-paper [class*="bg-sky-500/"] {
+    background-color: #e0f2fe !important;
+    border-color: #bae6fd !important;
+  }
+
+  .cv-viewer-paper [class*="text-sky-700"],
+  .cv-viewer-paper [class*="text-sky-300"] {
+    color: #0369a1 !important;
+  }
+
+  .cv-viewer-paper [class*="bg-emerald-500/"] {
+    background-color: #d1fae5 !important;
+  }
+
+  .cv-viewer-paper [class*="text-emerald-"] {
+    color: #059669 !important;
+  }
+
+  /* Compétences techniques : 1 seule colonne en pleine largeur */
+  .cv-skills-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    column-gap: 0 !important;
+  }
+
+  /* Forcer les grilles 2 colonnes en impression A4 pour Formation/Certifs et Langues/SoftSkills */
+  .cv-grid-block,
+  .cv-viewer-paper .cv-grid-block {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    column-gap: 24px !important;
+  }
+
+  /* Éviter strictement les titres orphelins en fin de page */
+  h1, h2, h3,
+  .cv-viewer-paper h1,
+  .cv-viewer-paper h2,
+  .cv-viewer-paper h3 {
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  /* Protection chirurgicale contre les coupures intempestives */
   .cv-item-block,
-  .break-inside-avoid {
+  .cv-grid-block,
+  .break-inside-avoid,
+  article {
     page-break-inside: avoid !important;
     break-inside: avoid !important;
   }

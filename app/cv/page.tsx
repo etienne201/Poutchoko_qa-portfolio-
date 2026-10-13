@@ -1,6 +1,7 @@
 "use client"
-import React, { useState } from "react"
+import React, { useState, useEffect, Suspense } from "react"
 import Link from "next/link"
+import { useSearchParams } from "next/navigation"
 import { useLanguage, LanguageProvider } from "@/hooks/use-language"
 import { CVViewer } from "@/components/cv-viewer"
 import {
@@ -13,9 +14,19 @@ import {
 
 function CVPageContent() {
   const { language, setLanguage, t } = useLanguage()
+  const searchParams = useSearchParams()
+  const langQuery = searchParams.get("lang")
+  const activeLang = (langQuery === "en" || langQuery === "fr") ? langQuery : language
   const [downloadSuccess, setDownloadSuccess] = useState(false)
 
-  const isEn = language === "en"
+  // Synchronisation avec le paramètre d'URL ?lang=fr|en si présent
+  useEffect(() => {
+    if (langQuery === "en" || langQuery === "fr") {
+      setLanguage(langQuery)
+    }
+  }, [langQuery, setLanguage])
+
+  const isEn = activeLang === "en"
   const fileName = isEn
     ? "CV_Poutchoko_Emako_Etienne_EN.pdf"
     : "CV_Poutchoko_Emako_Etienne_FR.pdf"
@@ -45,8 +56,8 @@ function CVPageContent() {
 
   return (
     <div className="min-h-screen bg-slate-100 dark:bg-[#070d14] text-slate-900 dark:text-slate-100 flex flex-col">
-      {/* Barre d'action supérieure sticky */}
-      <header className="sticky top-0 z-40 bg-white/95 dark:bg-[#081018]/95 backdrop-blur-xl border-b border-slate-200 dark:border-white/[0.1] px-4 py-3 sm:px-8 shadow-sm">
+      {/* Barre d'action supérieure sticky (masquée en impression) */}
+      <header className="cv-page-header no-print sticky top-0 z-40 bg-white/95 dark:bg-[#081018]/95 backdrop-blur-xl border-b border-slate-200 dark:border-white/[0.1] px-4 py-3 sm:px-8 shadow-sm">
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-3">
           {/* Gauche : Retour au Portfolio & Titre */}
           <div className="flex items-center space-x-3 min-w-0">
@@ -120,12 +131,12 @@ function CVPageContent() {
       </header>
 
       {/* Contenu principal de consultation */}
-      <main className="flex-1 px-3.5 sm:px-6 py-6 md:py-10">
-        <CVViewer variant="paper" />
+      <main className="flex-1 px-3.5 sm:px-6 py-6 md:py-10 print:p-0 print:m-0">
+        <CVViewer variant="paper" lang={activeLang} />
       </main>
 
       {/* Pied de page */}
-      <footer className="py-6 text-center text-xs text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-white/[0.08]">
+      <footer className="cv-page-footer no-print py-6 text-center text-xs text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-white/[0.08]">
         <div className="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center space-x-2">
             <Sparkles className="w-3.5 h-3.5 text-sky-500" />
@@ -149,7 +160,9 @@ function CVPageContent() {
 export default function CVPage() {
   return (
     <LanguageProvider>
-      <CVPageContent />
+      <Suspense fallback={null}>
+        <CVPageContent />
+      </Suspense>
     </LanguageProvider>
   )
 }
