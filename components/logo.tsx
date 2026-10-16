@@ -15,7 +15,7 @@ export function Logo({ size = 44, className = "" }: LogoProps) {
       aria-label="Poutchoko Emako Étienne — Senior QA Automation Engineer Portfolio"
     >
       <div
-        className="relative rounded-full transition-transform duration-300 ease-out group-hover:scale-105 filter drop-shadow-[0_2px_8px_rgba(15,23,42,0.1)] dark:drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)] group-hover:drop-shadow-[0_4px_16px_rgba(2,132,199,0.25)] dark:group-hover:drop-shadow-[0_4px_16px_rgba(56,189,248,0.35)]"
+        className="relative rounded-full ring-1 ring-black/[0.05] dark:ring-white/[0.12] transition-transform duration-300 ease-out group-hover:scale-105 filter drop-shadow-[0_2px_8px_rgba(15,23,42,0.1)] dark:drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)] group-hover:drop-shadow-[0_4px_16px_rgba(2,132,199,0.25)] dark:group-hover:drop-shadow-[0_0_16px_rgba(56,189,248,0.4)]"
         style={{ width: size, height: size }}
       >
         <Image
