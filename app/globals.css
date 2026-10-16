@@ -433,6 +433,19 @@ html.theme-transition *::after {
     color: #1e293b !important;
   }
 
+  .cv-viewer-paper [class*="bg-slate-50"] {
+    background-color: #f8fafc !important;
+    border-color: #e2e8f0 !important;
+    color: #1e293b !important;
+  }
+
+  .cv-viewer-paper .cv-metrics-banner {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 8px !important;
+    margin-bottom: 10px !important;
+  }
+
   .cv-viewer-paper [class*="bg-sky-500/"] {
     background-color: #e0f2fe !important;
     border-color: #bae6fd !important;
@@ -451,11 +464,11 @@ html.theme-transition *::after {
     color: #059669 !important;
   }
 
-  /* Compétences techniques : 1 seule colonne en pleine largeur */
+  /* Compétences techniques : 2 colonnes équilibrées et harmonieuses en impression A4 */
   .cv-skills-grid {
     display: grid !important;
-    grid-template-columns: 1fr !important;
-    column-gap: 0 !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 6px !important;
   }
 
   /* Forcer les grilles 2 colonnes en impression A4 pour Formation/Certifs et Langues/SoftSkills */

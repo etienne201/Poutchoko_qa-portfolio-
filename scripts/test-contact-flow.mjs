@@ -190,7 +190,30 @@ async function runTests() {
     passedCount++
   }
 
-  console.log(`\n🎉 All ${passedCount}/8 QA Automation tests PASSED with 100% success!`)
+  // -------------------------------------------------------------
+  // Test 9: Provider Error Resilience (Graceful Fallback on API rejection)
+  // -------------------------------------------------------------
+  {
+    resetRateLimits()
+    const res = await processContactSubmission(
+      {
+        name: "Test Failure Graceful",
+        email: "graceful@example.com",
+        message: "Valid test message for provider failure test.",
+        locale: "fr",
+      },
+      "10.0.0.99",
+      { resendApiKey: "re_invalid_api_key_for_testing" },
+    )
+    assert.equal(res.status, 200, "Must return HTTP 200 with fallback on provider rejection")
+    assert.equal(res.data.success, true, "Must flag success: true for client fallback")
+    assert.equal(res.data.emailSent, false, "Must flag emailSent: false on rejected key")
+    assert.ok(res.data.whatsappLink, "Must still provide WhatsApp link")
+    console.log("✅ Test 9: Resend provider error resilience & graceful fallback passed.")
+    passedCount++
+  }
+
+  console.log(`\n🎉 All ${passedCount}/9 QA Automation tests PASSED with 100% success!`)
 }
 
 runTests().catch((err) => {

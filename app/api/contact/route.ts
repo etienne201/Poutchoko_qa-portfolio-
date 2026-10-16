@@ -30,10 +30,17 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    const startTime = Date.now()
     const result = await processContactSubmission(body, ip)
+    const durationMs = Date.now() - startTime
+
+    console.log(
+      `[Contact Route] POST /api/contact from ${ip} - status=${result.status} emailSent=${result.data.emailSent ?? false} duration=${durationMs}ms`,
+    )
+
     return NextResponse.json(result.data, { status: result.status })
   } catch (error) {
-    console.error("Contact API fatal error:", error)
+    console.error("[Contact Route] Fatal error handling contact POST:", error)
     return NextResponse.json(
       {
         success: false,

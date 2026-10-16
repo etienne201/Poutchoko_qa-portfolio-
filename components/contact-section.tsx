@@ -15,6 +15,7 @@ import {
   Sparkles,
   Copy,
   Check,
+  RotateCcw,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -36,9 +37,20 @@ export function ContactSection() {
   const [submitResult, setSubmitResult] = useState<{
     status: "idle" | "success" | "fallback" | "error"
     message: string
+    emailId?: string
     whatsappLink?: string
     mailtoLink?: string
     gmailLink?: string
+    leadSummary?: {
+      name: string
+      email: string
+      company: string
+      requestType: string
+      subject: string
+      message: string
+      referenceId: string
+      date: string
+    }
   }>({
     status: "idle",
     message: "",
@@ -60,8 +72,24 @@ export function ContactSection() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
+  const handleResetForm = () => {
+    setSubmitResult({ status: "idle", message: "" })
+    setFormData({
+      name: "",
+      email: "",
+      company: "",
+      requestType: "Recruitment (Full-time / Contract)",
+      subject: "",
+      message: "",
+      website_hp: "",
+    })
+  }
+
   const handleCopy = async () => {
-    const textToCopy = `Destinataire : poutchokoetienne@gmail.com\nObjet : ${formData.subject || "Contact Portfolio QA"}\nDe : ${formData.name} (${formData.email})\nEntreprise : ${formData.company || "N/A"}\nType : ${formData.requestType}\n\nMessage :\n${formData.message}`
+    const summary = submitResult.leadSummary
+    const textToCopy = summary
+      ? `Destinataire : poutchokoetienne@gmail.com\nRéf : ${summary.referenceId}\nObjet : ${summary.subject}\nDe : ${summary.name} (${summary.email})\nEntreprise : ${summary.company || "N/A"}\nType : ${summary.requestType}\nDate : ${summary.date}\n\nMessage :\n${summary.message}`
+      : `Destinataire : poutchokoetienne@gmail.com\nObjet : ${formData.subject || "Contact Portfolio QA"}\nDe : ${formData.name} (${formData.email})\nEntreprise : ${formData.company || "N/A"}\nType : ${formData.requestType}\n\nMessage :\n${formData.message}`
     try {
       if (navigator.clipboard && navigator.clipboard.writeText) {
         await navigator.clipboard.writeText(textToCopy)
@@ -149,10 +177,12 @@ export function ContactSection() {
           // Direct email successfully delivered via Resend
           setSubmitResult({
             status: "success",
+            emailId: data.emailId,
             message: data.message || t("contact.form.success"),
             whatsappLink: data.whatsappLink,
             mailtoLink: data.mailtoLink,
             gmailLink: data.gmailLink,
+            leadSummary: data.leadSummary,
           })
           setFormData({
             name: "",
@@ -171,6 +201,7 @@ export function ContactSection() {
             whatsappLink: data.whatsappLink,
             mailtoLink: data.mailtoLink,
             gmailLink: data.gmailLink,
+            leadSummary: data.leadSummary,
           })
         }
       } else {
@@ -189,8 +220,8 @@ export function ContactSection() {
 
       const fallbackWaText = encodeURIComponent(
         language === "fr"
-          ? `Bonjour Étienne,\n\nJe vous contacte via votre portfolio QA.\n\n👤 Nom : ${formData.name}\n🏢 Entreprise : ${formData.company || "N/A"}\n🎯 Type : ${formData.requestType}\n📧 Email : ${formData.email}\n\n💬 Message :\n${formData.message}`
-          : `Hello Étienne,\n\nI am contacting you from your QA portfolio.\n\n👤 Name: ${formData.name}\n🏢 Company: ${formData.company || "N/A"}\n🎯 Type : ${formData.requestType}\n📧 Email : ${formData.email}\n\n💬 Message :\n${formData.message}`,
+          ? `Bonjour Étienne,\n\nJe suis ${formData.name}${formData.company ? ` de ${formData.company}` : ""}.\nMon email : ${formData.email}\n\n${formData.message}`
+          : `Hello Étienne,\n\nI am ${formData.name}${formData.company ? ` from ${formData.company}` : ""}.\nMy email: ${formData.email}\n\n${formData.message}`,
       )
       const fallbackWa = `https://wa.me/237657268355?text=${fallbackWaText}`
 
@@ -335,112 +366,162 @@ export function ContactSection() {
             </div>
           </div>
 
-          {/* Right Column: Smart Contact Form */}
+          {/* Right Column: Smart Contact Form or Post-Submission Screen */}
           <div className="lg:col-span-7 w-full">
-            <div className="rounded-2xl p-5 sm:p-8 glass-panel-elevated shadow-card text-left">
-              <div className="mb-5 sm:mb-6 pb-4 border-b border-slate-200/80 dark:border-white/[0.07]">
-                <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight">
-                  {t("contact.form.title")}
-                </h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
-                  {t("contact.form.desc")}
-                </p>
-              </div>
-
-              {/* Status Alerts */}
-              <div aria-live="polite" className="space-y-4">
-                {/* 1. Confirmed Success State (Email dispatched via Resend) */}
-                {submitResult.status === "success" && (
-                  <div className="p-4 sm:p-5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-900 dark:text-emerald-200 text-sm space-y-2.5 animate-in fade-in duration-200">
-                    <div className="flex items-center space-x-2 font-bold text-base">
-                      <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
-                      <span>{t("contact.successTitle")}</span>
+            {submitResult.status === "success" || submitResult.status === "fallback" ? (
+              <div className="rounded-2xl p-6 sm:p-8 glass-panel-elevated shadow-card text-left space-y-6 animate-in fade-in zoom-in-95 duration-200">
+                {/* 1. Header with Success Confirmation */}
+                <div className="flex items-start space-x-4 pb-5 border-b border-slate-200/80 dark:border-white/[0.08]">
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center flex-shrink-0 text-emerald-500 dark:text-emerald-400 shadow-sm">
+                    <CheckCircle2 className="w-6 h-6" />
+                  </div>
+                  <div className="space-y-1">
+                    <div className="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/25">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                      <span>
+                        {submitResult.status === "success"
+                          ? "Email transmis à poutchokoetienne@gmail.com"
+                          : "Données validées & prêtes à l'envoi"}
+                      </span>
                     </div>
-                    <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
-                      {submitResult.message}
+                    <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                      {t("contact.successTitle")}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                      {submitResult.status === "success"
+                        ? t("contact.successDesc")
+                        : submitResult.message || t("contact.fallbackDesc")}
                     </p>
+                  </div>
+                </div>
+
+                {/* 2. PROMINENT WHATSAPP EXPRESS OPTION CARD (Requested by user) */}
+                <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-emerald-500/15 via-emerald-600/5 to-transparent border-2 border-emerald-500/30 dark:border-emerald-500/40 shadow-sm space-y-4 relative overflow-hidden">
+                  <div className="flex items-center space-x-2 text-emerald-600 dark:text-emerald-400 font-bold text-xs uppercase tracking-wider">
+                    <Sparkles className="w-4 h-4 flex-shrink-0" />
+                    <span>{t("contact.waOptionBadge")}</span>
+                  </div>
+
+                  <div>
+                    <h4 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight">
+                      {t("contact.waOptionTitle")}
+                    </h4>
+                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
+                      {t("contact.waOptionDesc")}
+                    </p>
+                  </div>
+
+                  <div className="pt-1 flex items-center">
                     {submitResult.whatsappLink && (
-                      <div className="pt-2">
-                        <a
-                          href={submitResult.whatsappLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center text-xs font-semibold text-emerald-700 dark:text-emerald-400 hover:underline min-h-[32px]"
-                        >
-                          <MessageSquare className="w-3.5 h-3.5 mr-1.5 flex-shrink-0" />
-                          <span>{t("contact.openWa")}</span>
-                        </a>
-                      </div>
+                      <a
+                        href={submitResult.whatsappLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold text-sm shadow-md hover:shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98] min-h-[46px]"
+                      >
+                        <MessageSquare className="w-5 h-5 mr-2.5 flex-shrink-0" />
+                        <span>{t("contact.waOptionBtn")}</span>
+                      </a>
                     )}
                   </div>
-                )}
 
-                {/* 2. Transparent Fallback State (Message validated, 1-click confirm) */}
-                {submitResult.status === "fallback" && (
-                  <div className="p-4 sm:p-5 rounded-xl bg-blue-500/10 border border-blue-500/30 text-slate-900 dark:text-slate-100 text-sm space-y-3 animate-in fade-in duration-200">
-                    <div className="flex items-center space-x-2 font-bold text-base text-blue-600 dark:text-blue-400">
-                      <Sparkles className="w-5 h-5 flex-shrink-0" />
-                      <span>{t("contact.fallbackTitle")}</span>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-normal">
+                    {t("contact.waOptionHint")}
+                  </p>
+                </div>
+
+                {/* 3. Summary of Sent Message */}
+                {submitResult.leadSummary && (
+                  <div className="p-4 sm:p-5 rounded-xl bg-slate-100/90 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] space-y-3 text-xs">
+                    <div className="flex items-center justify-between font-bold text-slate-800 dark:text-slate-200 pb-2 border-b border-slate-200 dark:border-white/[0.08]">
+                      <span>{t("contact.successSummary")}</span>
+                      <span className="font-mono text-[11px] px-2 py-0.5 rounded bg-slate-200 dark:bg-white/[0.08] text-slate-700 dark:text-slate-300">
+                        Réf : {submitResult.leadSummary.referenceId}
+                      </span>
                     </div>
-                    <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
-                      {submitResult.message}
-                    </p>
-                    <div className="pt-1 flex flex-wrap gap-2.5">
-                      {submitResult.whatsappLink && (
-                        <a
-                          href={submitResult.whatsappLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center text-xs font-bold px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98] min-h-[40px]"
-                        >
-                          <MessageSquare className="w-4 h-4 mr-2 flex-shrink-0" />
-                          <span>{t("contact.fallbackWaBtn")}</span>
-                        </a>
-                      )}
-                      {submitResult.gmailLink && (
-                        <a
-                          href={submitResult.gmailLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center text-xs font-bold px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98] min-h-[40px]"
-                        >
-                          <Mail className="w-4 h-4 mr-2 flex-shrink-0" />
-                          <span>{t("contact.openGmail")}</span>
-                        </a>
-                      )}
-                      {submitResult.mailtoLink && (
-                        <a
-                          href={submitResult.mailtoLink}
-                          className="inline-flex items-center text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-white/[0.08] hover:bg-slate-200 dark:hover:bg-white/[0.14] text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-white/[0.1] transition-all hover:scale-[1.02] active:scale-[0.98] min-h-[40px]"
-                        >
-                          <ExternalLink className="w-3.5 h-3.5 mr-1.5 flex-shrink-0" />
-                          <span>{t("contact.openDefaultMail")}</span>
-                        </a>
-                      )}
-                      <button
-                        type="button"
-                        onClick={handleCopy}
-                        className="inline-flex items-center text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-white/[0.08] hover:bg-slate-200 dark:hover:bg-white/[0.14] text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-white/[0.1] transition-all hover:scale-[1.02] active:scale-[0.98] min-h-[40px]"
-                      >
-                        {isCopied ? (
-                          <>
-                            <Check className="w-3.5 h-3.5 mr-1.5 text-emerald-500 flex-shrink-0" />
-                            <span className="text-emerald-600 dark:text-emerald-400">{t("contact.copied")}</span>
-                          </>
-                        ) : (
-                          <>
-                            <Copy className="w-3.5 h-3.5 mr-1.5 flex-shrink-0" />
-                            <span>{t("contact.copyMessage")}</span>
-                          </>
-                        )}
-                      </button>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-slate-600 dark:text-slate-400">
+                      <div>
+                        <span className="font-semibold text-slate-900 dark:text-white">
+                          {t("contact.summarySender")} :{" "}
+                        </span>
+                        {submitResult.leadSummary.name} ({submitResult.leadSummary.email})
+                      </div>
+                      <div>
+                        <span className="font-semibold text-slate-900 dark:text-white">
+                          {t("contact.summaryCompany")} :{" "}
+                        </span>
+                        {submitResult.leadSummary.company || "Non précisée"}
+                      </div>
+                      <div>
+                        <span className="font-semibold text-slate-900 dark:text-white">
+                          {t("contact.summaryType")} :{" "}
+                        </span>
+                        <span className="inline-block px-2 py-0.5 rounded bg-blue-500/10 text-blue-700 dark:text-blue-300 font-semibold text-[11px]">
+                          {submitResult.leadSummary.requestType}
+                        </span>
+                      </div>
+                      <div>
+                        <span className="font-semibold text-slate-900 dark:text-white">
+                          {t("contact.summarySubject")} :{" "}
+                        </span>
+                        {submitResult.leadSummary.subject}
+                      </div>
+                    </div>
+                    <div className="pt-2 border-t border-slate-200 dark:border-white/[0.06]">
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400 font-mono line-clamp-2 italic">
+                        &quot;{submitResult.leadSummary.message}&quot;
+                      </p>
                     </div>
                   </div>
                 )}
 
-                {/* 3. Error State */}
+                {/* 4. Footer Actions (Reset form & Copy snippet) */}
+                <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-200/80 dark:border-white/[0.08]">
+                  <button
+                    type="button"
+                    onClick={handleResetForm}
+                    className="inline-flex items-center text-xs font-semibold text-primary hover:underline transition-colors min-h-[36px]"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5 mr-1.5 flex-shrink-0" />
+                    <span>{t("contact.sendAnother")}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={handleCopy}
+                    className="inline-flex items-center text-xs font-semibold px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-white/[0.08] hover:bg-slate-200 dark:hover:bg-white/[0.12] text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-white/[0.1] transition-all hover:scale-[1.02] active:scale-[0.98] min-h-[36px]"
+                  >
+                    {isCopied ? (
+                      <>
+                        <Check className="w-3.5 h-3.5 mr-1.5 text-emerald-500 flex-shrink-0" />
+                        <span className="text-emerald-600 dark:text-emerald-400">{t("contact.copied")}</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3.5 h-3.5 mr-1.5 flex-shrink-0" />
+                        <span>{t("contact.copyMessage")}</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="rounded-2xl p-5 sm:p-8 glass-panel-elevated shadow-card text-left">
+                <div className="mb-5 sm:mb-6 pb-4 border-b border-slate-200/80 dark:border-white/[0.07]">
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight">
+                    {t("contact.form.title")}
+                  </h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                    {t("contact.form.desc")}
+                  </p>
+                </div>
+
+                {/* Error State Banner if submission failed */}
                 {submitResult.status === "error" && (
-                  <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-900 dark:text-rose-200 text-sm space-y-2 animate-in fade-in duration-200">
+                  <div
+                    aria-live="polite"
+                    className="mb-5 p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-900 dark:text-rose-200 text-sm space-y-2 animate-in fade-in duration-200"
+                  >
                     <div className="flex items-center space-x-2 font-bold">
                       <AlertCircle className="w-5 h-5 text-rose-600 dark:text-rose-400 flex-shrink-0" />
                       <span>{t("contact.errorTitle")}</span>
@@ -449,225 +530,188 @@ export function ContactSection() {
                       {submitResult.message}
                     </p>
                     <div className="pt-2 flex flex-wrap gap-2">
-                      {submitResult.gmailLink && (
-                        <a
-                          href={submitResult.gmailLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded-lg bg-rose-600 text-white min-h-[32px]"
-                        >
-                          <Mail className="w-3.5 h-3.5 mr-1.5 flex-shrink-0" />
-                          <span>{t("contact.openGmail")}</span>
-                        </a>
-                      )}
                       {submitResult.whatsappLink && (
                         <a
                           href={submitResult.whatsappLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded-lg bg-emerald-600 text-white min-h-[32px]"
+                          className="inline-flex items-center text-xs font-semibold px-3.5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white min-h-[34px] transition-colors"
                         >
                           <MessageSquare className="w-3.5 h-3.5 mr-1.5 flex-shrink-0" />
-                          <span>WhatsApp</span>
+                          <span>Envoyer directement via WhatsApp</span>
                         </a>
                       )}
-                      {submitResult.mailtoLink && (
-                        <a
-                          href={submitResult.mailtoLink}
-                          className="inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded-lg bg-primary text-primary-foreground min-h-[32px]"
-                        >
-                          <ExternalLink className="w-3.5 h-3.5 mr-1.5 flex-shrink-0" />
-                          <span>{t("contact.sendViaMail")}</span>
-                        </a>
-                      )}
-                      <button
-                        type="button"
-                        onClick={handleCopy}
-                        className="inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/[0.08] text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-white/[0.1] min-h-[32px]"
-                      >
-                        {isCopied ? (
-                          <>
-                            <Check className="w-3.5 h-3.5 mr-1.5 text-emerald-500 flex-shrink-0" />
-                            <span className="text-emerald-600 dark:text-emerald-400">{t("contact.copied")}</span>
-                          </>
-                        ) : (
-                          <>
-                            <Copy className="w-3.5 h-3.5 mr-1.5 flex-shrink-0" />
-                            <span>{t("contact.copyMessage")}</span>
-                          </>
-                        )}
-                      </button>
                     </div>
                   </div>
                 )}
-              </div>
 
-              <form onSubmit={handleSubmit} className="space-y-4 mt-5" suppressHydrationWarning>
-                {/* Honeypot hidden input for anti-bot trap */}
-                <input
-                  type="text"
-                  name="website_hp"
-                  value={formData.website_hp}
-                  onChange={handleChange}
-                  tabIndex={-1}
-                  autoComplete="off"
-                  className="hidden"
-                  aria-hidden="true"
-                  suppressHydrationWarning
-                />
-
-                <div className="grid sm:grid-cols-2 gap-3.5 sm:gap-4">
-                  <div>
-                    <label htmlFor="contact-name" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
-                      {t("contact.form.name")}
-                    </label>
-                    <input
-                      id="contact-name"
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      aria-required="true"
-                      maxLength={100}
-                      placeholder={t("contact.form.namePlaceholder")}
-                      disabled={isSubmitting}
-                      suppressHydrationWarning
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-[#081018]/70 border border-slate-200 dark:border-white/[0.08] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all shadow-sm min-h-[42px]"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="contact-email" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
-                      {t("contact.form.email")}
-                    </label>
-                    <input
-                      id="contact-email"
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      aria-required="true"
-                      maxLength={254}
-                      placeholder={t("contact.form.emailPlaceholder")}
-                      disabled={isSubmitting}
-                      suppressHydrationWarning
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-[#081018]/70 border border-slate-200 dark:border-white/[0.08] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all shadow-sm min-h-[42px]"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid sm:grid-cols-2 gap-3.5 sm:gap-4">
-                  <div>
-                    <label htmlFor="contact-company" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
-                      {t("contact.form.company")}
-                    </label>
-                    <input
-                      id="contact-company"
-                      type="text"
-                      name="company"
-                      value={formData.company}
-                      onChange={handleChange}
-                      maxLength={100}
-                      placeholder={t("contact.form.companyPlaceholder")}
-                      disabled={isSubmitting}
-                      suppressHydrationWarning
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-[#081018]/70 border border-slate-200 dark:border-white/[0.08] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all shadow-sm min-h-[42px]"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="contact-type" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
-                      {t("contact.form.type")}
-                    </label>
-                    <select
-                      id="contact-type"
-                      name="requestType"
-                      value={formData.requestType}
-                      onChange={handleChange}
-                      disabled={isSubmitting}
-                      suppressHydrationWarning
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-[#081018]/70 border border-slate-200 dark:border-white/[0.08] text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all shadow-sm min-h-[42px]"
-                    >
-                      {requestTypes.map((rt, idx) => (
-                        <option key={idx} value={rt.value} className="bg-white dark:bg-[#0e1922] text-slate-900 dark:text-white">
-                          {rt.label}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="contact-subject" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
-                    {t("contact.form.subject")}
-                  </label>
+                <form onSubmit={handleSubmit} className="space-y-4" suppressHydrationWarning>
+                  {/* Honeypot hidden input for anti-bot trap */}
                   <input
-                    id="contact-subject"
                     type="text"
-                    name="subject"
-                    value={formData.subject}
+                    name="website_hp"
+                    value={formData.website_hp}
                     onChange={handleChange}
-                    maxLength={200}
-                    placeholder={t("contact.form.subjectPlaceholder")}
-                    disabled={isSubmitting}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    className="hidden"
+                    aria-hidden="true"
                     suppressHydrationWarning
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-[#081018]/70 border border-slate-200 dark:border-white/[0.08] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all shadow-sm min-h-[42px]"
                   />
-                </div>
 
-                <div>
-                  <div className="flex items-center justify-between mb-1.5">
-                    <label htmlFor="contact-message" className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
-                      {t("contact.form.message")}
-                    </label>
-                    <span className="text-[11px] text-slate-400 dark:text-slate-500 font-mono">
-                      {formData.message.length}/5000
-                    </span>
+                  <div className="grid sm:grid-cols-2 gap-3.5 sm:gap-4">
+                    <div>
+                      <label htmlFor="contact-name" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                        {t("contact.form.name")}
+                      </label>
+                      <input
+                        id="contact-name"
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                        aria-required="true"
+                        maxLength={100}
+                        placeholder={t("contact.form.namePlaceholder")}
+                        disabled={isSubmitting}
+                        suppressHydrationWarning
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-[#081018]/70 border border-slate-200 dark:border-white/[0.08] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all shadow-sm min-h-[42px]"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="contact-email" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                        {t("contact.form.email")}
+                      </label>
+                      <input
+                        id="contact-email"
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        aria-required="true"
+                        maxLength={254}
+                        placeholder={t("contact.form.emailPlaceholder")}
+                        disabled={isSubmitting}
+                        suppressHydrationWarning
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-[#081018]/70 border border-slate-200 dark:border-white/[0.08] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all shadow-sm min-h-[42px]"
+                      />
+                    </div>
                   </div>
-                  <textarea
-                    id="contact-message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    rows={4}
-                    required
-                    aria-required="true"
-                    maxLength={5000}
-                    placeholder={t("contact.form.messagePlaceholder")}
+
+                  <div className="grid sm:grid-cols-2 gap-3.5 sm:gap-4">
+                    <div>
+                      <label htmlFor="contact-company" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                        {t("contact.form.company")}
+                      </label>
+                      <input
+                        id="contact-company"
+                        type="text"
+                        name="company"
+                        value={formData.company}
+                        onChange={handleChange}
+                        maxLength={100}
+                        placeholder={t("contact.form.companyPlaceholder")}
+                        disabled={isSubmitting}
+                        suppressHydrationWarning
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-[#081018]/70 border border-slate-200 dark:border-white/[0.08] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all shadow-sm min-h-[42px]"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="contact-type" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                        {t("contact.form.type")}
+                      </label>
+                      <select
+                        id="contact-type"
+                        name="requestType"
+                        value={formData.requestType}
+                        onChange={handleChange}
+                        disabled={isSubmitting}
+                        suppressHydrationWarning
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-[#081018]/70 border border-slate-200 dark:border-white/[0.08] text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all shadow-sm min-h-[42px]"
+                      >
+                        {requestTypes.map((rt, idx) => (
+                          <option key={idx} value={rt.value} className="bg-white dark:bg-[#0e1922] text-slate-900 dark:text-white">
+                            {rt.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label htmlFor="contact-subject" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                      {t("contact.form.subject")}
+                    </label>
+                    <input
+                      id="contact-subject"
+                      type="text"
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      maxLength={200}
+                      placeholder={t("contact.form.subjectPlaceholder")}
+                      disabled={isSubmitting}
+                      suppressHydrationWarning
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-[#081018]/70 border border-slate-200 dark:border-white/[0.08] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all shadow-sm min-h-[42px]"
+                    />
+                  </div>
+
+                  <div>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <label htmlFor="contact-message" className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                        {t("contact.form.message")}
+                      </label>
+                      <span className="text-[11px] text-slate-400 dark:text-slate-500 font-mono">
+                        {formData.message.length}/5000
+                      </span>
+                    </div>
+                    <textarea
+                      id="contact-message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      rows={4}
+                      required
+                      aria-required="true"
+                      maxLength={5000}
+                      placeholder={t("contact.form.messagePlaceholder")}
+                      disabled={isSubmitting}
+                      data-gramm="false"
+                      data-enable-grammarly="false"
+                      suppressHydrationWarning
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-[#081018]/70 border border-slate-200 dark:border-white/[0.08] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all resize-none shadow-sm"
+                    ></textarea>
+                  </div>
+
+                  <Button
+                    type="submit"
                     disabled={isSubmitting}
-                    data-gramm="false"
-                    data-enable-grammarly="false"
-                    suppressHydrationWarning
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-[#081018]/70 border border-slate-200 dark:border-white/[0.08] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all resize-none shadow-sm"
-                  ></textarea>
-                </div>
+                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3.5 rounded-xl shadow-accent hover:shadow-accent transition-all hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center min-h-[46px]"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin flex-shrink-0" />
+                        <span>{t("contact.form.sending")}</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4 mr-2 flex-shrink-0" />
+                        <span>{t("contact.form.submit")}</span>
+                      </>
+                    )}
+                  </Button>
 
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3.5 rounded-xl shadow-accent hover:shadow-accent transition-all hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center min-h-[46px]"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin flex-shrink-0" />
-                      <span>{t("contact.form.sending")}</span>
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-4 h-4 mr-2 flex-shrink-0" />
-                      <span>{t("contact.form.submit")}</span>
-                    </>
-                  )}
-                </Button>
-
-                <div className="flex items-center justify-center space-x-2 pt-1 text-[11px] text-slate-500 dark:text-slate-400">
-                  <Clock className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
-                  <span>Réponse garantie sous 24h ouvrées • Zéro spam</span>
-                </div>
-              </form>
-            </div>
+                  <div className="flex items-center justify-center space-x-2 pt-1 text-[11px] text-slate-500 dark:text-slate-400">
+                    <Clock className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
+                    <span>Réponse garantie sous 24h ouvrées • Zéro spam</span>
+                  </div>
+                </form>
+              </div>
+            )}
           </div>
         </div>
       </div>
