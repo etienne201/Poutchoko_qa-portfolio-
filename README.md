@@ -12,7 +12,7 @@
 
 <br />
 
-**[🌐 Live Portfolio](https://poutchoko-qa-portfolio.vercel.app)** • **[📄 Interactive CV](https://poutchoko-qa-portfolio.vercel.app/cv)** • **[🛠️ CV Builder Studio](https://poutchoko-qa-portfolio.vercel.app/cv-builder)** • **[💼 LinkedIn Profile](https://linkedin.com/in/etienne-poutchoko-emako)** • **[📧 Email Contact](mailto:poutchokoetienne@gmail.com)**
+**[🌐 Live Portfolio](https://poutchoko-qa-portfolio.vercel.app)** • **[📄 Interactive CV](https://poutchoko-qa-portfolio.vercel.app/cv)** • **[🛠️ CV Builder Studio](https://poutchoko-qa-portfolio.vercel.app/cv-builder)** • **[💼 LinkedIn Profile](https://www.linkedin.com/in/%C3%A9tienne-poutchoko-emako-420524184/)** • **[📧 Email Contact](mailto:poutchokoetienne@gmail.com)**
 
 <br />
 
@@ -383,7 +383,7 @@ This project incorporates senior-level engineering and QA principles across the 
 📍 Douala, Cameroon (Available for international remote contracts & freelance missions 🌍)
 
 - **🌐 Portfolio:** [poutchoko-qa-portfolio.vercel.app](https://poutchoko-qa-portfolio.vercel.app)
-- **💼 LinkedIn:** [linkedin.com/in/etienne-poutchoko-emako](https://linkedin.com/in/etienne-poutchoko-emako)
+- **💼 LinkedIn:** [linkedin.com/in/étienne-poutchoko-emako-420524184](https://www.linkedin.com/in/%C3%A9tienne-poutchoko-emako-420524184/)
 - **🐙 GitHub:** [@etienne201](https://github.com/etienne201)
 - **📧 Email:** [poutchokoetienne@gmail.com](mailto:poutchokoetienne@gmail.com)
 - **💬 WhatsApp:** [+237 657 268 355](https://wa.me/237657268355)

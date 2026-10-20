@@ -16,6 +16,8 @@ import {
   MapPin,
 } from "lucide-react"
 import { TechBadge } from "@/components/tech-icon"
+import { TypewriterText } from "@/components/ui/typewriter-text"
+import { HeroTerminalBadge } from "@/components/hero-terminal-badge"
 
 export function HeroSection() {
   const { t, language } = useLanguage()
@@ -30,6 +32,20 @@ export function HeroSection() {
       ? "Contact Portfolio - Opportunité QA Automation"
       : "Portfolio Contact - QA Automation Opportunity",
   )
+
+  const roleTitles = language === "fr"
+    ? [
+        "Senior QA Automation Engineer",
+        "Architecte QA FinTech & RegTech",
+        "Expert CI/CD Quality Gates & DevOps",
+        "Spécialiste Automatisation E2E UI & API",
+      ]
+    : [
+        "Senior QA Automation Engineer",
+        "FinTech & RegTech QA Architect",
+        "CI/CD Quality Gates & DevOps Expert",
+        "E2E UI & API Test Automation Specialist",
+      ]
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id)
@@ -53,12 +69,31 @@ export function HeroSection() {
               <span className="text-slate-800 dark:text-slate-200 truncate">{t("hero.badge")}</span>
             </div>
 
-            {/* Main Headline */}
+            {/* Main Headline with Senior Typewriter Effects */}
             <div className="space-y-2">
               <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.12]">
-                <span className="block text-gradient-silver">{t("hero.name")}</span>
-                <span className="block text-gradient-accent mt-1.5 font-bold text-xl sm:text-3xl md:text-4xl lg:text-5xl">
-                  {t("hero.title")}
+                <span className="block text-gradient-silver">
+                  <TypewriterText
+                    key={`name-${language}`}
+                    text={t("hero.name")}
+                    speed={30}
+                    delay={100}
+                    cursorChar="|"
+                    cursorClassName="text-slate-400 dark:text-slate-200"
+                    hideCursorOnComplete={true}
+                  />
+                </span>
+                <span className="block text-gradient-accent mt-1.5 font-bold text-xl sm:text-3xl md:text-4xl lg:text-5xl min-h-[1.25em]">
+                  <TypewriterText
+                    key={`role-${language}`}
+                    words={roleTitles}
+                    loop={true}
+                    speed={38}
+                    deleteSpeed={22}
+                    pauseDuration={2600}
+                    cursorChar="|"
+                    cursorClassName="text-primary font-bold text-gradient-accent"
+                  />
                 </span>
               </h1>
               <p className="text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400 tracking-wider uppercase pt-1">
@@ -70,6 +105,11 @@ export function HeroSection() {
             <p className="text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed font-normal">
               {t("hero.description")}
             </p>
+
+            {/* QA Engineering Execution Terminal Strip */}
+            <div className="pt-1 max-w-2xl">
+              <HeroTerminalBadge />
+            </div>
 
             {/* Location & Status Bar */}
             <div className="flex flex-wrap items-center gap-y-2 gap-x-3 sm:gap-x-4 text-xs sm:text-sm text-slate-500 dark:text-slate-400">
@@ -126,12 +166,12 @@ export function HeroSection() {
                 {t("hero.direct")}
               </span>
               <a
-                href="https://linkedin.com/in/etienne-poutchoko-emako"
+                href="https://www.linkedin.com/in/%C3%A9tienne-poutchoko-emako-420524184/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.08] hover:border-blue-500 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/80 dark:hover:bg-white/[0.08] transition-all shadow-sm dark:shadow-subtle min-h-[40px] min-w-[40px] flex items-center justify-center"
-                title="LinkedIn"
-                aria-label="LinkedIn Profile"
+                title="LinkedIn Profile"
+                aria-label="LinkedIn Profile - Étienne Poutchoko Emako"
               >
                 <Linkedin className="w-4 h-4" />
               </a>

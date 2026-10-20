@@ -11,6 +11,7 @@ const nextConfig = {
   // Images
   images: {
     formats: ['image/avif', 'image/webp'],
+    qualities: [75, 90],
     // Aucune image distante utilisée : pas de remotePatterns (évite un proxy d'images ouvert)
   },
 

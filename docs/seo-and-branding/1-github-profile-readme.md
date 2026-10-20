@@ -9,7 +9,7 @@
 >    - **Bio :** Senior QA Automation Engineer | FinTech, RegTech & SaaS | Cypress • Playwright • Postman • CI/CD Quality Gates
 >    - **Location :** Douala, Cameroon (Available for Remote Europe & International)
 >    - **Website :** https://poutchoko-qa-portfolio.vercel.app
->    - **Social :** https://linkedin.com/in/etienne-poutchoko-emako
+>    - **Social :** https://www.linkedin.com/in/%C3%A9tienne-poutchoko-emako-420524184/
 
 ---
 
@@ -21,7 +21,7 @@
 **Douala, Cameroon 📍 (Open to Remote Worldwide & Freelance Contracts 🌍)**
 
 [![Portfolio](https://img.shields.io/badge/🌐_Portfolio-poutchoko--qa--portfolio.vercel.app-0284c7?style=for-the-badge)](https://poutchoko-qa-portfolio.vercel.app)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/etienne-poutchoko-emako)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/%C3%A9tienne-poutchoko-emako-420524184/)
 [![Email](https://img.shields.io/badge/Email-Contact_Me-EA4335?style=for-the-badge&logo=gmail)](mailto:poutchokoetienne@gmail.com)
 [![CV Download](https://img.shields.io/badge/📄_Resume-Download_PDF-10b981?style=for-the-badge)](https://poutchoko-qa-portfolio.vercel.app/cv)
 
@@ -124,7 +124,7 @@ I am a **Senior QA Automation Engineer** with **6+ years of hands-on experience*
 I am available for **Senior QA / QA Lead / SDET** roles, long-term remote contracts, and freelance consulting missions:
 
 - 🌐 **Portfolio & Case Studies:** [poutchoko-qa-portfolio.vercel.app](https://poutchoko-qa-portfolio.vercel.app)
-- 💼 **LinkedIn Profile:** [linkedin.com/in/etienne-poutchoko-emako](https://linkedin.com/in/etienne-poutchoko-emako)
+- 💼 **LinkedIn Profile:** [linkedin.com/in/étienne-poutchoko-emako-420524184](https://www.linkedin.com/in/%C3%A9tienne-poutchoko-emako-420524184/)
 - 📧 **Direct Inquiries:** [poutchokoetienne@gmail.com](mailto:poutchokoetienne@gmail.com)
 - 📱 **WhatsApp / Phone:** `+237 657 268 355`
 ```

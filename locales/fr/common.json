@@ -401,6 +401,12 @@
   "footer.cvFr": "Télécharger CV (Français)",
   "footer.rights": "Tous droits réservés.",
   "footer.tagline": "Haute Fiabilité • FinTech & RegTech QA",
+  "footer.backToTop": "Retour en haut",
+  "footer.cvStudio": "Studio CV & Personnalisation",
+  "contact.copyAction": "Copier",
+  "contact.responseTime": "Réponse garantie sous 24h ouvrées • Zéro spam",
+  "contact.availStatus": "Disponible immédiatement pour mission ou CDI",
+  "contact.availResponseTime": "Temps de réponse typique : < 2h sur WhatsApp",
 
   "cv.enTitle": "Resume (English)",
   "cv.enSubtitle": "PDF • International / ATS",

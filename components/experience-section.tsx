@@ -1,5 +1,6 @@
 "use client"
 import { useLanguage } from "@/hooks/use-language"
+import { TypewriterText } from "@/components/ui/typewriter-text"
 import {
   Briefcase,
   Calendar,
@@ -12,7 +13,7 @@ import {
 import { TechBadge } from "@/components/tech-icon"
 
 export function ExperienceSection() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
 
   const experiences = [
     {
@@ -93,8 +94,17 @@ export function ExperienceSection() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             {t("exp.title")}
           </h2>
-          <p className="text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-            {t("exp.subtitle")}
+          <p className="text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 leading-relaxed min-h-[2.5rem]">
+            <TypewriterText
+              key={`exp-sub-${language}`}
+              text={t("exp.subtitle")}
+              triggerOnView={true}
+              speed={20}
+              delay={150}
+              cursorChar="|"
+              cursorClassName="text-primary"
+              hideCursorOnComplete={true}
+            />
           </p>
         </div>
 

@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect, useCallback } from "react"
 import { useLanguage } from "@/hooks/use-language"
+import { TypewriterText } from "@/components/ui/typewriter-text"
 import {
   FolderGit2,
   Eye,
@@ -39,7 +40,7 @@ export interface ProjectItem {
 }
 
 export function ProjectsSection() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
   const [activeFilter, setActiveFilter] = useState<string>("all")
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null)
 
@@ -235,8 +236,17 @@ export function ProjectsSection() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             {t("projects.title")}
           </h2>
-          <p className="text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-            {t("projects.subtitle")}
+          <p className="text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 leading-relaxed min-h-[2.5rem]">
+            <TypewriterText
+              key={`projects-sub-${language}`}
+              text={t("projects.subtitle")}
+              triggerOnView={true}
+              speed={20}
+              delay={150}
+              cursorChar="|"
+              cursorClassName="text-primary"
+              hideCursorOnComplete={true}
+            />
           </p>
         </div>
 

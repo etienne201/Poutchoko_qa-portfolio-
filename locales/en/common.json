@@ -401,6 +401,12 @@
   "footer.cvFr": "Download Resume (French)",
   "footer.rights": "All rights reserved.",
   "footer.tagline": "High Reliability • FinTech & RegTech QA",
+  "footer.backToTop": "Back to top",
+  "footer.cvStudio": "CV Studio & Customizer",
+  "contact.copyAction": "Copy",
+  "contact.responseTime": "Guaranteed response within 24h • Zero spam",
+  "contact.availStatus": "Immediately available for contract or full-time",
+  "contact.availResponseTime": "Typical response time: < 2h on WhatsApp",
 
   "cv.enTitle": "Resume (English)",
   "cv.enSubtitle": "PDF • International / ATS",

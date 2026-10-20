@@ -1,5 +1,6 @@
 "use client"
 import { useLanguage } from "@/hooks/use-language"
+import { TypewriterText } from "@/components/ui/typewriter-text"
 import {
   FileCheck2,
   Terminal,
@@ -12,7 +13,7 @@ import {
 import { TechIcon } from "@/components/tech-icon"
 
 export function QAExpertiseSection() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
 
   const methodologySteps = [
     {
@@ -83,8 +84,17 @@ export function QAExpertiseSection() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             {t("expertise.title")}
           </h2>
-          <p className="text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-            {t("expertise.subtitle")}
+          <p className="text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 leading-relaxed min-h-[2.5rem]">
+            <TypewriterText
+              key={`expertise-sub-${language}`}
+              text={t("expertise.subtitle")}
+              triggerOnView={true}
+              speed={20}
+              delay={150}
+              cursorChar="|"
+              cursorClassName="text-primary"
+              hideCursorOnComplete={true}
+            />
           </p>
         </div>
 

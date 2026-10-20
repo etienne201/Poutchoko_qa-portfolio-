@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     "ISTQB Certified Tester",
   ],
   authors: [
-    { name: "Poutchoko Emako Étienne", url: "https://linkedin.com/in/etienne-poutchoko-emako" },
+    { name: "Poutchoko Emako Étienne", url: "https://www.linkedin.com/in/%C3%A9tienne-poutchoko-emako-420524184/" },
     { name: "etienne201", url: "https://github.com/etienne201" },
   ],
   creator: "Poutchoko Emako Étienne",
@@ -126,7 +126,7 @@ export default function RootLayout({
         email: "mailto:poutchokoetienne@gmail.com",
         telephone: "+237657268355",
         sameAs: [
-          "https://linkedin.com/in/etienne-poutchoko-emako",
+          "https://www.linkedin.com/in/%C3%A9tienne-poutchoko-emako-420524184/",
           "https://github.com/etienne201",
           "https://collective.work",
         ],

@@ -548,7 +548,7 @@ export async function processContactSubmission(
                         Consulter le Portfolio en ligne
                       </a>
                       &nbsp;•&nbsp;
-                      <a href="https://linkedin.com/in/etienne-poutchoko-emako" style="color: #2563eb; text-decoration: underline; font-weight: 600;">
+                      <a href="https://www.linkedin.com/in/%C3%A9tienne-poutchoko-emako-420524184/" style="color: #2563eb; text-decoration: underline; font-weight: 600;">
                         Profil LinkedIn
                       </a>
                     </p>

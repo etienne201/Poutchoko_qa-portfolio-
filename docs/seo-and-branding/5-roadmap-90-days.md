@@ -38,7 +38,7 @@ Ce plan d'action opérationnel détaille semaine par semaine les tâches à exé
   - Renseigner la Bio : `Senior QA Automation Engineer | FinTech, RegTech & SaaS | Cypress • Playwright • Postman • CI/CD Quality Gates`.
   - Renseigner la Ville : `Douala, Cameroon (Available for Remote Europe & Global)`.
   - Renseigner le site web : `https://poutchoko-qa-portfolio.vercel.app`.
-  - Lier le profil LinkedIn : `https://linkedin.com/in/etienne-poutchoko-emako`.
+  - Lier le profil LinkedIn : `https://www.linkedin.com/in/%C3%A9tienne-poutchoko-emako-420524184/`.
 - [ ] **GitHub Profile README :** Créer le dépôt public `etienne201` sur GitHub et y copier le fichier [1-github-profile-readme.md](file:///Users/joeemako/Documents/Poutchoko_qa-portfolio-/docs/seo-and-branding/1-github-profile-readme.md).
 - [ ] **Code Portfolio :** Déployer les mises à jour effectuées sur [app/layout.tsx](file:///Users/joeemako/Documents/Poutchoko_qa-portfolio-/app/layout.tsx), [app/sitemap.ts](file:///Users/joeemako/Documents/Poutchoko_qa-portfolio-/app/sitemap.ts) et les pages de CV via `git push`.
 
