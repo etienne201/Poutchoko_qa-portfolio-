@@ -93,6 +93,9 @@ export const metadata: Metadata = {
       "Senior QA Automation Engineer specializing in FinTech, RegTech, SaaS, Cypress, Playwright, and CI/CD quality gates.",
     images: ["/images/homepage.jpg"],
   },
+  verification: {
+    google: "7u6CYEZ9JAgTR4wGuxQ8qyN7TUgAP-KlEvun_bWEu2o",
+  },
 }
 
 export default function RootLayout({
