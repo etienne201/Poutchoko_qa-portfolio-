@@ -94,7 +94,10 @@ export const metadata: Metadata = {
     images: ["/images/homepage.jpg"],
   },
   verification: {
-    google: "7u6CYEZ9JAgTR4wGuxQ8qyN7TUgAP-KlEvun_bWEu2o",
+    google: [
+      "7u6CYEZ9JAgTR4wGuxQ8qyN7TUgAP-KlEvun_bWEu2o",
+      "_UBrYv8mIyNi0-_Y_ZnkzXYzxL74EdLYnbVO_oRxXc4",
+    ],
   },
 }
 
