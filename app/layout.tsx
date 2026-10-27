@@ -64,6 +64,8 @@ export const metadata: Metadata = {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
       { url: "/images/logo-badge.png", sizes: "192x192", type: "image/png" },
+      { url: "/images/logo-badge.png", sizes: "512x512", type: "image/png" },
+      { url: "/images/logo.jpg", sizes: "800x800", type: "image/jpeg" },
     ],
     apple: [{ url: "/images/logo-badge.png", sizes: "180x180", type: "image/png" }],
   },
@@ -79,10 +81,32 @@ export const metadata: Metadata = {
     siteName: "Poutchoko Emako Étienne - Portfolio QA",
     images: [
       {
-        url: "/images/homepage.jpg",
+        url: "https://poutchoko-qa-portfolio.vercel.app/images/homepage.jpg",
         width: 1200,
         height: 630,
-        alt: "Poutchoko Emako Étienne - Senior QA Automation Engineer",
+        type: "image/jpeg",
+        alt: "Poutchoko Emako Étienne - Senior QA Automation Engineer Portfolio",
+      },
+      {
+        url: "https://poutchoko-qa-portfolio.vercel.app/images/hero-background.jpg",
+        width: 1920,
+        height: 1080,
+        type: "image/jpeg",
+        alt: "Poutchoko Emako Étienne - QA Automation Workspace & Test Infrastructure",
+      },
+      {
+        url: "https://poutchoko-qa-portfolio.vercel.app/images/logo.jpg",
+        width: 800,
+        height: 800,
+        type: "image/jpeg",
+        alt: "Poutchoko Emako Étienne - Portrait Senior QA Engineer",
+      },
+      {
+        url: "https://poutchoko-qa-portfolio.vercel.app/images/logo-badge.png",
+        width: 512,
+        height: 512,
+        type: "image/png",
+        alt: "Poutchoko Emako Étienne - QA Automation Certification Badge",
       },
     ],
   },
@@ -91,7 +115,12 @@ export const metadata: Metadata = {
     title: "Poutchoko Emako Étienne | Senior QA Automation Engineer",
     description:
       "Senior QA Automation Engineer specializing in FinTech, RegTech, SaaS, Cypress, Playwright, and CI/CD quality gates.",
-    images: ["/images/homepage.jpg"],
+    images: [
+      "https://poutchoko-qa-portfolio.vercel.app/images/homepage.jpg",
+      "https://poutchoko-qa-portfolio.vercel.app/images/hero-background.jpg",
+      "https://poutchoko-qa-portfolio.vercel.app/images/logo.jpg",
+      "https://poutchoko-qa-portfolio.vercel.app/images/logo-badge.png",
+    ],
   },
   verification: {
     google: [
@@ -113,13 +142,24 @@ export default function RootLayout({
         "@type": "Person",
         "@id": "https://poutchoko-qa-portfolio.vercel.app/#person",
         name: "Poutchoko Emako Étienne",
+        givenName: "Étienne",
+        familyName: "Poutchoko Emako",
+        additionalName: "Etienne",
         alternateName: [
           "Étienne Poutchoko Emako",
           "Etienne Poutchoko",
           "etienne201",
           "Poutchoko Etienne",
+          "Poutchoko QA",
+          "Poutchoko QA Automation",
         ],
         jobTitle: "Senior QA Automation Engineer",
+        gender: "https://schema.org/Male",
+        nationality: {
+          "@type": "Country",
+          name: "Cameroon",
+          alternateName: "Cameroun",
+        },
         hasOccupation: {
           "@type": "Occupation",
           name: "Software Quality Assurance Analyst and Tester",
@@ -128,19 +168,79 @@ export default function RootLayout({
         description:
           "Senior QA Automation Engineer with 6+ years of experience delivering high-quality digital products in FinTech, SaaS, RegTech, and Payment platforms. Expert in Cypress, Playwright, API testing, and CI/CD quality gates.",
         url: "https://poutchoko-qa-portfolio.vercel.app",
-        image: "https://poutchoko-qa-portfolio.vercel.app/images/logo.jpg",
+        image: [
+          "https://poutchoko-qa-portfolio.vercel.app/images/logo.jpg",
+          "https://poutchoko-qa-portfolio.vercel.app/images/logo-badge.png",
+          "https://poutchoko-qa-portfolio.vercel.app/images/homepage.jpg",
+          "https://poutchoko-qa-portfolio.vercel.app/images/hero-background.jpg",
+        ],
         email: "mailto:poutchokoetienne@gmail.com",
         telephone: "+237657268355",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "Douala",
+          addressLocality: "Douala",
+          addressRegion: "Littoral",
+          postalCode: "00237",
+          addressCountry: {
+            "@type": "Country",
+            name: "Cameroon",
+            alternateName: "Cameroun",
+          },
+        },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: 4.0511,
+          longitude: 9.7679,
+        },
+        hasMap: "https://maps.google.com/?q=Douala,+Cameroon",
+        homeLocation: {
+          "@type": "Place",
+          name: "Douala, Littoral, Cameroun",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Douala",
+            addressRegion: "Littoral",
+            addressCountry: "Cameroon",
+          },
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: 4.0511,
+            longitude: 9.7679,
+          },
+        },
+        workLocation: {
+          "@type": "Place",
+          name: "Douala, Cameroun & Remote International (Europe, Amérique du Nord, Afrique)",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Douala",
+            addressRegion: "Littoral",
+            addressCountry: "Cameroon",
+          },
+        },
+        contactPoint: [
+          {
+            "@type": "ContactPoint",
+            contactType: "Professional & Contract Inquiries",
+            telephone: "+237657268355",
+            email: "poutchokoetienne@gmail.com",
+            availableLanguage: ["French", "English"],
+            areaServed: [
+              "Worldwide",
+              "Europe",
+              "CEMAC",
+              "Cameroon",
+              "France",
+              "Canada",
+            ],
+          },
+        ],
         sameAs: [
           "https://www.linkedin.com/in/%C3%A9tienne-poutchoko-emako-420524184/",
           "https://github.com/etienne201",
           "https://collective.work",
         ],
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: "Douala",
-          addressCountry: "Cameroon",
-        },
         worksFor: {
           "@type": "Organization",
           name: "Seven Common Factors (Seven GPS)",
@@ -184,10 +284,52 @@ export default function RootLayout({
         ],
       },
       {
+        "@type": "ProfessionalService",
+        "@id": "https://poutchoko-qa-portfolio.vercel.app/#service",
+        name: "Poutchoko Emako Étienne - Senior QA Consulting & Automation Services",
+        founder: {
+          "@id": "https://poutchoko-qa-portfolio.vercel.app/#person",
+        },
+        url: "https://poutchoko-qa-portfolio.vercel.app",
+        logo: "https://poutchoko-qa-portfolio.vercel.app/images/logo.jpg",
+        image: [
+          "https://poutchoko-qa-portfolio.vercel.app/images/homepage.jpg",
+          "https://poutchoko-qa-portfolio.vercel.app/images/hero-background.jpg",
+          "https://poutchoko-qa-portfolio.vercel.app/images/logo.jpg",
+          "https://poutchoko-qa-portfolio.vercel.app/images/logo-badge.png",
+        ],
+        telephone: "+237657268355",
+        email: "poutchokoetienne@gmail.com",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "Douala",
+          addressLocality: "Douala",
+          addressRegion: "Littoral",
+          postalCode: "00237",
+          addressCountry: "Cameroon",
+        },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: 4.0511,
+          longitude: 9.7679,
+        },
+        hasMap: "https://maps.google.com/?q=Douala,+Cameroon",
+        areaServed: [
+          "Worldwide",
+          "Remote",
+          "Europe",
+          "CEMAC",
+          "Cameroon",
+          "France",
+        ],
+        priceRange: "$$",
+      },
+      {
         "@type": "WebSite",
         "@id": "https://poutchoko-qa-portfolio.vercel.app/#website",
         url: "https://poutchoko-qa-portfolio.vercel.app",
         name: "Poutchoko Emako Étienne - Senior QA Automation Engineer Portfolio",
+        image: "https://poutchoko-qa-portfolio.vercel.app/images/homepage.jpg",
         publisher: {
           "@id": "https://poutchoko-qa-portfolio.vercel.app/#person",
         },
@@ -198,6 +340,10 @@ export default function RootLayout({
         "@id": "https://poutchoko-qa-portfolio.vercel.app/#profilepage",
         url: "https://poutchoko-qa-portfolio.vercel.app",
         name: "Profil Professionnel & Portfolio QA - Poutchoko Emako Étienne",
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: "https://poutchoko-qa-portfolio.vercel.app/images/homepage.jpg",
+        },
         mainEntity: {
           "@id": "https://poutchoko-qa-portfolio.vercel.app/#person",
         },
