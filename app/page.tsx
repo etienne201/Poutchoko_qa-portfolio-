@@ -1,5 +1,4 @@
 "use client"
-import { LanguageProvider } from "@/hooks/use-language"
 import { AnimatedBackground } from "@/components/animated-background"
 import { Navbar } from "@/components/navbar"
 import { HeroSection } from "@/components/hero-section"
@@ -12,8 +11,11 @@ import { EducationSection } from "@/components/education-section"
 import { ContactSection } from "@/components/contact-section"
 import { Footer } from "@/components/footer"
 import { MobileContactBar } from "@/components/mobile-contact-bar"
+import { SectionRail } from "@/components/navigation/section-rail"
+import { FloatingBackToTop } from "@/components/navigation/floating-back-to-top"
+import { RevealOnScroll } from "@/components/ui/reveal-on-scroll"
 
-function PortfolioContent() {
+export default function QAPortfolio() {
   return (
     <div className="min-h-screen relative isolate flex flex-col justify-between selection:bg-primary/20 selection:text-primary">
       {/* Dynamic Background */}
@@ -23,45 +25,57 @@ function PortfolioContent() {
       <Navbar />
 
       {/* Page Content Flow */}
-      <main className="flex-1 w-full overflow-hidden">
-        {/* 1. Hero Section */}
+      <main id="main-content" className="flex-1 w-full overflow-x-clip">
+        {/* 1. Hero Section (rendu immédiat pour LCP optimal) */}
         <HeroSection />
 
         {/* 2. About & Storytelling */}
-        <AboutSection />
+        <RevealOnScroll>
+          <AboutSection />
+        </RevealOnScroll>
 
         {/* 3. QA Methodology & Engineering Maturity */}
-        <QAExpertiseSection />
+        <RevealOnScroll>
+          <QAExpertiseSection />
+        </RevealOnScroll>
 
         {/* 4. Verified Professional Experience Timeline */}
-        <ExperienceSection />
+        <RevealOnScroll>
+          <ExperienceSection />
+        </RevealOnScroll>
 
         {/* 5. Technical Skills & Tools */}
-        <SkillsSection />
+        <RevealOnScroll>
+          <SkillsSection />
+        </RevealOnScroll>
 
         {/* 6. Case Studies & Real Projects */}
-        <ProjectsSection />
+        <RevealOnScroll>
+          <ProjectsSection />
+        </RevealOnScroll>
 
         {/* 7. Education, Languages & Soft Skills */}
-        <EducationSection />
+        <RevealOnScroll>
+          <EducationSection />
+        </RevealOnScroll>
 
         {/* 8. Conversion & Contact System */}
-        <ContactSection />
+        <RevealOnScroll>
+          <ContactSection />
+        </RevealOnScroll>
       </main>
 
       {/* Footer */}
       <Footer />
 
+      {/* Micro-rail latéral discret sur très grands écrans */}
+      <SectionRail />
+
+      {/* Retour en haut flottant (Mobile / Tablette / Desktop <2xl) */}
+      <FloatingBackToTop />
+
       {/* Mobile Sticky Quick Action Bar */}
       <MobileContactBar />
     </div>
-  )
-}
-
-export default function QAPortfolio() {
-  return (
-    <LanguageProvider>
-      <PortfolioContent />
-    </LanguageProvider>
   )
 }

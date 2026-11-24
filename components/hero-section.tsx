@@ -18,6 +18,7 @@ import {
 import { TechBadge } from "@/components/tech-icon"
 import { TypewriterText } from "@/components/ui/typewriter-text"
 import { HeroTerminalBadge } from "@/components/hero-terminal-badge"
+import { SpotlightCard } from "@/components/ui/spotlight-card"
 
 export function HeroSection() {
   const { t, language } = useLanguage()
@@ -206,7 +207,7 @@ export function HeroSection() {
 
           {/* Right Column: High-Impact QA Command Deck */}
           <div className="lg:col-span-5 w-full">
-            <div className="relative rounded-2xl p-5 sm:p-7 glass-panel-elevated shadow-card">
+            <SpotlightCard className="relative rounded-2xl p-5 sm:p-7 glass-panel-elevated shadow-card">
               {/* Card Header */}
               <div className="flex flex-wrap items-center justify-between gap-2 pb-4 sm:pb-5 border-b border-slate-200/80 dark:border-white/[0.08]">
                 <div className="flex items-center space-x-2.5">
@@ -222,7 +223,7 @@ export function HeroSection() {
 
               {/* 2x2 Quantified Metrics Grid */}
               <div className="grid grid-cols-2 gap-2.5 sm:gap-3.5 py-4 sm:py-5">
-                <div className="p-3.5 sm:p-4 rounded-xl inner-card space-y-1 text-left">
+                <div className="p-3.5 sm:p-4 rounded-xl inner-card space-y-1 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40">
                   <div className="flex items-center text-primary text-xs font-medium space-x-1.5">
                     <Clock className="w-3.5 h-3.5 flex-shrink-0" />
                     <span>{t("hero.stat.yearsTag")}</span>
@@ -235,7 +236,7 @@ export function HeroSection() {
                   </div>
                 </div>
 
-                <div className="p-3.5 sm:p-4 rounded-xl inner-card space-y-1 text-left">
+                <div className="p-3.5 sm:p-4 rounded-xl inner-card space-y-1 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-500/40">
                   <div className="flex items-center text-emerald-600 dark:text-emerald-400 text-xs font-medium space-x-1.5">
                     <TrendingDown className="w-3.5 h-3.5 flex-shrink-0" />
                     <span>{t("hero.stat.regressionTag")}</span>
@@ -248,7 +249,7 @@ export function HeroSection() {
                   </div>
                 </div>
 
-                <div className="p-3.5 sm:p-4 rounded-xl inner-card space-y-1 text-left">
+                <div className="p-3.5 sm:p-4 rounded-xl inner-card space-y-1 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-sky-500/40">
                   <div className="flex items-center text-sky-600 dark:text-sky-400 text-xs font-medium space-x-1.5">
                     <TrendingUp className="w-3.5 h-3.5 flex-shrink-0" />
                     <span>{t("hero.stat.coverageTag")}</span>
@@ -261,7 +262,7 @@ export function HeroSection() {
                   </div>
                 </div>
 
-                <div className="p-3.5 sm:p-4 rounded-xl inner-card space-y-1 text-left">
+                <div className="p-3.5 sm:p-4 rounded-xl inner-card space-y-1 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-indigo-500/40">
                   <div className="flex items-center text-indigo-600 dark:text-indigo-400 text-xs font-medium space-x-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0" />
                     <span>{t("hero.stat.defectsTag")}</span>
@@ -308,7 +309,7 @@ export function HeroSection() {
                 </span>
                 <span className="text-slate-500">{t("hero.zeroBugs")}</span>
               </div>
-            </div>
+            </SpotlightCard>
           </div>
         </div>
       </div>

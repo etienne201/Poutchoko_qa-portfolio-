@@ -1,7 +1,13 @@
 import type React from "react"
 import type { Metadata } from "next"
+import "@fontsource-variable/plus-jakarta-sans"
+import "@fontsource-variable/jetbrains-mono"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { LanguageProvider } from "@/hooks/use-language"
+import { SkipLink } from "@/components/navigation/skip-link"
+import { CommandPaletteProvider } from "@/components/navigation/command-palette-provider"
+import { MotionProvider } from "@/components/motion-provider"
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://poutchoko-qa-portfolio.vercel.app"),
@@ -352,7 +358,11 @@ export default function RootLayout({
   }
 
   return (
-    <html lang="fr" className="scroll-smooth" suppressHydrationWarning>
+    <html
+      lang="fr"
+      className="scroll-smooth"
+      suppressHydrationWarning
+    >
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="color-scheme" content="light dark" />
@@ -369,7 +379,14 @@ export default function RootLayout({
           disableTransitionOnChange
           storageKey="poutchoko-theme"
         >
-          {children}
+          <LanguageProvider>
+            <MotionProvider>
+              <CommandPaletteProvider>
+                <SkipLink />
+                {children}
+              </CommandPaletteProvider>
+            </MotionProvider>
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

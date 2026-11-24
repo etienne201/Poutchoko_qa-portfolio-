@@ -1,16 +1,46 @@
 "use client"
 
+import { useCallback, useRef } from "react"
 import Image from "next/image"
+import { useGsapScroll } from "@/hooks/use-gsap-scroll"
 
 /**
  * Arrière-plan global de la Home Page.
- * Calque `fixed` couvrant le viewport : une seule image continue du Hero au footer,
- * sans répétition ni coupure. Cette approche remplace `background-attachment: fixed`
- * (non supporté sur iOS/Android) tout en offrant le même effet parallax-like partout.
+ * Calque `fixed` couvrant le viewport avec micro-parallaxe GPU (GSAP ScrollTrigger)
+ * sur le halo d'ambiance et la grille technique, désactivée sous prefers-reduced-motion.
  */
 export function AnimatedBackground() {
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  const setupParallax = useCallback((gsapInstance: typeof import("gsap").default) => {
+    gsapInstance.to("[data-parallax-halo]", {
+      yPercent: 10,
+      ease: "none",
+      scrollTrigger: {
+        trigger: document.documentElement,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+      },
+    })
+
+    gsapInstance.to("[data-parallax-grid]", {
+      yPercent: -4,
+      ease: "none",
+      scrollTrigger: {
+        trigger: document.documentElement,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+      },
+    })
+  }, [])
+
+  useGsapScroll(containerRef, setupParallax)
+
   return (
     <div
+      ref={containerRef}
       aria-hidden="true"
       className="fixed inset-0 -z-10 overflow-hidden pointer-events-none select-none transition-colors duration-300"
     >
@@ -35,11 +65,15 @@ export function AnimatedBackground() {
       <div className="absolute inset-0 bg-gradient-to-b from-[#f8fafc]/40 via-transparent to-[#f8fafc]/60 dark:from-[#081018]/50 dark:via-transparent dark:to-[#081018]/70" />
 
       {/* Halo radial d'ambiance basé sur les reflets cyan/cobalt du logo */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(2,132,199,0.10),transparent)] dark:bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(56,189,248,0.14),transparent)]" />
+      <div
+        data-parallax-halo
+        className="absolute -inset-y-12 inset-x-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(2,132,199,0.10),transparent)] dark:bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(56,189,248,0.14),transparent)] will-change-transform"
+      />
 
       {/* Grille technique de précision QA / Engineering */}
       <div
-        className="absolute inset-0 opacity-[0.03] dark:opacity-[0.045]"
+        data-parallax-grid
+        className="absolute -inset-y-12 inset-x-0 opacity-[0.03] dark:opacity-[0.045] will-change-transform"
         style={{
           backgroundImage: `
             linear-gradient(to right, currentColor 1px, transparent 1px),

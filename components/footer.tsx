@@ -2,6 +2,7 @@
 import Link from "next/link"
 import { useLanguage } from "@/hooks/use-language"
 import { Logo } from "@/components/logo"
+import { PORTFOLIO_SECTIONS } from "@/config/navigation"
 import {
   Linkedin,
   MessageSquare,
@@ -68,69 +69,28 @@ export function Footer() {
               <span>{t("footer.navTitle")}</span>
             </h4>
             <ul className="grid grid-cols-2 md:grid-cols-1 gap-x-4 gap-y-2 text-xs text-slate-600 dark:text-slate-400 font-medium">
-              <li>
-                <Link
-                  href="#about"
-                  className="hover:text-primary dark:hover:text-sky-400 transition-colors py-1 inline-flex items-center gap-1.5 group"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-white/20 group-hover:bg-primary transition-colors"></span>
-                  {t("nav.about")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#expertise"
-                  className="hover:text-primary dark:hover:text-sky-400 transition-colors py-1 inline-flex items-center gap-1.5 group"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-white/20 group-hover:bg-primary transition-colors"></span>
-                  {t("nav.expertise")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#experience"
-                  className="hover:text-primary dark:hover:text-sky-400 transition-colors py-1 inline-flex items-center gap-1.5 group"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-white/20 group-hover:bg-primary transition-colors"></span>
-                  {t("nav.experience")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#skills"
-                  className="hover:text-primary dark:hover:text-sky-400 transition-colors py-1 inline-flex items-center gap-1.5 group"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-white/20 group-hover:bg-primary transition-colors"></span>
-                  {t("nav.skills")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#projects"
-                  className="hover:text-primary dark:hover:text-sky-400 transition-colors py-1 inline-flex items-center gap-1.5 group"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-white/20 group-hover:bg-primary transition-colors"></span>
-                  {t("nav.projects")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#education"
-                  className="hover:text-primary dark:hover:text-sky-400 transition-colors py-1 inline-flex items-center gap-1.5 group"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-white/20 group-hover:bg-primary transition-colors"></span>
-                  {t("nav.education")}
-                </Link>
-              </li>
-              <li className="col-span-2 md:col-span-1">
-                <Link
-                  href="#contact"
-                  className="hover:text-primary dark:hover:text-sky-400 transition-colors py-1 inline-flex items-center gap-1.5 group font-semibold text-primary dark:text-sky-400"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-                  {t("nav.contact")}
-                </Link>
-              </li>
+              {PORTFOLIO_SECTIONS.map((item) => {
+                const isContact = item.id === "contact"
+                return (
+                  <li key={item.id} className={isContact ? "col-span-2 md:col-span-1" : undefined}>
+                    <Link
+                      href={item.href}
+                      className={`hover:text-primary dark:hover:text-sky-400 transition-colors py-1 inline-flex items-center gap-1.5 group ${
+                        isContact ? "font-semibold text-primary dark:text-sky-400" : ""
+                      }`}
+                    >
+                      <span
+                        className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                          isContact
+                            ? "bg-primary animate-pulse"
+                            : "bg-slate-300 dark:bg-white/20 group-hover:bg-primary"
+                        }`}
+                      />
+                      {t(item.labelKey)}
+                    </Link>
+                  </li>
+                )
+              })}
             </ul>
           </div>
 

@@ -17,6 +17,12 @@ export function ThemeToggle() {
   const isDark = resolvedTheme === "dark"
 
   const toggleTheme = () => {
+    if (typeof document !== "undefined") {
+      document.documentElement.classList.add("theme-transition")
+      window.setTimeout(() => {
+        document.documentElement.classList.remove("theme-transition")
+      }, 320)
+    }
     setTheme(isDark ? "light" : "dark")
   }
 

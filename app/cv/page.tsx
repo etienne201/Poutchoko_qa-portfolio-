@@ -2,18 +2,22 @@
 import React, { useState, useEffect, Suspense } from "react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
-import { useLanguage, LanguageProvider } from "@/hooks/use-language"
+import { useLanguage } from "@/hooks/use-language"
 import { CVViewer } from "@/components/cv-viewer"
+import { ThemeToggle } from "@/components/theme-toggle"
+import { useCommandPalette } from "@/components/navigation/command-palette-provider"
 import {
   Download,
   Printer,
   ArrowLeft,
   CheckCircle2,
   Sparkles,
+  Command,
 } from "lucide-react"
 
 function CVPageContent() {
   const { language, setLanguage, t } = useLanguage()
+  const { openPalette } = useCommandPalette()
   const searchParams = useSearchParams()
   const langQuery = searchParams.get("lang")
   const activeLang = (langQuery === "en" || langQuery === "fr") ? langQuery : language
@@ -116,6 +120,30 @@ function CVPageContent() {
               )}
             </button>
 
+            {/* Lien direct Studio CV */}
+            <Link
+              href="/cv-builder"
+              className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.06] dark:hover:bg-white/[0.12] text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-white/[0.1] text-xs font-semibold transition-colors min-h-[36px]"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+              <span>Studio CV</span>
+            </Link>
+
+            {/* Palette ⌘K */}
+            <button
+              type="button"
+              onClick={openPalette}
+              aria-label={t("nav.commandOpen")}
+              title={t("nav.commandOpen")}
+              className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.06] dark:hover:bg-white/[0.12] text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/[0.1] text-[11px] font-mono transition-colors min-h-[36px]"
+            >
+              <Command className="w-3.5 h-3.5" />
+              <span>K</span>
+            </button>
+
+            {/* Thème */}
+            <ThemeToggle />
+
             {/* Imprimer */}
             <button
               type="button"
@@ -131,7 +159,7 @@ function CVPageContent() {
       </header>
 
       {/* Contenu principal de consultation */}
-      <main className="flex-1 px-3.5 sm:px-6 py-6 md:py-10 print:p-0 print:m-0">
+      <main id="main-content" className="flex-1 px-3.5 sm:px-6 py-6 md:py-10 print:p-0 print:m-0">
         <CVViewer variant="paper" lang={activeLang} />
       </main>
 
@@ -159,10 +187,8 @@ function CVPageContent() {
 
 export default function CVPage() {
   return (
-    <LanguageProvider>
-      <Suspense fallback={null}>
-        <CVPageContent />
-      </Suspense>
-    </LanguageProvider>
+    <Suspense fallback={null}>
+      <CVPageContent />
+    </Suspense>
   )
 }

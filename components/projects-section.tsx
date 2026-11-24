@@ -1,5 +1,7 @@
 "use client"
 import { useState, useEffect, useCallback } from "react"
+import { AnimatePresence, m } from "motion/react"
+import { SpotlightCard } from "@/components/ui/spotlight-card"
 import { useLanguage } from "@/hooks/use-language"
 import { TypewriterText } from "@/components/ui/typewriter-text"
 import {
@@ -225,7 +227,7 @@ export function ProjectsSection() {
   }, [selectedProject, handlePrevProject, handleNextProject])
 
   return (
-    <section id="projects" className="py-20 sm:py-24 px-3.5 sm:px-6 lg:px-8 relative overflow-hidden">
+    <section id="projects" className="scroll-mt-24 py-20 sm:py-24 px-3.5 sm:px-6 lg:px-8 relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 space-y-3">
@@ -250,84 +252,101 @@ export function ProjectsSection() {
           </p>
         </div>
 
-        {/* Filter Buttons */}
+        {/* Filter Buttons avec pilule active glissante (Motion layoutId) */}
         <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-10 sm:mb-12">
-          {filters.map((filter) => {
-            const isActive = activeFilter === filter.key
-            return (
-              <button
-                key={filter.key}
-                type="button"
-                onClick={() => setActiveFilter(filter.key)}
-                className={`text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2 rounded-xl transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary min-h-[38px] ${
-                  isActive
-                    ? "bg-primary text-primary-foreground shadow-accent border border-primary"
-                    : "bg-slate-100 dark:bg-white/[0.04] text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/80 dark:hover:bg-white/[0.08] border border-slate-200 dark:border-white/[0.08]"
-                }`}
-              >
-                {filter.label}
-              </button>
-            )
-          })}
-        </div>
-
-        {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-          {filteredProjects.map((project) => (
-            <div
-              key={project.id}
-              className="rounded-2xl p-5 sm:p-6 glass-panel border border-slate-200/80 dark:border-white/[0.07] hover:border-primary/40 dark:hover:border-white/[0.18] shadow-card flex flex-col justify-between text-left group transition-all duration-300 hover:scale-[1.01]"
-            >
-              <div>
-                {/* Sector & Metric badge */}
-                <div className="flex items-center justify-between gap-2 mb-3.5 sm:mb-4">
-                  <span className="text-xs font-semibold text-primary truncate max-w-[200px]">
-                    {project.sector}
-                  </span>
-                  <span className="chip-subtle text-[11px] font-bold font-mono px-2 py-0.5 rounded-md flex-shrink-0">
-                    {project.metric}
-                  </span>
-                </div>
-
-                <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-primary transition-colors tracking-tight">
-                  {project.title}
-                </h3>
-
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-2 leading-relaxed">
-                  {project.tagline}
-                </p>
-
-                {/* Challenge Snapshot */}
-                <div className="p-3.5 rounded-xl inner-card mb-4 text-xs text-slate-700 dark:text-slate-300">
-                  <span className="font-semibold text-amber-500 dark:text-amber-400 block mb-1">
-                    {t("projects.impact")}
-                  </span>
-                  <p className="line-clamp-2 leading-relaxed">{project.results[0]}</p>
-                </div>
-              </div>
-
-              <div>
-                {/* Technologies */}
-                <div className="flex flex-wrap gap-1.5 mb-5">
-                  {project.technologies.map((tech, tIdx) => (
-                    <TechBadge key={tIdx} name={tech} size="sm" />
-                  ))}
-                </div>
-
-                {/* View Details Button */}
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setSelectedProject(project)}
-                  className="w-full bg-slate-100 dark:bg-white/[0.04] hover:bg-primary hover:text-primary-foreground border-slate-200 dark:border-white/[0.08] hover:border-primary text-slate-700 dark:text-slate-300 transition-all rounded-xl shadow-sm min-h-[38px]"
-                >
-                  <Eye className="w-3.5 h-3.5 mr-2 flex-shrink-0" />
-                  <span>{t("projects.viewDetails")}</span>
-                </Button>
-              </div>
+              {filters.map((filter) => {
+                const isActive = activeFilter === filter.key
+                return (
+                  <button
+                    key={filter.key}
+                    type="button"
+                    onClick={() => setActiveFilter(filter.key)}
+                    aria-pressed={isActive}
+                    className={`relative text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2 rounded-xl transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary min-h-[38px] ${
+                      isActive
+                        ? "text-primary-foreground"
+                        : "bg-slate-100 dark:bg-white/[0.04] text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/80 dark:hover:bg-white/[0.08] border border-slate-200 dark:border-white/[0.08]"
+                    }`}
+                  >
+                    {isActive && (
+                      <m.span
+                        layoutId="projects-active-filter"
+                        transition={{ type: "spring", stiffness: 420, damping: 32 }}
+                        className="absolute inset-0 -z-10 rounded-xl bg-primary shadow-accent border border-primary"
+                      />
+                    )}
+                    <span className="relative z-10">{filter.label}</span>
+                  </button>
+                )
+              })}
             </div>
-          ))}
-        </div>
+
+            {/* Projects Grid animée */}
+            <m.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+              <AnimatePresence mode="popLayout">
+                {filteredProjects.map((project) => (
+                  <m.div
+                    key={project.id}
+                    layout
+                    initial={{ opacity: 0, scale: 0.96, y: 12 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.96, y: 8 }}
+                    transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                    className="h-full"
+                  >
+                    <SpotlightCard className="h-full rounded-2xl p-5 sm:p-6 glass-panel border border-slate-200/80 dark:border-white/[0.07] hover:border-primary/40 dark:hover:border-white/[0.18] shadow-card text-left group transition-all duration-300 hover:-translate-y-1">
+                      <div>
+                        {/* Sector & Metric badge */}
+                        <div className="flex items-center justify-between gap-2 mb-3.5 sm:mb-4">
+                          <span className="text-xs font-semibold text-primary truncate max-w-[200px]">
+                            {project.sector}
+                          </span>
+                          <span className="chip-subtle text-[11px] font-bold font-mono px-2 py-0.5 rounded-md flex-shrink-0">
+                            {project.metric}
+                          </span>
+                        </div>
+
+                        <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-primary transition-colors tracking-tight">
+                          {project.title}
+                        </h3>
+
+                        <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-2 leading-relaxed">
+                          {project.tagline}
+                        </p>
+
+                        {/* Challenge Snapshot */}
+                        <div className="p-3.5 rounded-xl inner-card mb-4 text-xs text-slate-700 dark:text-slate-300">
+                          <span className="font-semibold text-amber-500 dark:text-amber-400 block mb-1">
+                            {t("projects.impact")}
+                          </span>
+                          <p className="line-clamp-2 leading-relaxed">{project.results[0]}</p>
+                        </div>
+                      </div>
+
+                      <div>
+                        {/* Technologies */}
+                        <div className="flex flex-wrap gap-1.5 mb-5">
+                          {project.technologies.map((tech, tIdx) => (
+                            <TechBadge key={tIdx} name={tech} size="sm" />
+                          ))}
+                        </div>
+
+                        {/* View Details Button */}
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setSelectedProject(project)}
+                          className="w-full bg-slate-100 dark:bg-white/[0.04] hover:bg-primary hover:text-primary-foreground border-slate-200 dark:border-white/[0.08] hover:border-primary text-slate-700 dark:text-slate-300 transition-all rounded-xl shadow-sm min-h-[38px]"
+                        >
+                          <Eye className="w-3.5 h-3.5 mr-2 flex-shrink-0" />
+                          <span>{t("projects.viewDetails")}</span>
+                        </Button>
+                      </div>
+                    </SpotlightCard>
+                  </m.div>
+                ))}
+              </AnimatePresence>
+            </m.div>
 
         {/* Detailed Modal Premium */}
         {selectedProject && (

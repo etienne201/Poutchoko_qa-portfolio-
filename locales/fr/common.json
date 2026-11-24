@@ -17,6 +17,10 @@
   "nav.openMenu": "Ouvrir le menu de navigation",
   "nav.closeMenu": "Fermer le menu de navigation",
   "nav.cvStudio": "Studio CV & Créateur Pro",
+  "nav.cvHub": "Hub CV & Export",
+  "nav.commandOpen": "Ouvrir la palette de commandes (⌘K)",
+  "nav.commandPlaceholder": "Rechercher une section, CV, thème, action...",
+  "nav.commandEmpty": "Aucun résultat trouvé.",
   "nav.langSwitchFr": "Passer en Français",
   "nav.langSwitchEn": "Passer en Anglais",
 

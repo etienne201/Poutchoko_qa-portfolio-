@@ -17,6 +17,10 @@
   "nav.openMenu": "Open navigation menu",
   "nav.closeMenu": "Close navigation menu",
   "nav.cvStudio": "Resume Studio & Pro Builder",
+  "nav.cvHub": "Resume & Export Hub",
+  "nav.commandOpen": "Open command palette (⌘K)",
+  "nav.commandPlaceholder": "Jump to section, resume, theme, action...",
+  "nav.commandEmpty": "No matching commands found.",
   "nav.langSwitchFr": "Switch to French",
   "nav.langSwitchEn": "Switch to English",
 

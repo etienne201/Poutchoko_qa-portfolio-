@@ -1,5 +1,7 @@
 "use client"
+import { useCallback, useRef } from "react"
 import { useLanguage } from "@/hooks/use-language"
+import { useGsapScroll } from "@/hooks/use-gsap-scroll"
 import { TypewriterText } from "@/components/ui/typewriter-text"
 import {
   Briefcase,
@@ -14,6 +16,71 @@ import { TechBadge } from "@/components/tech-icon"
 
 export function ExperienceSection() {
   const { t, language } = useLanguage()
+  const sectionRef = useRef<HTMLElement>(null)
+
+  const setupTimeline = useCallback((gsapInstance: typeof import("gsap").default) => {
+    const progressPath = sectionRef.current?.querySelector<SVGPathElement>("[data-timeline-progress]")
+    const traveler = sectionRef.current?.querySelector<SVGGElement>("[data-timeline-traveler]")
+
+    if (progressPath) {
+      const length = progressPath.getTotalLength()
+      gsapInstance.set(progressPath, {
+        strokeDasharray: length,
+        strokeDashoffset: length,
+      })
+
+      const scrubTl = gsapInstance.timeline({
+        scrollTrigger: {
+          trigger: "[data-timeline-container]",
+          start: "top 72%",
+          end: "bottom 75%",
+          scrub: 0.6,
+        },
+      })
+
+      scrubTl.to(
+        progressPath,
+        {
+          strokeDashoffset: 0,
+          ease: "none",
+          duration: 1,
+        },
+        0,
+      )
+
+      if (traveler) {
+        scrubTl.to(
+          traveler,
+          {
+            motionPath: {
+              path: progressPath,
+              align: progressPath,
+              alignOrigin: [0.5, 0.5],
+            },
+            ease: "none",
+            duration: 1,
+          },
+          0,
+        )
+      }
+    }
+
+    gsapInstance.from("[data-timeline-card]", {
+      opacity: 0,
+      y: 24,
+      duration: 0.55,
+      stagger: 0.12,
+      ease: "power3.out",
+      clearProps: "transform,opacity",
+      scrollTrigger: {
+        trigger: "[data-timeline-container]",
+        start: "top 80%",
+        once: true,
+      },
+    })
+  }, [])
+
+  useGsapScroll(sectionRef, setupTimeline)
 
   const experiences = [
     {
@@ -83,7 +150,11 @@ export function ExperienceSection() {
   ]
 
   return (
-    <section id="experience" className="py-20 sm:py-24 px-3.5 sm:px-6 lg:px-8 relative overflow-hidden">
+    <section
+      ref={sectionRef}
+      id="experience"
+      className="scroll-mt-24 py-20 sm:py-24 px-3.5 sm:px-6 lg:px-8 relative overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-3">
@@ -108,13 +179,59 @@ export function ExperienceSection() {
           </p>
         </div>
 
-        {/* Timeline List */}
-        <div className="space-y-6 sm:space-y-8 relative">
+        {/* Timeline List avec trajectoire SVG animée au scroll (GSAP ScrollTrigger) */}
+        <div data-timeline-container className="space-y-6 sm:space-y-8 relative lg:pl-10">
+          {/* Ligne & trajectoire SVG verticale sur Desktop */}
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 20 1000"
+            preserveAspectRatio="none"
+            className="hidden lg:block pointer-events-none absolute left-2 top-6 bottom-6 w-5 h-[calc(100%-48px)] overflow-visible"
+          >
+            <defs>
+              <linearGradient id="exp-timeline-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#38bdf8" />
+                <stop offset="50%" stopColor="#0284c7" />
+                <stop offset="100%" stopColor="#6366f1" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M 10 0 L 10 1000"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              className="text-slate-200 dark:text-white/10"
+            />
+            <path
+              data-timeline-progress
+              d="M 10 0 L 10 1000"
+              fill="none"
+              stroke="url(#exp-timeline-grad)"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+            />
+            {/* Signal lumineux guidé par MotionPathPlugin le long de la frise SVG */}
+            <g data-timeline-traveler>
+              <circle cx="10" cy="0" r="6" fill="#38bdf8" opacity="0.28" />
+              <circle cx="10" cy="0" r="3" fill="#38bdf8" />
+            </g>
+          </svg>
+
           {experiences.map((exp) => (
             <div
               key={exp.id}
+              data-timeline-card
               className="relative rounded-2xl p-5 sm:p-7 lg:p-8 glass-panel border border-slate-200/80 dark:border-white/[0.07] hover:border-primary/40 dark:hover:border-white/[0.18] shadow-card transition-all duration-300 text-left"
             >
+              {/* Marqueur de jalon sur la trajectoire SVG */}
+              <span
+                aria-hidden="true"
+                className={`hidden lg:flex absolute -left-[34px] top-9 h-3.5 w-3.5 rounded-full ring-4 ring-background ${
+                  exp.current
+                    ? "bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.7)]"
+                    : "bg-primary shadow-[0_0_10px_rgba(56,189,248,0.5)]"
+                }`}
+              />
               {/* Header: Role, Company, Period, Location, Sector */}
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 sm:pb-6 border-b border-slate-200/80 dark:border-white/[0.07]">
                 <div className="space-y-1.5 min-w-0">

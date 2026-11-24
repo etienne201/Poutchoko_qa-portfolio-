@@ -312,7 +312,7 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+      className="scroll-mt-24 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}

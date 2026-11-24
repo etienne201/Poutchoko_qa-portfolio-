@@ -1,6 +1,9 @@
 "use client"
+import { useCallback, useRef } from "react"
 import { useLanguage } from "@/hooks/use-language"
+import { useGsapScroll } from "@/hooks/use-gsap-scroll"
 import { TypewriterText } from "@/components/ui/typewriter-text"
+import { SpotlightCard } from "@/components/ui/spotlight-card"
 import {
   GraduationCap,
   Languages,
@@ -12,6 +15,25 @@ import {
 
 export function EducationSection() {
   const { t, language } = useLanguage()
+  const sectionRef = useRef<HTMLElement>(null)
+
+  const setupEdu = useCallback((gsapInstance: typeof import("gsap").default) => {
+    gsapInstance.from("[data-edu-card]", {
+      opacity: 0,
+      y: 20,
+      duration: 0.48,
+      stagger: 0.09,
+      ease: "power3.out",
+      clearProps: "transform,opacity",
+      scrollTrigger: {
+        trigger: "[data-edu-grid]",
+        start: "top 82%",
+        once: true,
+      },
+    })
+  }, [])
+
+  useGsapScroll(sectionRef, setupEdu)
 
   const softSkills = [
     t("edu.soft.1"),
@@ -22,7 +44,11 @@ export function EducationSection() {
   ]
 
   return (
-    <section id="education" className="py-20 sm:py-24 px-3.5 sm:px-6 lg:px-8 relative overflow-hidden">
+    <section
+      ref={sectionRef}
+      id="education"
+      className="scroll-mt-24 py-20 sm:py-24 px-3.5 sm:px-6 lg:px-8 relative overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-3">
@@ -47,9 +73,10 @@ export function EducationSection() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-5 sm:gap-6 text-left">
+        <div data-edu-grid className="grid lg:grid-cols-3 gap-5 sm:gap-6 text-left">
           {/* Card 1: Formation */}
-          <div className="rounded-2xl p-5 sm:p-7 glass-panel border border-slate-200/80 dark:border-white/[0.07] shadow-card flex flex-col justify-between">
+          <div data-edu-card className="h-full">
+            <SpotlightCard className="h-full rounded-2xl p-5 sm:p-7 glass-panel border border-slate-200/80 dark:border-white/[0.07] hover:border-primary/35 shadow-card transition-colors duration-300">
             <div>
               <div className="flex items-center space-x-3.5 mb-5 pb-4 border-b border-slate-200/80 dark:border-white/[0.07]">
                 <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] text-primary flex-shrink-0">
@@ -91,10 +118,12 @@ export function EducationSection() {
             <div className="pt-4 mt-4 border-t border-slate-200/80 dark:border-white/[0.06] text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
               {t("edu.training.footer")}
             </div>
+            </SpotlightCard>
           </div>
 
           {/* Card 2: Langues */}
-          <div className="rounded-2xl p-5 sm:p-7 glass-panel border border-slate-200/80 dark:border-white/[0.07] shadow-card flex flex-col justify-between">
+          <div data-edu-card className="h-full">
+            <SpotlightCard className="h-full rounded-2xl p-5 sm:p-7 glass-panel border border-slate-200/80 dark:border-white/[0.07] hover:border-sky-500/35 shadow-card transition-colors duration-300">
             <div>
               <div className="flex items-center space-x-3.5 mb-5 pb-4 border-b border-slate-200/80 dark:border-white/[0.07]">
                 <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] text-sky-500 flex-shrink-0">
@@ -137,10 +166,12 @@ export function EducationSection() {
             <div className="pt-4 mt-4 border-t border-slate-200/80 dark:border-white/[0.06] text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
               {t("edu.lang.footer")}
             </div>
+            </SpotlightCard>
           </div>
 
           {/* Card 3: Soft Skills */}
-          <div className="rounded-2xl p-5 sm:p-7 glass-panel border border-slate-200/80 dark:border-white/[0.07] shadow-card flex flex-col justify-between">
+          <div data-edu-card className="h-full">
+            <SpotlightCard className="h-full rounded-2xl p-5 sm:p-7 glass-panel border border-slate-200/80 dark:border-white/[0.07] hover:border-emerald-500/35 shadow-card transition-colors duration-300">
             <div>
               <div className="flex items-center space-x-3.5 mb-5 pb-4 border-b border-slate-200/80 dark:border-white/[0.07]">
                 <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] text-emerald-500 flex-shrink-0">
@@ -167,6 +198,7 @@ export function EducationSection() {
             <div className="pt-4 mt-4 border-t border-slate-200/80 dark:border-white/[0.06] text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
               {t("edu.soft.footer")}
             </div>
+            </SpotlightCard>
           </div>
         </div>
       </div>

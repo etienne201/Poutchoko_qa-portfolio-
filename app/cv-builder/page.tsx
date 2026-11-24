@@ -1,8 +1,10 @@
 "use client"
 import React, { useState, useEffect, useRef } from "react"
 import Link from "next/link"
-import { LanguageProvider } from "@/hooks/use-language"
 import { CVData, CVSettings } from "@/types/cv"
+import { ThemeToggle } from "@/components/theme-toggle"
+import { LanguageToggle } from "@/components/language-toggle"
+import { useCommandPalette } from "@/components/navigation/command-palette-provider"
 import {
   defaultEtienneCV,
   defaultEtienneCV_FR,
@@ -24,9 +26,11 @@ import {
   ZoomOut,
   FileText,
   Printer,
+  Command,
 } from "lucide-react"
 
 function CVBuilderInner() {
+  const { openPalette } = useCommandPalette()
   const [cvData, setCvData] = useState<CVData>(defaultEtienneCV)
   const [activeSection, setActiveSection] = useState<string>("personal")
   const [mobileView, setMobileView] = useState<"editor" | "preview">("editor")
@@ -209,6 +213,30 @@ function CVBuilderInner() {
               </button>
             </div>
 
+            {/* Lien vers CV officiel + Utilitaires cohérents */}
+            <Link
+              href="/cv"
+              className="hidden md:inline-flex items-center gap-1.5 h-8 px-2.5 rounded-lg text-xs font-semibold text-sky-700 dark:text-sky-300 bg-sky-500/10 hover:bg-sky-500/20 border border-sky-500/20 transition-colors"
+            >
+              <FileText className="w-3.5 h-3.5" />
+              <span>CV</span>
+            </Link>
+
+            <div className="hidden sm:flex items-center gap-1.5">
+              <button
+                type="button"
+                onClick={openPalette}
+                aria-label="Ouvrir la palette de commandes (⌘K)"
+                title="Palette de commandes (⌘K)"
+                className="inline-flex items-center gap-1 h-9 px-2.5 rounded-xl bg-slate-100/90 dark:bg-[#0c1722] hover:bg-slate-200/90 dark:hover:bg-[#132230] border border-slate-200/80 dark:border-white/10 text-slate-600 dark:text-slate-300 text-[11px] font-mono transition-colors"
+              >
+                <Command className="w-3.5 h-3.5" />
+                <span>K</span>
+              </button>
+              <LanguageToggle />
+              <ThemeToggle />
+            </div>
+
             {/* Bouton Export PDF rapide */}
             <Button
               type="button"
@@ -227,7 +255,7 @@ function CVBuilderInner() {
       {/* ============================================================ */}
       {/* CONTENU PRINCIPAL : SPLIT-SCREEN SUR DESKTOP */}
       {/* ============================================================ */}
-      <main className="flex-1 max-w-7xl w-full mx-auto p-3.5 sm:p-6 space-y-4 print:p-0 print:m-0 print:max-w-none">
+      <main id="main-content" className="flex-1 max-w-7xl w-full mx-auto p-3.5 sm:p-6 space-y-4 print:p-0 print:m-0 print:max-w-none">
         {/* Barre d'outils et sélecteurs de style */}
         <CVToolbar
           settings={cvData.settings}
@@ -338,9 +366,5 @@ function CVBuilderInner() {
 }
 
 export default function CVBuilderPage() {
-  return (
-    <LanguageProvider>
-      <CVBuilderInner />
-    </LanguageProvider>
-  )
+  return <CVBuilderInner />
 }
